@@ -1,0 +1,55 @@
+import { TypeUtils } from './src/utils';
+import LogoConfiguration from './src/logo/logo-configuration';
+import Logo from './src/logo/logo';
+
+import '@fortawesome/fontawesome-free/js/fontawesome'
+import '@fortawesome/fontawesome-free/js/solid'
+import '@fortawesome/fontawesome-free/js/regular'
+import '@fortawesome/fontawesome-free/js/brands'
+
+(function(w, $) 
+{
+    //no jQuery around
+    if (!$) return false;
+
+    // estendo JQuery aggiungendo i plugin della UI Kit
+    $.fn.extend({
+        // Plugin definitions
+
+        logo : function(opts : any) 
+        {
+            // configurazione 
+            var opts = opts;
+            if (opts == undefined) opts = {};
+
+            // la lista dei metodi pubblici
+            var methods : any = 
+            {
+                getDimension: function()
+                {
+                    // recupero l'instanza della classe Logo da 'data'
+                    return $(this).data("logo").getDimension();
+                }
+            };
+
+            // l'argomento opts può essere di due tipi: string oppure object
+            if (TypeUtils.isObject(opts))
+            {
+                // se opts è di tipo object, vuol dire che dobbiamo instanziare il plugin
+                var logoBuilder = function()
+                {
+                    var logoConfiguration = new LogoConfiguration(opts);
+                    // assegnare l'instanza della classe Logo a 'data' ci servirà per la chiamata dei metodi (vedi methods.getDimension)
+                    $(this).data("logo", new Logo($(this).get(0), logoConfiguration));
+                }
+
+                return this.each(logoBuilder);
+            } 
+            else
+            {
+                // se opts è di tipo string, vuol dire che dobbiamo chiamare un metodo pubblico
+                return methods[opts].apply(this, Array.prototype.slice.call( arguments, 1 ));
+            }
+        }
+    });
+})(window, jQuery);
