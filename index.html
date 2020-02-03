@@ -14,6 +14,7 @@
 	<body>
 		<div id="logo"></div>
 		<div id="logo-dimension"></div>
+		<div id="message"></div>
 	</body>
 
 	<script type="text/javascript">
@@ -30,5 +31,14 @@
 
 		// call public method Logo.getDimension
 		var logoDimension = logoPlugin.logo("getDimension");
+
+		var messageConfiguration =
+		{
+			message: "Messaggio di test",
+			type: "SUCCESS",
+			align: "CENTER"
+		}
+
+		$("#message").message(messageConfiguration);
 	</script>
 </html>

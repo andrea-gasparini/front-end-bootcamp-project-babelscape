@@ -1,6 +1,8 @@
 import { TypeUtils } from './src/utils';
 import LogoConfiguration from './src/logo/logo-configuration';
 import Logo from './src/logo/logo';
+import MessageConfiguration from './src/message/message-configuration';
+import Message from './src/message/message';
 
 import '@fortawesome/fontawesome-free/js/fontawesome'
 import '@fortawesome/fontawesome-free/js/solid'
@@ -50,6 +52,19 @@ import '@fortawesome/fontawesome-free/js/brands'
                 // se opts è di tipo string, vuol dire che dobbiamo chiamare un metodo pubblico
                 return methods[opts].apply(this, Array.prototype.slice.call( arguments, 1 ));
             }
+        },
+
+        message : function(opts : MessageConfiguration)
+        {
+            var opts = opts;
+            if (opts == undefined) return undefined;
+            
+            var messageBuilder = function()
+            {
+                $(this).data('message', new Message($(this).get(0), new MessageConfiguration(opts)));
+            }
+
+            return this.each(messageBuilder)
         }
     });
 })(window, jQuery);
