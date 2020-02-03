@@ -1,1 +1,1 @@
-first commit
+Test commit from command line
