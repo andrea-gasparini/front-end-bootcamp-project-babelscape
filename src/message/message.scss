@@ -1,16 +1,16 @@
 .message
 {
-    .success
+    &.success
     {
         color: green;
     }
 
-    .warning
+    &.warning
     {
         color: orangered;
     }
 
-    .danger
+    &.danger
     {
         color: red;
     }
