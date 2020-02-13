@@ -7,12 +7,97 @@
         <title>UI Kit | Babelscape Bootcamp</title>
 
         <link rel="stylesheet" type="text/css" href="documentation.css" />
+
+        <script src="../dist/vendors/jquery.min.js" type="text/javascript"></script>
+        <script src="../dist/bootcamp-ui-kit.min.js" type="text/javascript"></script>
     </head>
     <body>
-        <div id='context'>
-            <h1>
-                Documentazione Plugin Messaggio
-            </h1>
+        <div id='topbar'>
+            <div id='logo'></div>
+        </div>
+        <div id='menu-button' onclick='changeButton()'>
+            <div id='bar1'></div>
+            <div id='bar2'></div>
+            <div id='bar3'></div>
+        </div>
+        
+        <div id='main-page'>
+            <div id='menu'>
+                <div id='menu-container'>
+                    <span id='title' class='noselect'>
+                        Components
+                    </span>
+                    <a class='noselect actual-page'>
+                        Message
+                    </a>
+                    <a class='noselect'>
+                        Button
+                    </a>
+                    <a class='noselect'>
+                        Dropdown
+                    </a>
+                    <a class='noselect'>
+                        Toggle
+                    </a>
+                    <a class='noselect'>
+                        Table
+                    </a>
+                    <a class='noselect'>
+                        Autocomplete
+                    </a>
+                    <a class='noselect'>
+                        Modal
+                    </a>
+                </div>
+            </div>
+
+            <div id='context'>
+                <h1>
+                    Documentazione Plugin Messaggio
+                </h1>
+                <h1>
+                    Documentazione Plugin Messaggio2
+                </h1>
+                <h1>
+                    Documentazione Plugin Messaggio3
+                </h1>
+                <h1>
+                    Documentazione Plugin Messaggio4
+                </h1>
+                <h1>
+                    Documentazione Plugin Messaggio5
+                </h1>
+                <h1>
+                    Documentazione Plugin Messaggio
+                </h1>
+                <h1>
+                    Documentazione Plugin Messaggio
+                </h1><h1>
+                    Documentazione Plugin Messaggio
+                </h1>
+                <h1>
+                    Documentazione Plugin Messaggio
+                </h1>
+                <h1>
+                    Documentazione Plugin Messaggio
+                </h1>
+                <h1>
+                    Documentazione Plugin Messaggio
+                </h1>
+            </div>
         </div>
     </body>
+    <script type='text/javascript'>
+        function changeButton()
+        {
+            $('#menu-button').toggleClass('change');
+        } 
+
+		$("#logo").logo(
+            {
+                url : "http://babelscape.com/img/svg/babelscape-white-logo.svg",
+                width: 160,
+                align: 'CENTER' 
+            });
+    </script>
 </html>
