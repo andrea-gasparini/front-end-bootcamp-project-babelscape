@@ -14,7 +14,10 @@
 	<body>
 		<div id="logo"></div>
 		<div id="logo-dimension"></div>
-		<div id="message"></div>
+		<div id="message1"></div>
+		<div id="message2"></div>
+		<div id="message3"></div>
+		<div id="message4"></div>
 	</body>
 
 	<script type="text/javascript">
@@ -32,13 +35,38 @@
 		// call public method Logo.getDimension
 		var logoDimension = logoPlugin.logo("getDimension");
 
-		var messageConfiguration =
+		var messageConfiguration1 =
 		{
-			message: "Messaggio di test",
-			type: "SUCCESS",
-			align: "CENTER"
+			message: "Messaggio di test INFO",
+			width: 500,
+			alignText: "CENTER",
+			centered: false
 		}
 
-		$("#message").message(messageConfiguration);
+		var messageConfiguration2 =
+		{
+			message: "Messaggio di test SUCCESS",
+			type: "success",
+			alignText: "CENTER"
+		}
+
+		var messageConfiguration3 =
+		{
+			message: "Messaggio di test WARNING",
+			type: "warning",
+			alignText: "CENTER"
+		}
+
+		var messageConfiguration4 =
+		{
+			message: "Messaggio di test DANGER",
+			type: "danger",
+			alignText: "CENTER"
+		}
+
+		$("#message1").message(messageConfiguration1);
+		$("#message2").message(messageConfiguration2);
+		$("#message3").message(messageConfiguration3);
+		$("#message4").message(messageConfiguration4);
 	</script>
 </html>

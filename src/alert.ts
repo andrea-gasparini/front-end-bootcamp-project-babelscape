@@ -5,14 +5,14 @@ export enum Alert
 
 export namespace Alert
 {
-    export function fromValue(value: string)
+    export function fromValue(value: string) : Alert
     {
         if (value === undefined) return undefined;
 
         return Alert[value.toUpperCase()];
     }
 
-    export function toCssClass(alert: Alert)
+    export function toCssClass(alert: Alert) : string
     {
         if (alert === undefined) return undefined;
 
