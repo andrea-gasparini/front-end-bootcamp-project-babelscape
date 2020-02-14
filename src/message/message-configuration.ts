@@ -9,7 +9,7 @@ export default class MessageConfiguration
     private _height: number;
     private _type : Alert = Alert.INFO;
     private _alignText : Align = Align.LEFT;
-    private _centered: boolean = true;
+    private _centered: boolean = false;
 
     constructor(config: {message : string, width? : number, height? : number, type? : Alert | string, alignText? : Align | string, centered? : boolean})
     {
