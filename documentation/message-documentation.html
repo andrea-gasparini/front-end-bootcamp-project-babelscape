@@ -70,6 +70,22 @@
                 <div id='esempio-success'></div>
                 <div id='esempio-warning'></div>
                 <div id='esempio-danger'></div>
+                <pre>
+$('#esempio-info').message({
+        message: 'Un semplice Message Info di test'});
+
+$('#esempio-success').message({
+        message: 'Un semplice Message Success di test',
+        type: 'SUCCESS'});
+    
+$('#esempio-warning').message({
+        message: 'Un semplice Message Warning di test',
+        type: 'WARNING'});
+
+$('#esempio-danger').message({
+        message: 'Un semplice Message Danger di test',
+        type: 'DANGER'});
+                </pre> 
             </div>
         </div>
     </body>
@@ -81,7 +97,10 @@
                 align: 'CENTER' 
             });
 
-        $('#esempio-info').message({ message: 'Un semplice Message Info di test' });
+        $('#esempio-info').message(
+            {
+                message: 'Un semplice Message Info di test'
+            });
         $('#esempio-success').message(
             {
                 message: 'Un semplice Message Success di test',
