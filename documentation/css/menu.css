@@ -22,13 +22,14 @@
 {
     margin: 20px 0px 10px 0px;
     font-weight: bold;
-    font-size: 130%;
+    font-size: 110%;
 }
 #menu-container a
 {
     color: rgb(78, 78, 78);
     margin: 5px 0px 5px 0px;
     text-decoration: none;
+    font-size: 90%;
 }
 #menu-container a.actual-page
 {
