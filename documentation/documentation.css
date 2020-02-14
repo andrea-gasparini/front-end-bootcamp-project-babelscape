@@ -32,7 +32,7 @@ body
 {
     background-color: #fff;
     height: 3px;
-    margin: 7px 0;
+    margin: 7px 0px;
     transition: all .2s ease-in-out;
 }
 #menu-button.change #bar1
@@ -64,6 +64,7 @@ body
 
 #menu
 {    
+    display: block;
     border: lightgrey;
     border-right-style: solid;
     border-left-style: solid;
@@ -133,7 +134,22 @@ h1
 
     #menu 
     {
-        display: none !important;
+        display: none;
+        position: fixed;
+        background-color: rgba(29, 44, 65);
+        color: white;
+        border: none;
+        width: 180px;
+        height: 100%;
+    }
+    #menu-container
+    {
+        top: 0;
+        position: relative;
+    }
+    #menu-container a
+    {
+        color: whitesmoke;
     }
 
     #context
