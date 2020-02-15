@@ -20,6 +20,25 @@ body
     height: 100%;
 }
 
+#context
+{
+    display: flex;
+    flex-direction: column;
+
+    border: lightgrey;
+    border-right-style: solid;
+    border-width: 1px;
+    width: 80%;
+    padding: 40px;
+    padding-top: 10px;
+}
+#subtitle
+{
+    font-size: 120%;
+    margin: 6px 0 12px;
+    line-height: 28px;
+}
+
 h1, h2, h3, h4
 {
     font-weight: normal;
@@ -98,4 +117,12 @@ th#descrizione
     -moz-user-select: none;         /* Old versions of Firefox */
     -ms-user-select: none;          /* Internet Explorer/Edge */
     user-select: none;              /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
+@media screen and (max-width: 900px)
+{
+    #context
+    {
+        width: 100%;
+    }
 }
