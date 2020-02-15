@@ -63,8 +63,12 @@
                 
                 <h2> Esempi </h2>
                 <p> 
-                    I componenti Message sono disponibili in 4 principali tipologie di messaggio: <code>INFO</code>, <code>SUCCESS</code>, <code>WARNING</code> e <code>DANGER</code>.
-                    Possono essere personalizzati anche nelle dimensioni e nell'allineamento del testo al loro interno.
+                    Il componente Message è disponibile in 4 principali tipologie di messaggio: <code>INFO</code>, <code>SUCCESS</code>, <code>WARNING</code> e <code>DANGER</code>
+                    (la tipologia <code>INFO</code> è di default se non ne viene specificata una diversa).
+                    Il componente può essere personalizzato anche nelle dimensioni e nell'allineamento del testo al proprio interno.
+                </p>
+                <p>
+                    A seguire gli esempi di base con la relativa configurazione.
                 </p>
                 <div id='esempio-info'></div>
                 <div id='esempio-success'></div>
@@ -86,6 +90,54 @@ $('#esempio-danger').message({
         message: 'Un semplice Message Danger di test',
         type: 'DANGER'});
                 </pre> 
+                <h2> Opzioni </h2>
+                <p>
+                    Le opzioni del componente vanno specificate nella configurazione tramite un oggetto <code>JSON</code>, come mostrato negli esempi precedenti.
+                </p>
+                <table>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Default</th>
+                        <th id='descrizione'>Descrizione</th>
+                      </tr>
+                      <tr>
+                        <td>message</td>
+                        <td><code>string</code></td>
+                        <td></td>
+                        <td>Messaggio di testo da mostrare nel componente.</td>
+                      </tr>
+                      <tr>
+                        <td>width</td>
+                        <td><code>number</code></td>
+                        <td><code>auto</code></td>
+                        <td>Larghezza del componente, di default si adatta alle dimensioni del div in cui è contenuto.</td>
+                      </tr>
+                      <tr>
+                        <td>height</td>
+                        <td><code>number</code></td>
+                        <td><code>auto</code></td>
+                        <td>Altezza del componente, di default si adatta alle righe del messaggio.</td>
+                      </tr>
+                      <tr>
+                        <td>type</td>
+                        <td><code>Alert</code> o <code>string</code></td>
+                        <td><code>INFO</code></td>
+                        <td>Tipologia del messaggio, che modifica i colori del componente. È possibile scegliere tra <code>INFO</code>, <code>SUCCESS</code>, <code>WARNING</code> e <code>DANGER</code> </td>
+                      </tr>
+                      <tr>
+                        <td>alignText</td>
+                        <td><code>Align</code> o <code>string</code></td>
+                        <td><code>LEFT</code></td>
+                        <td>Allineamento del messaggio all'interno del componente. È possibile scegliere tra <code>LEFT</code>, <code>CENTER</code> e <code>RIGHT</code></td>
+                      </tr>
+                      <tr>
+                        <td>centered</td>
+                        <td><code>boolean</code></td>
+                        <td><code>false</code></td>
+                        <td>Centra il componente impostando <code>margin: auto</code>.</td>
+                      </tr>
+                </table>
             </div>
         </div>
     </body>
