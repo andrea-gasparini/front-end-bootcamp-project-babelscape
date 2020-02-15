@@ -1,12 +1,12 @@
 import { Align } from '../align';
 import { Alert } from '../alert';
 import { TypeUtils } from '../utils';
+import Dimension from '../dimension';
 
 export default class MessageConfiguration
 {
     private _message : string;
-    private _width: number;
-    private _height: number;
+    private _dimensions : Dimension = new Dimension();
     private _type : Alert = Alert.INFO;
     private _alignText : Align = Align.LEFT;
     private _centered: boolean = false;
@@ -15,8 +15,8 @@ export default class MessageConfiguration
     {
         if (config.message !== undefined) this._message = config.message;
 
-        if (config.width !== undefined) this._width = config.width;
-        if (config.height !== undefined) this._height = config.height;
+        if (config.width !== undefined) this._dimensions.width = config.width;
+        if (config.height !== undefined) this._dimensions.height = config.height;
 
         if (config.type !== undefined)
             this._type = TypeUtils.isString(config.type) ?
@@ -32,9 +32,9 @@ export default class MessageConfiguration
 
     get message() : string { return this._message; }
 
-    get width(): number { return this._width; }
+    get width(): number { return this._dimensions.width; }
 
-    get height(): number { return this._height; }
+    get height(): number { return this._dimensions.height; }
 
     get type() : Alert { return this._type; }
 
