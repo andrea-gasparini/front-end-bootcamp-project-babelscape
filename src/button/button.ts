@@ -35,15 +35,14 @@ export default class Button
         if (this._configuration.height !== undefined)
             button.css('height', this._configuration.height + 'px');
 
-        $(this._element)
-            .append(button);
+        $(this._element).append(button);
     }
 
     public setState(state : State) : void
     {
         this._actualState = state;
         if ( this._actualState == State.PENDING )
-            this._element.append(' <i class="fa fa-spinner fa-spin"></i>')
+            $(this._element).append(' <i class="fa fa-spinner fa-spin"></i>')
     }
 
     public getState() : State
