@@ -25,7 +25,7 @@
     background-color: #fff;
     height: 3px;
     margin: 7px 0px;
-    transition: all .2s ease-in-out;
+    transition: transform .2s ease-in-out;
 }
 #menu-button.change #bar1
 {
