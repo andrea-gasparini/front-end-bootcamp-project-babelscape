@@ -1,3 +1,4 @@
+$info-color: rgb(109, 109, 109);
 $success-color: rgb(0, 54, 0);
 $warning-color: rgb(190, 139, 0);
 $danger-color: rgb(190, 0, 0);
@@ -9,9 +10,10 @@ $danger-color: rgb(190, 0, 0);
     margin: 5px;
     border-style: solid;
     border-width: 1px;
-    border-color: grey;
+    color: $info-color;
+    border-color: $info-color;
     border-radius: 5px;
-    background-color: whitesmoke;
+    background-color: lighten($info-color, 50);
 
     &.success
     {
