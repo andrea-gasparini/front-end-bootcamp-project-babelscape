@@ -6,6 +6,8 @@ import MessageConfiguration from './src/message/message-configuration';
 import Message from './src/message/message';
 import ButtonConfiguration from './src/button/button-configuration';
 import Button from './src/button/button';
+import TableConfiguration from './src/table/table-configuration';
+import Table from './src/table/table';
 
 import '@fortawesome/fontawesome-free/js/fontawesome'
 import '@fortawesome/fontawesome-free/js/solid'
@@ -100,6 +102,20 @@ import '@fortawesome/fontawesome-free/js/brands'
             } 
             else
                 return methods[opts].apply(this, Array.prototype.slice.call( arguments, 1 ));
+        },
+
+        table : function(opts : TableConfiguration)
+        {
+            var opts = opts;
+            if (opts == undefined) return undefined;
+            
+            var tableBuilder = function()
+            {
+                var tableConfiguration = new TableConfiguration(opts);
+                $(this).data('table', new Table($(this).get(0), tableConfiguration));
+            }
+            
+            return this.each(tableBuilder)
         }
     });
 })(window, jQuery);

@@ -1,0 +1,32 @@
+.table
+{ 
+    margin: 5px;
+    border-collapse: collapse;
+    width: 98.5%;
+
+    td, th
+    {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    td
+    {
+        font-size: 90%;
+    }
+
+    tr:nth-child(even)
+    {
+        background-color: #f2f2f2;
+    }
+    
+    th
+    {
+        max-width: 50%;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: rgb(29, 44, 65);
+        color: white;
+    }
+}
