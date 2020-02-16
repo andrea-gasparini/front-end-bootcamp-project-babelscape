@@ -21,7 +21,19 @@ export default class Button
     {
         let button = $('<button />')
             .addClass('button')
-            .text(this._configuration.text);
+            .addClass(State.toCssClass(this._actualState))
+            .append(this._configuration.icon)
+            .append(' ')
+            .append(this._configuration.text);
+
+        if ( this._configuration.initialState == State.PENDING )
+            button.append(' <i class="fa fa-spinner fa-spin"></i>')
+
+        if (this._configuration.width !== undefined)
+            button.css('width', this._configuration.width + 'px');
+
+        if (this._configuration.height !== undefined)
+            button.css('height', this._configuration.height + 'px');
 
         $(this._element)
             .append(button);
@@ -30,6 +42,8 @@ export default class Button
     public setState(state : State) : void
     {
         this._actualState = state;
+        if ( this._actualState == State.PENDING )
+            this._element.append(' <i class="fa fa-spinner fa-spin"></i>')
     }
 
     public getState() : State

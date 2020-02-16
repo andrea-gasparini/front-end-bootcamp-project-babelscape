@@ -1,12 +1,19 @@
+$main-color: grey;
+
 .button
 {
     cursor: pointer;
+    margin: 5px;
 
     border-radius: 10px;
     border-style: solid;
     border-width: 1px;
-    border-color: grey;
-    
+    font-weight: bold;
+    color: $main-color;
+    border-color: $main-color;
+    background-color: lighten($main-color, 40);
+    box-shadow: 0 3px $main-color;
+
     padding:
     {
         top: 10px;
@@ -14,19 +21,54 @@
         left: 15px;
         right: 15px;
     }
-    
-    &:focus
+
+    &:hover
     {
-        outline: 0;
+        color: lighten($main-color, 40);
+        background-color: lighten($main-color, 20);
     }
 
-    &::-moz-focus-inner
-    {
-        border: none;
-    }
+    &:focus { outline: none; }
+
+    &::-moz-focus-inner { border: none; }
 
     &:active
     {
         transform: translateY(1px);
+        box-shadow: 0 2px darken($main-color, 10);
+    }
+
+    &.disabled 
+    {
+        font-weight: normal;
+        color: lighten($main-color, 10);
+        pointer-events: none;
+        box-shadow: none;
+    }
+
+    &.error 
+    {
+        $main-color: red;
+        color: $main-color;
+        border-color: $main-color;
+        background-color: lighten($main-color, 40);
+        box-shadow: 0 3px $main-color;
+
+        &:hover
+        {
+            color: lighten($main-color, 40);
+            background-color: lighten($main-color, 20);
+        }
+
+        &:active
+        {
+            transform: translateY(1px);
+            box-shadow: 0 2px darken($main-color, 10);
+        }
+    }
+
+    &.pending 
+    {
+        pointer-events: none;
     }
 }
