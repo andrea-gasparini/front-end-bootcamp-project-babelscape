@@ -1,8 +1,11 @@
 import { TypeUtils } from './src/utils';
+import { State } from './src/state';
 import LogoConfiguration from './src/logo/logo-configuration';
 import Logo from './src/logo/logo';
 import MessageConfiguration from './src/message/message-configuration';
 import Message from './src/message/message';
+import ButtonConfiguration from './src/button/button-configuration';
+import Button from './src/button/button';
 
 import '@fortawesome/fontawesome-free/js/fontawesome'
 import '@fortawesome/fontawesome-free/js/solid'
@@ -65,6 +68,38 @@ import '@fortawesome/fontawesome-free/js/brands'
             }
 
             return this.each(messageBuilder)
+        },
+
+        button : function(opts : any) 
+        {
+            var opts = opts;
+            if (opts == undefined) opts = {};
+
+            var methods : any = 
+            {
+                setState: function(state : State)
+                {
+                    $(this).data("button").setState(state);
+                },
+
+                getState: function()
+                {
+                    return $(this).data("button").getState();
+                }
+            };
+
+            if (TypeUtils.isObject(opts))
+            {
+                var buttonBuilder = function()
+                {
+                    var buttonConfiguration = new ButtonConfiguration(opts);
+                    $(this).data("button", new Button($(this).get(0), buttonConfiguration));
+                }
+
+                return this.each(buttonBuilder);
+            } 
+            else
+                return methods[opts].apply(this, Array.prototype.slice.call( arguments, 1 ));
         }
     });
 })(window, jQuery);
