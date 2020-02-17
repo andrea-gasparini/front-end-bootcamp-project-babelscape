@@ -65,8 +65,9 @@ import '@fortawesome/fontawesome-free/js/brands'
             if (opts == undefined) return undefined;
             
             var messageBuilder = function()
-            {
-                $(this).data('message', new Message($(this).get(0), new MessageConfiguration(opts)));
+            {  
+                var messageConfiguration = new MessageConfiguration(opts);
+                $(this).data('message', new Message($(this).get(0), messageConfiguration));
             }
 
             return this.each(messageBuilder)
