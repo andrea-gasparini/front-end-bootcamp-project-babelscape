@@ -47,6 +47,8 @@ export default class Table
 
                     if ( TypeUtils.isNumber(matrixElement) )
                         sums[col] = sums[col] == undefined ? matrixElement : (sums[col] + matrixElement);
+                    else if ( TypeUtils.isNumber(sums[col]) )
+                        sums[col] = null;
                 }
 
                 tableElement.append(matrixElement);
