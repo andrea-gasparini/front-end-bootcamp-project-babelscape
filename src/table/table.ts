@@ -1,4 +1,5 @@
 import TableConfiguration from './table-configuration';
+import { TypeUtils } from '../utils';
 import './table.scss';
 
 export default class Table
@@ -25,17 +26,53 @@ export default class Table
         if (this._configuration.height !== undefined)
             $(table).css('height', this._configuration.height + 'px');
 
-        for ( let _row = 0; _row < this._configuration.data.length; _row++ )
-        {
-            let tableRow = $('<tr />').appendTo(table);
+        let rowCount : number = this._configuration.data.length;
+        let colCount : number = this._configuration.data[0].length;
+        let sums : Array<number> = new Array();
 
-            for ( let _col = 0; _col < this._configuration.data[0].length; _col++ )
-                if ( _row === 0 && this._configuration.firstRowHeader )
-                    tableRow.append('<th>' + this._configuration.data[_row][_col] + '</th>');
+        for ( let row = 0; row < rowCount; row++ )
+        {
+            let tableRow = $('<tr />');
+
+            for ( let col = 0; col < colCount; col++ )
+            {
+                let matrixElement = this._configuration.data[row][col];
+                let tableElement : JQuery<HTMLElement>;
+
+                if ( row === 0 && this._configuration.firstRowHeader )
+                    tableElement = $('<th />');
                 else
-                    tableRow.append('<td>' + this._configuration.data[_row][_col] + '</td>');
+                {
+                    tableElement = $('<td />');
+
+                    if ( TypeUtils.isNumber(matrixElement) )
+                        sums[col] = sums[col] == undefined ? matrixElement : (sums[col] + matrixElement);
+                }
+
+                tableElement.append(matrixElement);
+                tableRow.append(tableElement);
+                table.append(tableRow);
+            }
         }
 
+        this.createLastRow(table, sums)
+
         $(this._element).append(table)
+    }
+
+    private createLastRow(table : JQuery<HTMLElement>, sums : Array<number>) : void 
+    {
+        let lastRow : JQuery<HTMLElement> = $('<tr / >').appendTo(table);
+        lastRow.append($('<td> Totale righe ' + this._configuration.data.length + '</td>'))
+
+        for ( let i = 1; i < sums.length; i++ )
+        {
+            let tableElement : JQuery<HTMLElement> = $('<td />');
+
+            if ( TypeUtils.isNumber(sums[i]) )
+                tableElement.append(String(sums[i]));
+
+            lastRow.append(tableElement);
+        }
     }
 }
