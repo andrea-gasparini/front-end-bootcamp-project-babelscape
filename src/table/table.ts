@@ -129,40 +129,38 @@ export default class Table
     private selectionSortTable(col : number)
     {
         let firstRowIdx : number = this._configuration.firstRowHeader ? 1 : 0;
-        let switchCount : number = 0;
+        let wasAlreadySorted : boolean = true;
         let matrix = this._configuration.data;
         let getMatrixCellValue = (row: number) => matrix[row][col];
         let setMatrixRow = (row: number, newRow : any) => matrix[row] = newRow;
+
+        sort()
+
+        if ( wasAlreadySorted )
+            sort((val1 : any, val2 : any) => val1 > val2)
+
+        this.renderData()
 
         function sort(sortFunc = (val1 : any, val2 : any) => val1 < val2)
         {
             let minIdx : number = firstRowIdx;
             
-            for ( let rowIdx = firstRowIdx; rowIdx < matrix.length - 1; rowIdx++ ) 
+            for ( let rowIdx : number = firstRowIdx; rowIdx < matrix.length - 1; rowIdx++ ) 
             {
                 minIdx = rowIdx
                 
-                for ( let rowIdx2 = rowIdx + 1; rowIdx2 < matrix.length; rowIdx2++ )
-                {
+                for ( let rowIdx2 : number = rowIdx + 1; rowIdx2 < matrix.length; rowIdx2++ )
                     if ( sortFunc(getMatrixCellValue(rowIdx2), getMatrixCellValue(minIdx)) )
                         minIdx = rowIdx2;
-                }
 
                 if ( minIdx != rowIdx )
                 {
                     let tmpIdx = matrix[minIdx];
                     setMatrixRow(minIdx, matrix[rowIdx])
                     setMatrixRow(rowIdx, tmpIdx)
-                    switchCount++;
+                    wasAlreadySorted = false;
                 }
             }
         }
-
-        sort()
-
-        if ( switchCount == 0 )
-            sort((val1 : any, val2 : any) => val1 > val2)
-
-        this.renderData()
     }
 }
