@@ -46,7 +46,7 @@ export default class Table
                 {
                     tableCell = $('<td />');
 
-                    if ( TypeUtils.isNumber(matrixCell) )
+                    if ( TypeUtils.isNumber(matrixCell) && sums[col] !== null )
                         sums[col] = sums[col] == undefined ? matrixCell : (sums[col] + matrixCell);
                     else if ( TypeUtils.isNumber(sums[col]) )
                         sums[col] = null;
