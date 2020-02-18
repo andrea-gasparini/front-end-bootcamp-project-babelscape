@@ -57,9 +57,9 @@ export default class Table
             }
         }
 
-        this.createLastRow(table, sums)
+        this.createLastRow(table, sums);
 
-        $(this._element).append(table)
+        $(this._element).append(table);
     }
 
     private createLastRow(table : JQuery<HTMLElement>, sums : Array<number>) : void 
@@ -77,4 +77,45 @@ export default class Table
             lastRow.append(tableElement);
         }
     }
+
+    private sortTable(table : HTMLTableElement, col : number)
+    {
+        enum Direction { ASC, DISC }
+
+        let rows : HTMLCollectionOf<HTMLTableRowElement> = table.rows;
+        let firstElement : any, secondElement : any;
+        let isSorted : boolean = false;
+        let direction : Direction = Direction.ASC;
+        let switchCount : number = 0;
+
+        while ( ! isSorted )
+        {
+            /* Loop through all table rows (except the
+            first and the last one: */
+            for ( let row = 1; row < rows.length - 2; row++ ) {
+                /* Get the two elements you want to compare,
+                one from current row and one from the next: */
+                firstElement = rows[row].getElementsByTagName("td")[col];
+                secondElement = rows[row + 1].getElementsByTagName("td")[col];
+                /* Check if the two rows should switch place,
+                based on the direction, asc or desc: */
+                if ( direction == Direction.ASC && firstElement.innerHTML.toLowerCase() > secondElement.innerHTML.toLowerCase() 
+                || direction == Direction.DISC && firstElement.innerHTML.toLowerCase() < secondElement.innerHTML.toLowerCase()) 
+                {
+                    rows[row].parentNode.insertBefore(rows[row + 1], rows[row]);
+                    // Each time a switch is done, increase this count by 1:
+                    switchCount++;
+                    break;
+                }
+
+                if ( row + 1 == rows.length - 2 )
+                    isSorted = true
+            }
+
+            /* If no switching has been done AND the direction is Direction.ASC,
+            set the direction to Direction.DISC and run the while loop again. */
+            if (switchCount == 0 && direction == Direction.ASC) 
+                direction = Direction.DISC;
+        } 
+      }
 }
