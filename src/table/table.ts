@@ -31,10 +31,12 @@ export default class Table
 
         $(this._element).append(this._tableElement);
 
-        //this.sortTable(0)
-        //this.sortTable(0)
-        this.selectionSortTable(0)
-        this.selectionSortTable(0)
+        /*
+        //Sorting di test, TODO: implementare sul click degli header
+
+        this.sortData(0)
+        this.sortData(0)
+        */
     }
 
     private renderData() : void
@@ -91,6 +93,8 @@ export default class Table
         }
     }
 
+    /*
+    // OLD sorting func, lavorava sull'HTML invece che sui dati
     private sortTable(col : number)
     {
         let rows : HTMLCollectionOf<HTMLTableRowElement> = this._tableElement.get(0).rows;
@@ -125,8 +129,9 @@ export default class Table
             }
         } 
     }
+    */
 
-    private selectionSortTable(col : number)
+    private sortData(col : number)
     {
         let firstRowIdx : number = this._configuration.firstRowHeader ? 1 : 0;
         let wasAlreadySorted : boolean = true;
