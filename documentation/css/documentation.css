@@ -68,7 +68,10 @@ pre
 }
 code
 {
-    color: #d44950;
+    padding: 2px 4px;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border-radius: 5px;
 }
 table
 { 
