@@ -62,7 +62,10 @@ export default class Table
 
         $(this._element).append(this._tableElement);
 
-        this.sortTable(0)
+        //this.sortTable(0)
+        //this.sortTable(0)
+        //this.selectionSortTable(0)
+        //this.selectionSortTable(0)
     }
 
     private createLastRow(sums : Array<number>) : void 
@@ -83,23 +86,22 @@ export default class Table
 
     private sortTable(col : number)
     {
-        enum Direction { ASC, DISC }
-
         let rows : HTMLCollectionOf<HTMLTableRowElement> = this._tableElement.get(0).rows;
-        let firstElement : any, secondElement : any;
+        let firstTableCellValue : any, secondTableCellValue : any;
         let isSorted : boolean = false;
-        let direction : Direction = Direction.ASC;
         let switchCount : number = 0;
-
+        let getTableCellValue = (row: number) => rows[row].getElementsByTagName("td")[col].innerText;
+        let sortFunc = (val1 : any, val2 : any) => val1 > val2;
+        
         while ( ! isSorted )
         {
-            for ( let row = 1; row < rows.length - 2; row++ ) {
+            for ( let row = 1; row < rows.length - 2; row++ ) 
+            {
                 
-                firstElement = rows[row].getElementsByTagName("td")[col];
-                secondElement = rows[row + 1].getElementsByTagName("td")[col];
+                firstTableCellValue = getTableCellValue(row);
+                secondTableCellValue = getTableCellValue(row + 1);
                 
-                if ( direction == Direction.ASC && firstElement.innerHTML.toLowerCase() > secondElement.innerHTML.toLowerCase() 
-                || direction == Direction.DISC && firstElement.innerHTML.toLowerCase() < secondElement.innerHTML.toLowerCase()) 
+                if ( sortFunc(firstTableCellValue.toLowerCase(), secondTableCellValue.toLowerCase()) ) 
                 {
                     rows[row].parentNode.insertBefore(rows[row + 1], rows[row]);
                     switchCount++;
@@ -109,9 +111,48 @@ export default class Table
                 if ( row + 1 == rows.length - 2 )
                     isSorted = true
             }
-
-            if (switchCount == 0 && direction == Direction.ASC) 
-                direction = Direction.DISC;
+            
+            if ( switchCount == 0 ) 
+            {
+                isSorted = false
+                sortFunc = (val1 : any, val2 : any) => val1 < val2;
+            }
         } 
+    }
+
+    private selectionSortTable(col : number)
+    {
+        let minIdx : number;
+        let switchCount : number = 0;
+        let rows : HTMLCollectionOf<HTMLTableRowElement> = this._tableElement.get(0).rows;
+        let getTableCellValue = (row: number) => rows[row].getElementsByTagName("td")[col].innerText;
+        let setTableCellValue = (row: number, newValue : any) => rows[row].getElementsByTagName("td")[col].innerText = newValue;
+        let sortFunc = (val1 : any, val2 : any) => val1 < val2;
+
+        function sort()
+        {
+            for ( let rowIdx = 1; rowIdx < rows.length - 2; rowIdx++ ) 
+            {
+                minIdx = rowIdx
+                
+                for ( let rowIdx2 = rowIdx; rowIdx2 < rows.length - 1; rowIdx2++ )
+                    if ( sortFunc(getTableCellValue(rowIdx2), getTableCellValue(minIdx)) )
+                        minIdx = rowIdx2;
+
+                if ( minIdx != rowIdx )
+                {
+                    let tmp = getTableCellValue(minIdx);
+                    setTableCellValue(minIdx, getTableCellValue(rowIdx))
+                    setTableCellValue(rowIdx, tmp)
+                    switchCount++;
+                }
+            }
+        }
+
+        sort()
+
+        if ( switchCount == 0 )
+            sortFunc = (val1 : any, val2 : any) => val1 > val2;
+            sort()
     }
 }
