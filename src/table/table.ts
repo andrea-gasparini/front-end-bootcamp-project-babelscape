@@ -27,6 +27,20 @@ export default class Table
         if (this._configuration.height !== undefined)
             $(this._tableElement).css('height', this._configuration.height + 'px');
 
+        this.renderData()
+
+        $(this._element).append(this._tableElement);
+
+        //this.sortTable(0)
+        //this.sortTable(0)
+        this.selectionSortTable(0)
+        this.selectionSortTable(0)
+    }
+
+    private renderData() : void
+    {
+        this._tableElement.empty()
+
         let rowCount : number = this._configuration.data.length;
         let colCount : number = this._configuration.data[0].length;
         let sums : Array<number> = new Array();
@@ -48,7 +62,7 @@ export default class Table
 
                     if ( TypeUtils.isNumber(matrixCell) && sums[col] !== null )
                         sums[col] = sums[col] == undefined ? matrixCell : (sums[col] + matrixCell);
-                    else if ( TypeUtils.isNumber(sums[col]) )
+                    else
                         sums[col] = null;
                 }
 
@@ -59,18 +73,11 @@ export default class Table
         }
 
         this.createLastRow(sums);
-
-        $(this._element).append(this._tableElement);
-
-        //this.sortTable(0)
-        //this.sortTable(0)
-        //this.selectionSortTable(0)
-        //this.selectionSortTable(0)
     }
 
     private createLastRow(sums : Array<number>) : void 
     {
-        let lastRow : JQuery<HTMLElement> = $('<tr / >').appendTo(this._tableElement);
+        let lastRow : JQuery<HTMLElement> = $('<tr />').appendTo(this._tableElement);
         lastRow.append($('<td> Totale righe ' + this._configuration.data.length + '</td>'))
 
         for ( let i = 1; i < sums.length; i++ )
@@ -90,14 +97,13 @@ export default class Table
         let firstTableCellValue : any, secondTableCellValue : any;
         let isSorted : boolean = false;
         let switchCount : number = 0;
-        let getTableCellValue = (row: number) => rows[row].getElementsByTagName("td")[col].innerText;
+        let getTableCellValue = (row: number) => rows[row].getElementsByTagName('td')[col].innerText;
         let sortFunc = (val1 : any, val2 : any) => val1 > val2;
         
         while ( ! isSorted )
         {
             for ( let row = 1; row < rows.length - 2; row++ ) 
             {
-                
                 firstTableCellValue = getTableCellValue(row);
                 secondTableCellValue = getTableCellValue(row + 1);
                 
@@ -122,28 +128,31 @@ export default class Table
 
     private selectionSortTable(col : number)
     {
-        let minIdx : number;
+        let firstRowIdx : number = this._configuration.firstRowHeader ? 1 : 0;
         let switchCount : number = 0;
-        let rows : HTMLCollectionOf<HTMLTableRowElement> = this._tableElement.get(0).rows;
-        let getTableCellValue = (row: number) => rows[row].getElementsByTagName("td")[col].innerText;
-        let setTableCellValue = (row: number, newValue : any) => rows[row].getElementsByTagName("td")[col].innerText = newValue;
-        let sortFunc = (val1 : any, val2 : any) => val1 < val2;
+        let matrix = this._configuration.data;
+        let getMatrixCellValue = (row: number) => matrix[row][col];
+        let setMatrixRow = (row: number, newRow : any) => matrix[row] = newRow;
 
-        function sort()
+        function sort(sortFunc = (val1 : any, val2 : any) => val1 < val2)
         {
-            for ( let rowIdx = 1; rowIdx < rows.length - 2; rowIdx++ ) 
+            let minIdx : number = firstRowIdx;
+            
+            for ( let rowIdx = firstRowIdx; rowIdx < matrix.length - 1; rowIdx++ ) 
             {
                 minIdx = rowIdx
                 
-                for ( let rowIdx2 = rowIdx; rowIdx2 < rows.length - 1; rowIdx2++ )
-                    if ( sortFunc(getTableCellValue(rowIdx2), getTableCellValue(minIdx)) )
+                for ( let rowIdx2 = rowIdx + 1; rowIdx2 < matrix.length; rowIdx2++ )
+                {
+                    if ( sortFunc(getMatrixCellValue(rowIdx2), getMatrixCellValue(minIdx)) )
                         minIdx = rowIdx2;
+                }
 
                 if ( minIdx != rowIdx )
                 {
-                    let tmp = getTableCellValue(minIdx);
-                    setTableCellValue(minIdx, getTableCellValue(rowIdx))
-                    setTableCellValue(rowIdx, tmp)
+                    let tmpIdx = matrix[minIdx];
+                    setMatrixRow(minIdx, matrix[rowIdx])
+                    setMatrixRow(rowIdx, tmpIdx)
                     switchCount++;
                 }
             }
@@ -152,7 +161,8 @@ export default class Table
         sort()
 
         if ( switchCount == 0 )
-            sortFunc = (val1 : any, val2 : any) => val1 > val2;
-            sort()
+            sort((val1 : any, val2 : any) => val1 > val2)
+
+        this.renderData()
     }
 }
