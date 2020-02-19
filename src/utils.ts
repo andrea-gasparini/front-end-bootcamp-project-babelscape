@@ -15,3 +15,8 @@ export namespace TypeUtils
         return typeof x === "object";
     }
 }
+
+export function tableRowSortFn()
+{
+    
+}

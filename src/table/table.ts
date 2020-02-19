@@ -147,10 +147,14 @@ export default class Table
 
         this.renderData()
 
-        function sort(sortFunc = (val1 : any, val2 : any) => val1 < val2)
+
+
+        //var sort = function sort(sortFunc = (val1 : HTMLElement, val2 : any) => val1 < val2)
+        var ssort = function(a  :HTMLElement, b:HTMLElement) : number
         {
+            const colIndex : number = this;
             let minIdx : number = firstRowIdx;
-            
+            /*
             for ( let rowIdx : number = firstRowIdx; rowIdx < matrix.length - 1; rowIdx++ ) 
             {
                 minIdx = rowIdx
@@ -166,7 +170,15 @@ export default class Table
                     setMatrixRow(rowIdx, tmpIdx)
                     wasAlreadySorted = false;
                 }
-            }
+            }*/
+            return 0;
         }
+        const rows : HTMLElement[] = $(this._element).find("tbody tr").detach().toArray();
+
+        var newSort = $.proxy(ssort, col);
+
+        rows.sort(newSort);
+
+        $(this._element).find("tbody").append(rows);
     }
 }

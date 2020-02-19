@@ -78,7 +78,7 @@
 		$("#message3").message(messageConfiguration3);
 		$("#message4").message(messageConfiguration4);
 
-		$("#button1").button({text: "READY", icon: "<i class='fas fa-play'></i>", onClick: function(event) { console.log('test') }})
+		$("#button1").button({text: "READY", icon: "<i class='fas fa-play'></i>", onClick: function(event) { console.log(event); alert('click') }})
 		$("#button2").button({text: "DISABLED", initialState: "disabled"})
 		$("#button3").button({text: "ERROR", initialState: "error"})
 		$("#button4").button({text: "PENDING", initialState: "pending"})

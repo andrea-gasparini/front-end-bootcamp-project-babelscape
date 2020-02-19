@@ -29,7 +29,7 @@ export default class Button
             .append(this._configuration.text);
 
         if ( this._configuration.initialState != State.PENDING && this._configuration.initialState != State.DISABLED )
-            this._buttonElement.click(() => this._configuration.onClick)
+            this._buttonElement.click((e : JQuery.Event) => this._configuration.onClick(e))
 
         if ( this._configuration.initialState == State.PENDING )
             this._buttonElement.append(' <i class="fa fa-spinner fa-spin"></i>');

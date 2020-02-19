@@ -2,7 +2,7 @@ import Dimension from "../dimension";
 
 export default class TableConfiguration
 {
-    private _data : Array<Array<any>>;
+    private _data : Array<Array<string>>;
     private _dimensions : Dimension = new Dimension();
     private _firstRowHeader: boolean = true;
 
