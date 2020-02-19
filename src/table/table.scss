@@ -1,9 +1,14 @@
+$main-color: rgb(29, 44, 65);
+$header-footer-text-color: white;
+$rows-color: white;
+$even-rows-color: #f2f2f2;
+
 .table
 { 
     margin: 15px 5px;
     border-collapse: collapse;
     width: 98.5%;
-    border: 1px solid rgb(29, 44, 65);
+    border: 1px solid $main-color;
 
     td, th
     {
@@ -16,15 +21,20 @@
         font-size: 90%;
     }
 
+    tbody tr
+    {
+        background-color: $rows-color;
+    }
+
     tbody tr:nth-child(even)
     {
-        background-color: #f2f2f2;
+        background-color: $even-rows-color;
     }
 
     tfoot td
     {
-        background-color: rgb(29, 44, 65);
-        color: white;
+        background-color: $main-color;
+        color: $header-footer-text-color;
     }
     
     th
@@ -34,7 +44,7 @@
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: left;
-        background-color: rgb(29, 44, 65);
-        color: white;
+        background-color: $main-color;
+        color: $header-footer-text-color;
     }
 }
