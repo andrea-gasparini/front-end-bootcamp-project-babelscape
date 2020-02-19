@@ -16,7 +16,11 @@ export namespace TypeUtils
     }
 }
 
-export function tableRowSortFn()
+export function tableRowSort(table : JQuery<HTMLTableElement>, sortFunc : (a : HTMLTableElement, b : HTMLTableElement) => number)
 {
-    
+    const rows : HTMLTableElement[] = table.find('tbody tr').detach().toArray();
+
+    rows.sort(sortFunc);
+
+    table.find('tbody').append(rows);
 }
