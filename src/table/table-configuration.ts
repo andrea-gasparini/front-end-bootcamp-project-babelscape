@@ -6,7 +6,7 @@ export default class TableConfiguration
     private _dimensions : Dimension = new Dimension();
     private _firstRowHeader: boolean = true;
 
-    constructor(config: {data : any, width? : number, height? : number, firstRowHeader? : boolean})
+    constructor(config: {data : Array<Array<string>>, width? : number, height? : number, firstRowHeader? : boolean})
     {
         if (config.data !== undefined) this._data = config.data;
 
@@ -16,7 +16,7 @@ export default class TableConfiguration
         if (config.firstRowHeader !== undefined) this._firstRowHeader = config.firstRowHeader;
     }
 
-    get data() : Array<Array<any>> { return this._data; }
+    get data() : Array<Array<string>> { return this._data; }
 
     get width(): number { return this._dimensions.width; }
 
