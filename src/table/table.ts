@@ -34,8 +34,8 @@ export default class Table
         /*
         //Sorting di test, TODO: implementare sul click degli header
 
-        this.sortData(0)
-        this.sortData(0)
+        this.sortTablePerCol(0)
+        this.sortTablePerCol(0)
         */
     }
 
@@ -47,6 +47,11 @@ export default class Table
         let colCount : number = this._configuration.data[0].length;
         let sums : Array<number> = new Array();
 
+        if ( this._configuration.firstRowHeader )
+            this._tableElement.append('<thead />');    
+
+        this._tableElement.append('<tbody />');
+
         for ( let row = 0; row < rowCount; row++ )
         {
             let tableRow = $('<tr />');
@@ -56,9 +61,9 @@ export default class Table
                 let matrixCell = this._configuration.data[row][col];
                 let tableCell : JQuery<HTMLElement>;
 
-                if ( row === 0 && this._configuration.firstRowHeader )
+                if ( row == 0 && this._configuration.firstRowHeader )
                     tableCell = $('<th />')
-                        .click(() => this.sortData(col));
+                        .click(() => this.sortTablePerCol(col));
                 else
                 {
                     tableCell = $('<td />');
@@ -71,8 +76,12 @@ export default class Table
 
                 tableCell.append(matrixCell);
                 tableRow.append(tableCell);
-                this._tableElement.append(tableRow);
             }
+
+            if ( row == 0 && this._configuration.firstRowHeader )
+                this._tableElement.find('thead').append(tableRow);
+            else
+                this._tableElement.find('tbody').append(tableRow);
         }
 
         this.createLastRow(sums);
@@ -80,7 +89,8 @@ export default class Table
 
     private createLastRow(sums : Array<number>) : void 
     {
-        let lastRow : JQuery<HTMLElement> = $('<tr />').appendTo(this._tableElement);
+        let tFoot = $('<tfoot />').appendTo(this._tableElement); 
+        let lastRow : JQuery<HTMLElement> = $('<tr />').appendTo(tFoot);
         lastRow.append($('<td> Totale righe ' + this._configuration.data.length + '</td>'))
 
         for ( let i = 1; i < sums.length; i++ )
@@ -132,6 +142,7 @@ export default class Table
     }
     */
 
+    /*
     private sortData(col : number)
     {
         let firstRowIdx : number = this._configuration.firstRowHeader ? 1 : 0;
@@ -147,14 +158,10 @@ export default class Table
 
         this.renderData()
 
-
-
-        //var sort = function sort(sortFunc = (val1 : HTMLElement, val2 : any) => val1 < val2)
-        var ssort = function(a  :HTMLElement, b:HTMLElement) : number
+        function sort(sortFunc = (val1 : any, val2 : any) => val1 < val2)
         {
-            const colIndex : number = this;
             let minIdx : number = firstRowIdx;
-            /*
+            
             for ( let rowIdx : number = firstRowIdx; rowIdx < matrix.length - 1; rowIdx++ ) 
             {
                 minIdx = rowIdx
@@ -170,15 +177,20 @@ export default class Table
                     setMatrixRow(rowIdx, tmpIdx)
                     wasAlreadySorted = false;
                 }
-            }*/
-            return 0;
+            }
         }
-        const rows : HTMLElement[] = $(this._element).find("tbody tr").detach().toArray();
+    }
+    */
 
-        var newSort = $.proxy(ssort, col);
 
-        rows.sort(newSort);
+    private sortTablePerCol(col : number)
+    {
+        let getTableCellValue = (row: HTMLTableElement) => row.children[col].textContent;
 
-        $(this._element).find("tbody").append(rows);
+        const rows : HTMLTableElement[] = this._tableElement.find('tbody tr').detach().toArray();
+
+        rows.sort((a, b) => getTableCellValue(a).localeCompare(getTableCellValue(b)));
+
+        this._tableElement.find('tbody').append(rows);
     }
 }
