@@ -57,7 +57,8 @@ export default class Table
                 let tableCell : JQuery<HTMLElement>;
 
                 if ( row === 0 && this._configuration.firstRowHeader )
-                    tableCell = $('<th />');
+                    tableCell = $('<th />')
+                        .click(() => this.sortData(col));
                 else
                 {
                     tableCell = $('<td />');
