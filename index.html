@@ -78,11 +78,13 @@
 		$("#message3").message(messageConfiguration3);
 		$("#message4").message(messageConfiguration4);
 
-		$("#button1").button({text: "READY", icon: "<i class='fas fa-play'></i>"})
+		$("#button1").button({text: "READY", icon: "<i class='fas fa-play'></i>", onClick: function(event) { console.log('test') }})
 		$("#button2").button({text: "DISABLED", initialState: "disabled"})
 		$("#button3").button({text: "ERROR", initialState: "error"})
 		$("#button4").button({text: "PENDING", initialState: "pending"})
 		$("#button5").button({icon: "<i class='fab fa-accessible-icon'></i>", initialState: "ready", width: 100, height: 50})
+
+		$("#button5").button("setState", "Pending");
 
 		$("#table1").table({firstRowHeader: true, data: [['Header1', 'Header2', 'Header3', 'HeaderNumerico'], ['mele','buone',3,44], ['arance', 'cattive', 4, 12], ['test' ,'colonna2' , 'a', 5]]})
 		$("#table1").table({firstRowHeader: false, data: [['noHeader1', 'noHeader2', 'noHeader3', 'noHeaderNumerico'], ['mele','buone',3,44], ['arance', 'cattive', 4, 12], ['test' ,'colonna2' , 'a', 5]]})
