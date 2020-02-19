@@ -1,6 +1,7 @@
 import ButtonConfiguration from "./button-configuration";
 import { State } from "../state";
 import "./button.scss";
+import { TypeUtils } from "../utils";
 
 export default class Button
 {
@@ -27,8 +28,11 @@ export default class Button
             .append(' ')
             .append(this._configuration.text);
 
+        if ( this._configuration.initialState != State.PENDING && this._configuration.initialState != State.DISABLED )
+            this._buttonElement.click(() => this._configuration.onClick)
+
         if ( this._configuration.initialState == State.PENDING )
-            this._buttonElement.append(' <i class="fa fa-spinner fa-spin"></i>')
+            this._buttonElement.append(' <i class="fa fa-spinner fa-spin"></i>');
 
         if (this._configuration.width !== undefined)
             this._buttonElement.css('width', this._configuration.width + 'px');
@@ -41,9 +45,15 @@ export default class Button
 
     public setState(state : State) : void
     {
-        this._actualState = state;
         if ( this._actualState == State.PENDING )
-            $(this._element).append(' <i class="fa fa-spinner fa-spin"></i>')
+            this._buttonElement.children().last().remove();
+
+        this._buttonElement.removeClass(State.toCssClass(this._actualState));
+        this._actualState = TypeUtils.isString(state) ? State.fromValue(state) : state;;
+        this._buttonElement.addClass(State.toCssClass(this._actualState));
+
+        if ( this._actualState == State.PENDING )
+            $(this._buttonElement).append(' <i class="fa fa-spinner fa-spin"></i>')
     }
 
     public getState() : State

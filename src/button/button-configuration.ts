@@ -8,9 +8,9 @@ export default class ButtonConfiguration
     private _icon : JQuery;
     private _dimensions : Dimension = new Dimension();
     private _initialState : State = State.READY;
-    private _onClick(param : Event) : void {};
+    private _onClick : (param : Event) => void;
 
-    constructor(config : {text : string, icon? : JQuery, width?: number, height? : number, initialState? : State, onClick(param : Event) : void})
+    constructor(config : {text : string, icon? : JQuery, width?: number, height? : number, initialState? : State, onClick? : (param : Event) => void})
     {
         if (config.text !== undefined) this._text = config.text;
 
