@@ -12,7 +12,6 @@ $even-rows-color: #f2f2f2;
 
     td, th
     {
-        
         padding: 8px;
     }
 
@@ -21,30 +20,39 @@ $even-rows-color: #f2f2f2;
         font-size: 90%;
     }
 
-    tbody tr
+    thead
     {
-        background-color: $rows-color;
+        th
+        {
+            cursor : pointer;
+            max-width: 50%;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: $main-color;
+            color: $header-footer-text-color;
+        }
     }
 
-    tbody tr:nth-child(even)
+    tbody
     {
-        background-color: $even-rows-color;
+        tr
+        {
+            background-color: $rows-color;
+        }
+
+        tr:nth-child(even)
+        {
+            background-color: $even-rows-color;
+        }
     }
 
-    tfoot td
+    tfoot
     {
-        background-color: $main-color;
-        color: $header-footer-text-color;
-    }
-    
-    th
-    {
-        cursor : pointer;
-        max-width: 50%;
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: $main-color;
-        color: $header-footer-text-color;
+        td
+        {
+            background-color: $main-color;
+            color: $header-footer-text-color;
+        }
     }
 }
