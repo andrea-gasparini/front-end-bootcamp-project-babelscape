@@ -1,5 +1,6 @@
 import TableConfiguration from './table-configuration';
 import { TypeUtils } from '../utils';
+import { tableRowSort } from '../utils';
 import './table.scss';
 
 export default class Table
@@ -27,30 +28,14 @@ export default class Table
         if (this._configuration.height !== undefined)
             $(this._tableElement).css('height', this._configuration.height + 'px');
 
-        this.renderData()
-
-        $(this._element).append(this._tableElement);
-
-        /*
-        //Sorting di test, TODO: implementare sul click degli header
-
-        this.sortTablePerCol(0)
-        this.sortTablePerCol(0)
-        */
-    }
-
-    private renderData() : void
-    {
-        this._tableElement.empty()
-
-        let rowCount : number = this._configuration.data.length;
-        let colCount : number = this._configuration.data[0].length;
-        let sums : Array<number> = new Array();
-
         if ( this._configuration.firstRowHeader )
             this._tableElement.append('<thead />');    
 
         this._tableElement.append('<tbody />');
+
+        let rowCount : number = this._configuration.data.length;
+        let colCount : number = this._configuration.data[0].length;
+        let sums : Array<number> = new Array();
 
         for ( let row = 0; row < rowCount; row++ )
         {
@@ -85,6 +70,8 @@ export default class Table
         }
 
         this.createLastRow(sums);
+
+        $(this._element).append(this._tableElement);
     }
 
     private createLastRow(sums : Array<number>) : void 
@@ -104,93 +91,21 @@ export default class Table
         }
     }
 
-    /*
-    // OLD sorting func, lavorava sull'HTML invece che sui dati
-    private sortTable(col : number)
-    {
-        let rows : HTMLCollectionOf<HTMLTableRowElement> = this._tableElement.get(0).rows;
-        let firstTableCellValue : any, secondTableCellValue : any;
-        let isSorted : boolean = false;
-        let switchCount : number = 0;
-        let getTableCellValue = (row: number) => rows[row].getElementsByTagName('td')[col].innerText;
-        let sortFunc = (val1 : any, val2 : any) => val1 > val2;
-        
-        while ( ! isSorted )
-        {
-            for ( let row = 1; row < rows.length - 2; row++ ) 
-            {
-                firstTableCellValue = getTableCellValue(row);
-                secondTableCellValue = getTableCellValue(row + 1);
-                
-                if ( sortFunc(firstTableCellValue.toLowerCase(), secondTableCellValue.toLowerCase()) ) 
-                {
-                    rows[row].parentNode.insertBefore(rows[row + 1], rows[row]);
-                    switchCount++;
-                    break;
-                }
-
-                if ( row + 1 == rows.length - 2 )
-                    isSorted = true
-            }
-            
-            if ( switchCount == 0 ) 
-            {
-                isSorted = false
-                sortFunc = (val1 : any, val2 : any) => val1 < val2;
-            }
-        } 
-    }
-    */
-
-    /*
-    private sortData(col : number)
-    {
-        let firstRowIdx : number = this._configuration.firstRowHeader ? 1 : 0;
-        let wasAlreadySorted : boolean = true;
-        let matrix = this._configuration.data;
-        let getMatrixCellValue = (row: number) => matrix[row][col];
-        let setMatrixRow = (row: number, newRow : any) => matrix[row] = newRow;
-
-        sort()
-
-        if ( wasAlreadySorted )
-            sort((val1 : any, val2 : any) => val1 > val2)
-
-        this.renderData()
-
-        function sort(sortFunc = (val1 : any, val2 : any) => val1 < val2)
-        {
-            let minIdx : number = firstRowIdx;
-            
-            for ( let rowIdx : number = firstRowIdx; rowIdx < matrix.length - 1; rowIdx++ ) 
-            {
-                minIdx = rowIdx
-                
-                for ( let rowIdx2 : number = rowIdx + 1; rowIdx2 < matrix.length; rowIdx2++ )
-                    if ( sortFunc(getMatrixCellValue(rowIdx2), getMatrixCellValue(minIdx)) )
-                        minIdx = rowIdx2;
-
-                if ( minIdx != rowIdx )
-                {
-                    let tmpIdx = matrix[minIdx];
-                    setMatrixRow(minIdx, matrix[rowIdx])
-                    setMatrixRow(rowIdx, tmpIdx)
-                    wasAlreadySorted = false;
-                }
-            }
-        }
-    }
-    */
-
-
     private sortTablePerCol(col : number)
     {
         let getTableCellValue = (row: HTMLTableElement) => row.children[col].textContent;
 
-        const rows : HTMLTableElement[] = this._tableElement.find('tbody tr').detach().toArray();
-
-        rows.sort((a, b) => getTableCellValue(a).localeCompare(getTableCellValue(b)));
-
-        this._tableElement.find('tbody').append(rows);
+        if ( this._tableElement.find('thead th.asc-sorted').length == 0 )
+        {
+            this._tableElement.find('thead th').eq(col).addClass('asc-sorted');
+            this._tableElement.find('thead th').removeClass('desc-sorted');
+            tableRowSort(this._tableElement, (a, b) => getTableCellValue(a).localeCompare(getTableCellValue(b)));
+        }
+        else
+        {
+            this._tableElement.find('thead th').eq(col).addClass('desc-sorted');
+            this._tableElement.find('thead th').removeClass('asc-sorted');
+            tableRowSort(this._tableElement, (a, b) => getTableCellValue(b).localeCompare(getTableCellValue(a)))
+        }
     }
 }
