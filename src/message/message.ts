@@ -24,9 +24,6 @@ export default class Message
             .addClass('message')
             .addClass(Alert.toCssClass(this._configuration.type));
 
-        if (this._configuration.centered !== undefined)
-            $(this._element).css('margin', this._configuration.centered ? 'auto' : '');
-
         if (this._configuration.width !== undefined)
             $(this._element).css('width', this._configuration.width + 'px');
 
