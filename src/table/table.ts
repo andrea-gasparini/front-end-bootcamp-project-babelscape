@@ -8,6 +8,7 @@ export default class Table
     private _element : HTMLElement;
     private _configuration : TableConfiguration;
     private _tableElement : JQuery<HTMLTableElement> = $('<table />');
+    private readonly _sortIcon = '<i class="fas fa-sort"></i>';
 
     constructor(element: HTMLElement, config : TableConfiguration)
     {
@@ -48,7 +49,8 @@ export default class Table
 
                 if ( row == 0 && this._configuration.firstRowHeader )
                     tableCell = $('<th />')
-                        .click(() => this.sortTablePerCol(col));
+                        .click(() => this.sortTablePerCol(col))
+                        .append(' ' + this._sortIcon);
                 else
                 {
                     tableCell = $('<td />');
@@ -59,7 +61,7 @@ export default class Table
                         sums[col] = null;
                 }
 
-                tableCell.append(matrixCell);
+                tableCell.prepend(matrixCell);
                 tableRow.append(tableCell);
             }
 
@@ -95,16 +97,24 @@ export default class Table
     {
         let getTableCellValue = (row: HTMLTableElement) => row.children[col].textContent;
 
-        if ( this._tableElement.find('thead th.asc-sorted').length == 0 )
+        if ( ! this._tableElement.find('thead th').eq(col).hasClass('asc-sorted') )
         {
+            this._tableElement.find('thead th svg').addClass('fa-sort');
+            this._tableElement.find('thead th svg').eq(col).addClass('fa-sort-down');
+            
+            this._tableElement.find('thead th').removeClass('asc-sorted desc-sorted');
             this._tableElement.find('thead th').eq(col).addClass('asc-sorted');
-            this._tableElement.find('thead th').removeClass('desc-sorted');
+
             tableRowSort(this._tableElement, (a, b) => getTableCellValue(a).localeCompare(getTableCellValue(b)));
         }
         else
         {
+            this._tableElement.find('thead th svg').addClass('fa-sort');
+            this._tableElement.find('thead th svg').eq(col).addClass('fa-sort-up');
+
+            this._tableElement.find('thead th').removeClass('asc-sorted desc-sorted');
             this._tableElement.find('thead th').eq(col).addClass('desc-sorted');
-            this._tableElement.find('thead th').removeClass('asc-sorted');
+
             tableRowSort(this._tableElement, (a, b) => getTableCellValue(b).localeCompare(getTableCellValue(a)))
         }
     }
