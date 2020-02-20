@@ -1,38 +1,36 @@
-$info-color: rgb(109, 109, 109);
-$success-color: rgb(0, 54, 0);
-$warning-color: rgb(190, 139, 0);
-$danger-color: rgb(190, 0, 0);
+@import '../variables';
 
 .message
 {
+    margin: $default-margin;
+
     display: block;
     padding: 10px 15px 10px 15px;
-    margin: 5px;
     border-style: solid;
     border-width: 1px;
-    color: $info-color;
-    border-color: $info-color;
+    color: $message-info-color;
+    border-color: $message-info-color;
     border-radius: 5px;
-    background-color: lighten($info-color, 50);
+    background-color: lighten($message-info-color, 50);
 
     &.success
     {
-        color: $success-color;
-        background-color: lighten($success-color, 85);
-        border-color: $success-color;
+        color: $message-success-color;
+        background-color: lighten($message-success-color, 85);
+        border-color: $message-success-color;
     }
 
     &.warning
     {
-        color: $warning-color;
-        background-color: lighten($warning-color, 60);
-        border-color: $warning-color;
+        color: $message-warning-color;
+        background-color: lighten($message-warning-color, 60);
+        border-color: $message-warning-color;
     }
 
     &.danger
     {
-        color: $danger-color;
-        background-color: lighten($danger-color, 60);
-        border-color: $danger-color;
+        color: $message-danger-color;
+        background-color: lighten($message-danger-color, 60);
+        border-color: $message-danger-color;
     }
 }

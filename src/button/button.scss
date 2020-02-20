@@ -1,18 +1,18 @@
-$main-color: grey;
+@import '../variables';
 
 .button
 {
     cursor: pointer;
-    margin: 5px;
+    margin: $default-margin;
 
     border-radius: 10px;
     border-style: solid;
     border-width: 1px;
     font-weight: bold;
-    color: $main-color;
-    border-color: $main-color;
-    background-color: lighten($main-color, 40);
-    box-shadow: 0 3px $main-color;
+    color: $button-ready-color;
+    border-color: $button-ready-color;
+    background-color: lighten($button-ready-color, 40);
+    box-shadow: 0 3px $button-ready-color;
 
     padding:
     {
@@ -24,8 +24,8 @@ $main-color: grey;
 
     &:hover
     {
-        color: lighten($main-color, 40);
-        background-color: lighten($main-color, 20);
+        color: lighten($button-ready-color, 40);
+        background-color: lighten($button-ready-color, 20);
     }
 
     &:focus { outline: none; }
@@ -35,33 +35,32 @@ $main-color: grey;
     &:active
     {
         transform: translateY(1px);
-        box-shadow: 0 2px darken($main-color, 10);
+        box-shadow: 0 2px darken($button-ready-color, 10);
     }
 
     &.disabled 
     {
         font-weight: normal;
-        color: lighten($main-color, 10);
+        color: lighten($button-ready-color, 10);
         box-shadow: none;
     }
 
     &.error 
     {
-        $main-color: red;
-        color: $main-color;
-        border-color: $main-color;
-        background-color: lighten($main-color, 40);
-        box-shadow: 0 3px $main-color;
+        color: $button-error-color;
+        border-color: $button-error-color;
+        background-color: lighten($button-error-color, 40);
+        box-shadow: 0 3px $button-error-color;
 
         &:hover
         {
-            color: lighten($main-color, 40);
-            background-color: lighten($main-color, 20);
+            color: lighten($button-error-color, 40);
+            background-color: lighten($button-error-color, 20);
         }
 
         &:active
         {
-            box-shadow: 0 2px darken($main-color, 10);
+            box-shadow: 0 2px darken($button-error-color, 10);
         }
     }
 }
