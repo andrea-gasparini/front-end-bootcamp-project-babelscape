@@ -9,6 +9,7 @@ export default class Button
     private _configuration : ButtonConfiguration;
     private _actualState : State;
     private _buttonElement : JQuery<HTMLButtonElement> = $('<button />');
+    private readonly _loadingIcon = '<i class="fa fa-spinner fa-spin"></i>';
 
     constructor(element: HTMLElement, config : ButtonConfiguration)
     {
@@ -32,7 +33,7 @@ export default class Button
             this._buttonElement.click((e : JQuery.Event) => this._configuration.onClick(e))
 
         if ( this._configuration.initialState == State.PENDING )
-            this._buttonElement.append(' <i class="fa fa-spinner fa-spin"></i>');
+            this._buttonElement.append(' ' + this._loadingIcon);
 
         if (this._configuration.width !== undefined)
             this._buttonElement.css('width', this._configuration.width + 'px');
@@ -46,14 +47,14 @@ export default class Button
     public setState(state : State) : void
     {
         if ( this._actualState == State.PENDING )
-            this._buttonElement.children().last().remove();
+            $(this._buttonElement).find('.fa').last().remove();
 
         this._buttonElement.removeClass(State.toCssClass(this._actualState));
-        this._actualState = TypeUtils.isString(state) ? State.fromValue(state) : state;;
+        this._actualState = TypeUtils.isString(state) ? State.fromValue(state) : state;
         this._buttonElement.addClass(State.toCssClass(this._actualState));
 
         if ( this._actualState == State.PENDING )
-            $(this._buttonElement).append(' <i class="fa fa-spinner fa-spin"></i>')
+            $(this._buttonElement).append(' ' + this._loadingIcon);
     }
 
     public getState() : State
