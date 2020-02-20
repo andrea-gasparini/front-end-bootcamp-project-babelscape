@@ -29,8 +29,14 @@ export default class Button
             .append(' ')
             .append(this._configuration.text);
 
-        if ( this._configuration.initialState != State.PENDING && this._configuration.initialState != State.DISABLED )
+    
+        if (  this._configuration.onClick != undefined )
             this._buttonElement.click((e : JQuery.Event) => this._configuration.onClick(e))
+        
+        if ( this._configuration.initialState == State.DISABLED || this._configuration.initialState == State.PENDING )
+            this._buttonElement.css('pointer-events', 'none');
+        else if ( this._configuration.initialState == State.ERROR )
+            this._buttonElement.off('click');
 
         if ( this._configuration.initialState == State.PENDING )
             this._buttonElement.append(' ' + this._loadingIcon);
@@ -47,14 +53,21 @@ export default class Button
     public setState(state : State) : void
     {
         if ( this._actualState == State.PENDING )
-            $(this._buttonElement).find('.fa').last().remove();
+            this._buttonElement.find('.fa').last().remove();
 
         this._buttonElement.removeClass(State.toCssClass(this._actualState));
         this._actualState = TypeUtils.isString(state) ? State.fromValue(state) : state;
         this._buttonElement.addClass(State.toCssClass(this._actualState));
 
-        if ( this._actualState == State.PENDING )
-            $(this._buttonElement).append(' ' + this._loadingIcon);
+        if ( this._actualState == State.PENDING || this._actualState == State.DISABLED )
+        {
+            this._buttonElement.css('pointer-events', 'none');
+            
+            if ( this._actualState == State.PENDING )
+                this._buttonElement.append(' ' + this._loadingIcon);    
+        }
+        else if ( this._actualState == State.ERROR )
+            this._buttonElement.off('click');
     }
 
     public getState() : State

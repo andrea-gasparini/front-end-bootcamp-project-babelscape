@@ -42,7 +42,6 @@ $main-color: grey;
     {
         font-weight: normal;
         color: lighten($main-color, 10);
-        pointer-events: none;
         box-shadow: none;
     }
 
@@ -62,13 +61,7 @@ $main-color: grey;
 
         &:active
         {
-            transform: translateY(1px);
             box-shadow: 0 2px darken($main-color, 10);
         }
-    }
-
-    &.pending 
-    {
-        pointer-events: none;
     }
 }
