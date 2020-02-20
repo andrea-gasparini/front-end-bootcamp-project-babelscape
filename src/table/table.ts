@@ -2,6 +2,7 @@ import TableConfiguration from './table-configuration';
 import { TypeUtils } from '../utils';
 import { tableRowSort } from '../utils';
 import './table.scss';
+import { Align } from '../align';
 
 export default class Table
 {
@@ -21,7 +22,9 @@ export default class Table
     private render() : void
     {
         this._tableElement
-            .addClass('table');   
+            .addClass('table')
+            .css('text-align', Align.toCssValue(this._configuration.alignText))
+            .find('thead th').css('text-align', Align.toCssValue(this._configuration.alignText));   
             
         if (this._configuration.width !== undefined)
             $(this._tableElement).css('width', this._configuration.width + 'px');
