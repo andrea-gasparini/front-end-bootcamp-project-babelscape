@@ -76,26 +76,26 @@ code
 {
     color: #c7254e;
 }
-table
+.doc-table
 { 
     margin: 5px;
     border-collapse: collapse;
     width: 98.5%;
 }
-td, th
+.doc-table td, th
 {
     border: 1px solid #ddd;
     padding: 8px;
 }
-td
+.doc-table td
 {
     font-size: 90%;
 }
-tr:nth-child(even)
+.doc-table tr:nth-child(even)
 {
     background-color: #f2f2f2;
 }
-th
+.doc-table th
 {
     max-width: 50%;
     padding-top: 12px;
@@ -104,11 +104,11 @@ th
     background-color: rgb(29, 44, 65);
     color: white;
 }
-table code
+.doc-table code
 {
     font-size: 110%;
 }
-th#descrizione
+.doc-table th#descrizione
 {
     width: 50%;
 }
