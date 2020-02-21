@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <h1> Documentazione Button </h1>
+        <span id='subtitle'> Il Button è un componente molto semplice che equivale ad un normale bottone.</span>
+
+        <h2> Esempi </h2>
+        <p> 
+           
+        </p>
+        <p>
+            
+        </p>
+        <div style='display: flex; flex-direction: row; justify-content: center;'>
+            <div id='esempio-ready'></div>
+            <div id='esempio-disabled'></div>
+            <div id='esempio-error'></div>
+            <div id='esempio-pending'></div>
+        </div>
+        <div style='display: flex; flex-direction: row; justify-content: center;'>
+            <div id='esempio-error2'></div>
+            <div id='esempio-ready2'></div>
+            <div id='esempio-pending2'></div>
+        </div>
+        <pre>
+$("#esempio-ready").button({
+    text: "Button Ready",
+    icon: "&lt;i class='fas fa-play'&gt;&lt;/i&gt;",
+    onClick: function(event) { alert('click') }});
+
+$("#esempio-disabled").button({
+    text: "Button Disabled",
+    initialState: "DISABLED"});
+
+$("#esempio-error").button({
+    text: "Button Error",
+    initialState: "ERROR"});
+
+$("#esempio-pending").button({
+    text: "Button Pending",
+    initialState: "PENDING"});
+
+$("#esempio-error2").button({
+    text: "Button Error 2",
+    icon: "&lt;i class='fas fa-ban'&gt;&lt;/i&gt;",
+    initialState: "ERROR"});
+
+$("#esempio-ready2").button({
+    text: "Button Ready 2",
+    initialState: "READY",
+    width: 100,
+    height: 75});
+
+$("#esempio-pending2").button({
+    text: "Button Pending 2",
+    initialState: "PENDING",
+    width: 200});
+        </pre> 
+        <h2> Opzioni </h2>
+        <p>
+            Le opzioni del componente vanno specificate nella configurazione tramite un oggetto <code>JSON</code>, come mostrato negli esempi precedenti.
+            Se l'opzione non ha alcun valore in default è obbligatorio specificarne uno per la corretta configurazione del componente.
+        </p>
+        <table class='doc-table'>
+            <thead>
+                <tr>
+                    <th>Opzione</th>
+                    <th>Tipo</th>
+                    <th>Default</th>
+                    <th id='descrizione'>Descrizione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>message</td>
+                    <td><code>string</code></td>
+                    <td></td>
+                    <td>Messaggio di testo da mostrare nel componente.</td>
+                </tr>
+                <tr>
+                    <td>width</td>
+                    <td><code>number</code></td>
+                    <td><code>auto</code></td>
+                    <td>Larghezza del componente, di default si adatta alle dimensioni del div in cui è contenuto.</td>
+                </tr>
+                <tr>
+                    <td>height</td>
+                    <td><code>number</code></td>
+                    <td><code>auto</code></td>
+                    <td>Altezza del componente, di default si adatta alle righe del messaggio.</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td><code>Alert</code> o <code>string</code></td>
+                    <td><code>INFO</code></td>
+                    <td>Tipologia del messaggio, che modifica i colori del componente. È possibile scegliere tra <code>INFO</code>, <code>SUCCESS</code>, <code>WARNING</code> e <code>DANGER</code> </td>
+                </tr>
+                <tr>
+                    <td>alignText</td>
+                    <td><code>Align</code> o <code>string</code></td>
+                    <td><code>LEFT</code></td>
+                    <td>Allineamento del messaggio all'interno del componente. È possibile scegliere tra <code>LEFT</code>, <code>CENTER</code> e <code>RIGHT</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+    <script type='text/javascript'>
+        $("#esempio-ready").button({text: "Button Ready", icon: "<i class='fas fa-play'></i>", onClick: function(event) { alert('click') }});
+		$("#esempio-disabled").button({text: "Button Disabled", initialState: "disabled"});
+		$("#esempio-error").button({text: "Button Error", initialState: "error"});
+        $("#esempio-pending").button({text: "Button Pending", initialState: "pending"});
+        $("#esempio-error2").button({text: "Button Error 2", icon: "<i class='fas fa-ban'></i>", initialState: "error"});
+        $("#esempio-ready2").button({text: "Button Ready 2", initialState: "READY", width: 100, height: 75});
+        $("#esempio-pending2").button({text: "Button Pending 2", initialState: "pending", width: 200});
+    </script>
+</html>
