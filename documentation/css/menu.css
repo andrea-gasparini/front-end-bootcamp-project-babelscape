@@ -24,14 +24,15 @@
     font-weight: bold;
     font-size: 110%;
 }
-#menu-container a
+#menu-container .page-link
 {
+    cursor: pointer;
     color: rgb(78, 78, 78);
     margin: 5px 0px 5px 0px;
     text-decoration: none;
     font-size: 90%;
 }
-#menu-container a.actual-page
+#menu-container .page-link.actual-page
 {
     font-weight: bold;
 }
