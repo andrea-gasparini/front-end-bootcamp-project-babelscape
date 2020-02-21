@@ -9,7 +9,7 @@ export default class Button
     private _configuration : ButtonConfiguration;
     private _actualState : State;
     private _buttonElement : JQuery<HTMLButtonElement> = $('<button />');
-    private readonly _loadingIcon = '<i class="fa fa-spinner fa-spin"></i>';
+    private readonly _loadingIcon : JQuery<HTMLElement> = $('<i class="fa fa-spinner fa-spin"></i>');
 
     constructor(element: HTMLElement, config : ButtonConfiguration)
     {
@@ -27,7 +27,9 @@ export default class Button
             .addClass(State.toCssClass(this._actualState))
             .append(this._configuration.icon)
             .append(' ')
-            .append(this._configuration.text);
+            .append(this._configuration.text)
+            .append(' ')
+            .append(this._loadingIcon);
 
     
         if (  this._configuration.onClick != undefined )
@@ -38,8 +40,8 @@ export default class Button
         else if ( this._configuration.initialState == State.ERROR )
             this._buttonElement.off('click');
 
-        if ( this._configuration.initialState == State.PENDING )
-            this._buttonElement.append(' ' + this._loadingIcon);
+        if ( this._configuration.initialState != State.PENDING )
+            this._loadingIcon.hide();
 
         if (this._configuration.width !== undefined)
             this._buttonElement.css('width', this._configuration.width + 'px');
@@ -53,7 +55,7 @@ export default class Button
     public setState(state : State) : void
     {
         if ( this._actualState == State.PENDING )
-            this._buttonElement.find('.fa').last().remove();
+            this._loadingIcon.hide();
 
         this._buttonElement.removeClass(State.toCssClass(this._actualState));
         this._actualState = TypeUtils.isString(state) ? State.fromValue(state) : state;
@@ -64,7 +66,7 @@ export default class Button
             this._buttonElement.css('pointer-events', 'none');
             
             if ( this._actualState == State.PENDING )
-                this._buttonElement.append(' ' + this._loadingIcon);    
+                this._loadingIcon.show();
         }
         else if ( this._actualState == State.ERROR )
             this._buttonElement.off('click');
