@@ -15,6 +15,7 @@
         <link rel="stylesheet" type="text/css" href="./css/menu.css" />
 
         <script src="./js/menu-button.js" type="text/javascript"></script>
+        <script src="./js/change-page.js" type="text/javascript"></script>
     </head>
     <body>
         <div id='topbar'>
@@ -29,36 +30,18 @@
         <div id='main-page'>
             <div id='menu'>
                 <div id='menu-container'>
-                    <span id='title' class='noselect'>
-                        Componenti
-                    </span>
-                    <a class='noselect actual-page'>
-                        Message
-                    </a>
-                    <a class='noselect'>
-                        Button
-                    </a>
-                    <a class='noselect'>
-                        Dropdown
-                    </a>
-                    <a class='noselect'>
-                        Toggle
-                    </a>
-                    <a class='noselect'>
-                        Table
-                    </a>
-                    <a class='noselect'>
-                        Autocomplete
-                    </a>
-                    <a class='noselect'>
-                        Modal
-                    </a>
+                    <span id='title' class='noselect'>Componenti</span>
+                    <span name='message' class='page-link noselect actual-page'>Message</span>
+                    <span name='button' class='page-link noselect'>Button</span>
+                    <span name='dropdown' class='page-link noselect'>Dropdown</span>
+                    <span name='toggle' class='page-link noselect'>Toggle</span>
+                    <span name='table' class='page-link noselect'>Table</span>    
+                    <span name='autocomplete' class='page-link noselect'>Autocomplete</span>
+                    <span name='modal' class='page-link noselect'>Modal</span>
                 </div>
             </div>
 
-            <div id='context'>
-                
-            </div>
+            <div id='context'></div>
         </div>
     </body>
     <script type='text/javascript'>
