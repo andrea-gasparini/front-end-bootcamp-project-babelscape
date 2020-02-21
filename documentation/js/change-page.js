@@ -7,6 +7,6 @@ $('document').ready(function()
         $('.page-link.actual-page').removeClass('actual-page');
         $(this).addClass('actual-page');
         
-        $('#context').load(newPage);        
+        $('#context').empty().load(newPage).scrollTop();   
     })
 })
