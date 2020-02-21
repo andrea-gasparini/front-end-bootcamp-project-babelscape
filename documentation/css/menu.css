@@ -54,7 +54,7 @@
         top: 0;
         position: relative;
     }
-    #menu-container a
+    #menu-container .page-link
     {
         color: whitesmoke;
     }
