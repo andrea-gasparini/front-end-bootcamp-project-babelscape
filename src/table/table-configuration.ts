@@ -7,7 +7,7 @@ export default class TableConfiguration
     private _data : Array<Array<string>>;
     private _dimensions : Dimension = new Dimension();
     private _firstRowHeader: boolean = true;
-    private _alignText : Align = Align.LEFT;
+    private _alignText : Align = Align.CENTER;
 
     constructor(config: {data : Array<Array<string>>, width? : number, height? : number, firstRowHeader? : boolean, alignText? : Align | string})
     {
