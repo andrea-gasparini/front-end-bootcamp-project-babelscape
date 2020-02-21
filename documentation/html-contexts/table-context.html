@@ -12,29 +12,31 @@
 
         <h2> Esempi </h2>
         <p> 
-            Il componente può essere personalizzato nell'utilizzo o meno della prima riga come header (questa opzione viene utilizzata di default) nelle dimensioni e nell'allineamento del testo al proprio interno.
+            Il componente può essere personalizzato nell'utilizzo o meno della prima riga come header (questa opzione viene utilizzata di default) nelle dimensioni e nell'allineamento del testo al proprio interno (impostato a <code>CENTER</code> se non ne viene specificato uno diverso).
         </p>
         <p>
             A seguire alcuni esempi con la relativa configurazione.
         </p>
         <div id='esempio1'></div>
-        <div id='esempio2'></div>
         <div id='esempio-no-header'></div>
         <pre>
-$('#esempio-info').message({
-message: 'Un semplice Message Info di test'});
+$("#esempio1").table({
+    alignText: 'left',
+    data: [
+        ['Nome', 'Cognome', 'Sesso', 'Figli a carico'],
+        ['Mario', 'Rossi', 'M', 2],
+        ['Roberto', 'Bianchi', 'M', 0],
+        ['Giovanni' ,'Verdi' , 'M', 4],
+        ['Maria' ,'Neri' , 'F', 2]]});
 
-$('#esempio-success').message({
-message: 'Un semplice Message Success di test',
-type: 'SUCCESS'});
-
-$('#esempio-warning').message({
-message: 'Un semplice Message Warning di test',
-type: 'WARNING'});
-
-$('#esempio-danger').message({
-message: 'Un semplice Message Danger di test',
-type: 'DANGER'});
+$("#esempio-no-header").table({
+    firstRowHeader: false,
+    data: [
+        ['mele', '0,89 € / Kg', 'Melinda', 5000, 'Roma'],
+        ['pere', '1,05 € / Kg', 'Perelle', 2600, 'Roma'],
+        ['arance', '0,67 € / Kg', 'SicilyDoc', 12050, 'Milano'],
+        ['pesche' , '0,34 € / Kg', 'Peschine', 520, 'Napoli'],
+        ['kiwi', '0,99 € / Kg', 'TopKiwi', 430, 'Roma']]});
         </pre> 
         <h2> Opzioni </h2>
         <p>
@@ -52,10 +54,10 @@ type: 'DANGER'});
             </thead>
             <tbody>
                 <tr>
-                    <td>message</td>
-                    <td><code>string</code></td>
+                    <td>data</td>
+                    <td><code>Array&lt;Array&lt;T&gt;&gt;</code></td>
                     <td></td>
-                    <td>Messaggio di testo da mostrare nel componente.</td>
+                    <td>La matrice dei dati da mostrare nel componente.</td>
                 </tr>
                 <tr>
                     <td>width</td>
@@ -70,22 +72,22 @@ type: 'DANGER'});
                     <td>Altezza del componente, di default si adatta alle righe del messaggio.</td>
                 </tr>
                 <tr>
-                    <td>type</td>
-                    <td><code>Alert</code> o <code>string</code></td>
-                    <td><code>INFO</code></td>
-                    <td>Tipologia del messaggio, che modifica i colori del componente. È possibile scegliere tra <code>INFO</code>, <code>SUCCESS</code>, <code>WARNING</code> e <code>DANGER</code> </td>
+                    <td>firstRowHeader</td>
+                    <td><code>boolean</code></td>
+                    <td><code>true</code></td>
+                    <td>Definisce se la prima riga deve essere mostrata come header (se <code>true</code>) o meno (se <code>false</code>). La presenza dell'header determina la possibilità di ordinare le righe in base ai valori delle singole colonne.</td>
                 </tr>
                 <tr>
                     <td>alignText</td>
                     <td><code>Align</code> o <code>string</code></td>
                     <td><code>LEFT</code></td>
-                    <td>Allineamento del messaggio all'interno del componente. È possibile scegliere tra <code>LEFT</code>, <code>CENTER</code> e <code>RIGHT</code></td>
+                    <td>Allineamento del testo all'interno del componente. È possibile scegliere tra <code>LEFT</code>, <code>CENTER</code> e <code>RIGHT</code></td>
                 </tr>
             </tbody>
         </table>
     </body>
     <script type='text/javascript'>
-        $("#esempio1").table({firstRowHeader: true, data: [['Header1', 'Header2', 'Header3', 'HeaderNumerico'], ['mele','buone',3,44], ['arance', 'cattive', 4, 12], ['test' ,'colonna2' , 'a', 5]]})
-		$("#esempio2").table({firstRowHeader: false, data: [['noHeader1', 'noHeader2', 'noHeader3', 'noHeaderNumerico'], ['mele','buone',3,44], ['arance', 'cattive', 4, 12], ['test' ,'colonna2' , 'a', 5]]})
+        $("#esempio1").table({alignText: 'left', data: [['Nome', 'Cognome', 'Sesso', 'Figli a carico'], ['Mario','Rossi','M',2], ['Roberto', 'Bianchi', 'M', 0], ['Giovanni' ,'Verdi' , 'M', 4], ['Maria' ,'Neri' , 'F', 2]]});
+		$("#esempio-no-header").table({firstRowHeader: false, data: [['mele', '0,89 € / Kg', 'Melinda', 5000, 'Roma'], ['pere', '1,05 € / Kg', 'Perelle', 2600, 'Roma'], ['arance', '0,67 € / Kg', 'SicilyDoc', 12050, 'Milano'], ['pesche' , '0,34 € / Kg', 'Peschine', 520, 'Napoli'], ['kiwi', '0,99 € / Kg', 'TopKiwi', 430, 'Roma']]});
     </script>
 </html>
