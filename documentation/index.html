@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>UI Kit | Babelscape Bootcamp</title>
+
+        <script src="./dependencies/jquery.min.js" type="text/javascript"></script>
+        <script src="./dependencies/bootcamp-ui-kit.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="./dependencies/bootcamp-ui-kit.min.css" />
+
+        <link rel="stylesheet" type="text/css" href="./css/documentation.css" />
+        <link rel="stylesheet" type="text/css" href="./css/topbar.css" />
+        <link rel="stylesheet" type="text/css" href="./css/menu.css" />
+
+        <script src="./js/menu-button.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div id='topbar'>
+            <div id='logo'></div>
+        </div>
+        <div id='menu-button'>
+            <div id='bar1'></div>
+            <div id='bar2'></div>
+            <div id='bar3'></div>
+        </div>
+        
+        <div id='main-page'>
+            <div id='menu'>
+                <div id='menu-container'>
+                    <span id='title' class='noselect'>
+                        Componenti
+                    </span>
+                    <a class='noselect actual-page'>
+                        Message
+                    </a>
+                    <a class='noselect'>
+                        Button
+                    </a>
+                    <a class='noselect'>
+                        Dropdown
+                    </a>
+                    <a class='noselect'>
+                        Toggle
+                    </a>
+                    <a class='noselect'>
+                        Table
+                    </a>
+                    <a class='noselect'>
+                        Autocomplete
+                    </a>
+                    <a class='noselect'>
+                        Modal
+                    </a>
+                </div>
+            </div>
+
+            <div id='context'>
+                
+            </div>
+        </div>
+    </body>
+    <script type='text/javascript'>
+		$('#logo').logo(
+            {
+                url : 'http://babelscape.com/img/svg/babelscape-white-logo.svg',
+                width: 160,
+                align: 'CENTER' 
+            });
+
+        $('#context').load('./html-contexts/message-context.html');
+    </script>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <h1> Documentazione Message </h1>
+        <span id='subtitle'> Il Message è un componente molto semplice, che si occupa di mostrare un messaggio preso in input.</span>
+
+        <h2> Esempi </h2>
+        <p> 
+            Il componente Message è disponibile in 4 principali tipologie di messaggio: <code>INFO</code>, <code>SUCCESS</code>, <code>WARNING</code> e <code>DANGER</code>
+            (la tipologia <code>INFO</code> è di default se non ne viene specificata una diversa).
+            Il componente può essere personalizzato anche nelle dimensioni e nell'allineamento del testo al proprio interno.
+        </p>
+        <p>
+            A seguire gli esempi di base con la relativa configurazione.
+        </p>
+        <div id='esempio-info'></div>
+        <div id='esempio-success'></div>
+        <div id='esempio-warning'></div>
+        <div id='esempio-danger'></div>
+        <pre>
+$('#esempio-info').message({
+message: 'Un semplice Message Info di test'});
+
+$('#esempio-success').message({
+message: 'Un semplice Message Success di test',
+type: 'SUCCESS'});
+
+$('#esempio-warning').message({
+message: 'Un semplice Message Warning di test',
+type: 'WARNING'});
+
+$('#esempio-danger').message({
+message: 'Un semplice Message Danger di test',
+type: 'DANGER'});
+        </pre> 
+        <h2> Opzioni </h2>
+        <p>
+            Le opzioni del componente vanno specificate nella configurazione tramite un oggetto <code>JSON</code>, come mostrato negli esempi precedenti.
+            Se l'opzione non ha alcun valore in default è obbligatorio specificarne uno per la corretta configurazione del componente.
+        </p>
+        <table>
+            <tr>
+                <th>Opzione</th>
+                <th>Tipo</th>
+                <th>Default</th>
+                <th id='descrizione'>Descrizione</th>
+            </tr>
+            <tr>
+                <td>message</td>
+                <td><code>string</code></td>
+                <td></td>
+                <td>Messaggio di testo da mostrare nel componente.</td>
+            </tr>
+            <tr>
+                <td>width</td>
+                <td><code>number</code></td>
+                <td><code>auto</code></td>
+                <td>Larghezza del componente, di default si adatta alle dimensioni del div in cui è contenuto.</td>
+            </tr>
+            <tr>
+                <td>height</td>
+                <td><code>number</code></td>
+                <td><code>auto</code></td>
+                <td>Altezza del componente, di default si adatta alle righe del messaggio.</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td><code>Alert</code> o <code>string</code></td>
+                <td><code>INFO</code></td>
+                <td>Tipologia del messaggio, che modifica i colori del componente. È possibile scegliere tra <code>INFO</code>, <code>SUCCESS</code>, <code>WARNING</code> e <code>DANGER</code> </td>
+            </tr>
+            <tr>
+                <td>alignText</td>
+                <td><code>Align</code> o <code>string</code></td>
+                <td><code>LEFT</code></td>
+                <td>Allineamento del messaggio all'interno del componente. È possibile scegliere tra <code>LEFT</code>, <code>CENTER</code> e <code>RIGHT</code></td>
+            </tr>
+        </table>
+    </body>
+    <script type='text/javascript'>
+        $('#esempio-info').message(
+            {
+                message: 'Un semplice Message Info di test'
+            });
+        $('#esempio-success').message(
+            {
+                message: 'Un semplice Message Success di test',
+                type: 'SUCCESS'
+            });
+        $('#esempio-warning').message(
+            {
+                message: 'Un semplice Message Warning di test',
+                type: 'WARNING'
+            });
+        $('#esempio-danger').message(
+            {
+                message: 'Un semplice Message Danger di test',
+                type: 'DANGER'
+            });
+    </script>
+</html>
