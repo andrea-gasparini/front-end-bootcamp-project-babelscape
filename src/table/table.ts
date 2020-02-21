@@ -83,7 +83,8 @@ export default class Table
     {
         let tFoot = $('<tfoot />').appendTo(this._tableElement); 
         let lastRow : JQuery<HTMLElement> = $('<tr />').appendTo(tFoot);
-        lastRow.append($('<td> Totale righe ' + this._configuration.data.length + '</td>'))
+        let totRows : number = this._configuration.firstRowHeader ? this._configuration.data.length - 1 : this._configuration.data.length;
+        lastRow.append($('<td> Totale righe ' + totRows + '</td>'))
 
         for ( let i = 1; i < sums.length; i++ )
         {
