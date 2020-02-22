@@ -113,6 +113,14 @@ code
     width: 50%;
 }
 
+.horizontal-centered-container
+{
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+    align-items: center;
+}
+
 .noselect
 {
     /* Evita la possibilità di selezionare il testo */
