@@ -127,8 +127,8 @@ $("#esempio-pending2").button({
         <h2> Metodi </h2>
         <p>Il componente dispone inoltre dei metodi descritti a seguire.</p>
         
-        <h2><code>.button('setState', state)</code></h2>
-        <p>Modifica lo stato del bottone, impostando quello passato come parametro come nuovo stato.</p>
+        <h2><code>.button('setState', newState)</code></h2>
+        <p>Modifica lo stato del bottone, impostando <code>newState</code> (il secondo parametro) come nuovo stato.</p>
         <pre>
 $("#esempio-ready").button(
     'setState',
@@ -143,7 +143,7 @@ $("#esempio-ready").button(
         <h2><code>.button('getState')</code></h2>
         <p>Ritorna lo stato attuale del bottone.</p>
         <pre>
-$("#esempio-ready").button('getState');
+let statoButton = $("#esempio-ready").button('getState');
         </pre>
     </body>
     <script type='text/javascript'>
