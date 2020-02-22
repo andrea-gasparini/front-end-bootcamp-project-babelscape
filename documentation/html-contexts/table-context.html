@@ -57,9 +57,9 @@ $("#esempio-no-header").table({
             <tbody>
                 <tr>
                     <td>data</td>
-                    <td><code>Array&lt;Array&lt;T&gt;&gt;</code></td>
+                    <td><code>Array&lt;Array&lt;TableValue&gt;&gt;</code></td>
                     <td></td>
-                    <td>La matrice dei dati da mostrare nel componente.</td>
+                    <td>La matrice dei dati da mostrare nel componente. I singoli valori devono essere rappresentabili sotto forma di stringa (l'interfaccia TableValue richiede il metodo <code>toString</code>).</td>
                 </tr>
                 <tr>
                     <td>width</td>

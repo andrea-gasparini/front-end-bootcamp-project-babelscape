@@ -1,8 +1,9 @@
 import TableConfiguration from './table-configuration';
+import TableValue from './table-value';
 import { TypeUtils } from '../utils';
 import { tableRowSort } from '../utils';
-import './table.scss';
 import { Align } from '../align';
+import './table.scss';
 
 export default class Table
 {
@@ -47,7 +48,7 @@ export default class Table
 
             for ( let col = 0; col < colCount; col++ )
             {
-                let matrixCell = this._configuration.data[row][col];
+                let dataCell : TableValue = this._configuration.data[row][col];
                 let tableCell : JQuery<HTMLElement>;
 
                 if ( row == 0 && this._configuration.firstRowHeader )
@@ -58,13 +59,13 @@ export default class Table
                 {
                     tableCell = $('<td />');
 
-                    if ( TypeUtils.isNumber(matrixCell) && sums[col] !== null )
-                        sums[col] = sums[col] == undefined ? matrixCell : (sums[col] + matrixCell);
+                    if ( TypeUtils.isNumber(dataCell) && sums[col] !== null )
+                        sums[col] = sums[col] == undefined ? dataCell : (sums[col] + dataCell);
                     else
                         sums[col] = null;
                 }
 
-                tableCell.prepend(matrixCell);
+                tableCell.prepend(dataCell.toString());
                 tableRow.append(tableCell);
             }
 
