@@ -6,6 +6,8 @@ import MessageConfiguration from './src/message/message-configuration';
 import Message from './src/message/message';
 import ButtonConfiguration from './src/button/button-configuration';
 import Button from './src/button/button';
+import DropdownConfiguration from './src/dropdown/dropdown-configuration';
+import Dropdown from './src/dropdown/dropdown';
 import TableConfiguration from './src/table/table-configuration';
 import Table from './src/table/table';
 
@@ -59,10 +61,10 @@ import '@fortawesome/fontawesome-free/js/brands'
             }
         },
 
-        message : function(opts : MessageConfiguration)
+        message : function(opts : any)
         {
             var opts = opts;
-            if (opts == undefined) return undefined;
+            if (opts == undefined) opts = {};
             
             var messageBuilder = function()
             {  
@@ -105,7 +107,39 @@ import '@fortawesome/fontawesome-free/js/brands'
                 return methods[opts].apply(this, Array.prototype.slice.call( arguments, 1 ));
         },
 
-        table : function(opts : TableConfiguration)
+        dropdown : function(opts : any)
+        {
+            var opts = opts;
+            if (opts == undefined) opts = {};
+
+            var methods : any = 
+            {
+                //setValues:
+
+                //getValues:
+
+                //show:
+
+                //hide:
+
+                //toggle:
+            };
+
+            if (TypeUtils.isObject(opts))
+            {
+                var dropdownBuilder = function()
+                {
+                    var dropdownConfiguration = new DropdownConfiguration(opts);
+                    $(this).data("dropdown", new Dropdown($(this).get(0), dropdownConfiguration));
+                }
+
+                return this.each(dropdownBuilder);
+            }
+            else
+                return methods[opts].apply(this, Array.prototype.slice.call( arguments, 1 ));   
+        },
+
+        table : function(opts : any)
         {
             var opts = opts;
             if (opts == undefined) return undefined;

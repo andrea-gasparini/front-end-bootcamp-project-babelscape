@@ -92,5 +92,19 @@
 
 		$("#table1").table({firstRowHeader: true, data: [['Header1', 'Header2', 'Header3', 'HeaderNumerico'], ['mele','buone',3,44], ['arance', 'cattive', 4, 12], ['test' ,'colonna2' , 'a', 5]]})
 		$("#table2").table({firstRowHeader: false, data: [['noHeader1', 'noHeader2', 'noHeader3', 'noHeaderNumerico'], ['mele','buone',3,44], ['arance', 'cattive', 4, 12], ['test' ,'colonna2' , 'a', 5]]})
+
+		var dropdownConfig = 
+		{
+			placeholder: 'test',
+			data: [
+				{id: 1, nome:"Javascript", img: "http://myhost.com/javascript.png"},
+				{id: 2, nome:"Java", img: "http://myhost.com/java-icon.png"},
+				{id: 3, nome:"C++", img: "http://myhost.com/c-plus-plus.png"}],
+			dataMapper: function(t){ return { key: t.id, value: t.nome }; },
+			labebelMapper: function(t){ return t },
+			onChange: function(values){ console.log("Valori selezionati " + values.map(function(value){ return value.name; }).join(",")); }
+		}
+		
+		$("#dropdown1").dropdown(dropdownConfig);
 	</script>
 </html>
