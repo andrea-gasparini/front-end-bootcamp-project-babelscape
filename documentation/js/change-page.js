@@ -8,5 +8,12 @@ $('document').ready(function()
         $(this).addClass('actual-page');
         
         $('#context').empty().load(newPage).scrollTop();   
+
+        if ( $('#menu-button').is(':visible') )
+        {
+            $('#menu-button').toggleClass('change');
+            $('#menu').css('display', '');
+            // .hide() aggiungerebbe display: none, così invece si cancella la proprietà
+        }
     })
 })
