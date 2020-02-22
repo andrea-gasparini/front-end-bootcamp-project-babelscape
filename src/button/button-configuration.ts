@@ -10,7 +10,7 @@ export default class ButtonConfiguration
     private _initialState : State = State.READY;
     private _onClick : (event : JQuery.Event) => void;
 
-    constructor(config : {text : string, icon? : JQuery, width?: number, height? : number, initialState? : State, onClick? : (param : JQuery.Event) => void})
+    constructor(config : {text : string, icon? : JQuery, width?: number, height? : number, initialState? : State | string, onClick? : (param : JQuery.Event) => void})
     {
         if (config.text !== undefined) this._text = config.text;
 
