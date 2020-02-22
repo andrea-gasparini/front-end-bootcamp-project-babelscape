@@ -3,16 +3,27 @@
     <body>
         <h1> Documentazione Button </h1>
         <span id='subtitle'> Il Button è un componente molto semplice che equivale ad un normale bottone.</span>
+        <p> 
+            Può contenere un testo, un'icona oppure entrambi. Se specificati entrambi, l’icona viene visualizzata alla sinistra del testo.
+            Questo componente può assumere 4 diversi stati:
+            <ul>
+                <li><code>READY</code>: permette di cliccare e azionare il bottone</li>
+                <li><code>DISABLED</code>: non permette di cliccare o azionare il bottone, in quanto disabilitato</li>
+                <li><code>ERROR</code>: notifica una situazione di errore e non permette di azionare il bottone, ma rimane cliccabile</li>
+                <li><code>PENDING</code>: notifica che il bottone ha eseguito un'operazione che non è stata completata; non permette di cliccare o azionare il bottone</li>
+            </ul>
+        </p>
 
         <h2> Esempi </h2>
         <p> 
-           
+            Oltre agli stati, il componente può essere personalizzato nell'utilizzo o meno di un'icona e del testo come label del bottone, nelle dimensioni
+            e nella funzione che viene invocata se il bottone viene azionato correttamente dopo essere stato cliccato (questo può variare in base allo stato in cui si trova). 
         </p>
         <p>
-            
+            A seguire alcuni esempi con la relativa configurazione.
         </p>
         <div style='display: flex; flex-direction: row; justify-content: center;'>
-            <div id='esempio-ready'></div>
+            <div class='esempio-ready'></div>
             <div id='esempio-disabled'></div>
             <div id='esempio-error'></div>
             <div id='esempio-pending'></div>
@@ -30,15 +41,18 @@ $("#esempio-ready").button({
 
 $("#esempio-disabled").button({
     text: "Button Disabled",
-    initialState: "DISABLED"});
+    initialState: "DISABLED",
+    onClick: function(event) { alert('click') }});
 
 $("#esempio-error").button({
     text: "Button Error",
-    initialState: "ERROR"});
+    initialState: "ERROR",
+    onClick: function(event) { alert('click') }});
 
 $("#esempio-pending").button({
     text: "Button Pending",
-    initialState: "PENDING"});
+    initialState: "PENDING",
+    onClick: function(event) { alert('click') }});
 
 $("#esempio-error2").button({
     text: "Button Error 2",
@@ -72,10 +86,16 @@ $("#esempio-pending2").button({
             </thead>
             <tbody>
                 <tr>
-                    <td>message</td>
+                    <td>text</td>
                     <td><code>string</code></td>
                     <td></td>
-                    <td>Messaggio di testo da mostrare nel componente.</td>
+                    <td>Il testo da mostrare nel componente.</td>
+                </tr>
+                <tr>
+                    <td>icon</td>
+                    <td><code>JQuery</code></td>
+                    <td></td>
+                    <td>L'icona da mostrare nel componente. Es: <code>&lt;i class='fas fa-envelope'&gt;&lt;/i&gt;</code>.</td>
                 </tr>
                 <tr>
                     <td>width</td>
@@ -87,30 +107,53 @@ $("#esempio-pending2").button({
                     <td>height</td>
                     <td><code>number</code></td>
                     <td><code>auto</code></td>
-                    <td>Altezza del componente, di default si adatta alle righe del messaggio.</td>
+                    <td>Altezza del componente, di default si adatta alle righe del testo.</td>
                 </tr>
                 <tr>
-                    <td>type</td>
-                    <td><code>Alert</code> o <code>string</code></td>
-                    <td><code>INFO</code></td>
-                    <td>Tipologia del messaggio, che modifica i colori del componente. È possibile scegliere tra <code>INFO</code>, <code>SUCCESS</code>, <code>WARNING</code> e <code>DANGER</code> </td>
+                    <td>initialState</td>
+                    <td><code>State</code> o <code>string</code></td>
+                    <td><code>READY</code></td>
+                    <td>Lo stato iniziale del bottone, che ne modifica il comportamento e l'aspetto. È possibile scegliere tra <code>READY</code>, <code>DISABLED</code>, <code>ERROR</code> e <code>PENDING</code>.</td>
                 </tr>
                 <tr>
-                    <td>alignText</td>
-                    <td><code>Align</code> o <code>string</code></td>
-                    <td><code>LEFT</code></td>
-                    <td>Allineamento del messaggio all'interno del componente. È possibile scegliere tra <code>LEFT</code>, <code>CENTER</code> e <code>RIGHT</code></td>
+                    <td>onClick</td>
+                    <td><code>function&lt;Event&gt;</code></td>
+                    <td></td>
+                    <td>Funzione (callback) che viene invocata ogni volta che il componente viene azionato correttamente dopo essere stato cliccato. Questo può variare in base allo stato in cui si trova.</td>
                 </tr>
             </tbody>
         </table>
+
+        <h2> Metodi </h2>
+        <p>Il componente dispone inoltre dei metodi descritti a seguire.</p>
+        
+        <h2><code>.button('setState', state)</code></h2>
+        <p>Modifica lo stato del bottone, impostando quello passato come parametro come nuovo stato.</p>
+        <pre>
+$("#esempio-ready").button(
+    'setState',
+    'PENDING');
+        </pre>
+        <div style='display: flex; flex-direction: row; justify-content: center; align-items: center;'>
+            <div class='esempio-ready'></div>
+            &rarr;
+            <div id='esempio-ready-pending'></div>
+        </div>
+
+        <h2><code>.button('getState')</code></h2>
+        <p>Ritorna lo stato attuale del bottone.</p>
+        <pre>
+$("#esempio-ready").button('getState');
+        </pre>
     </body>
     <script type='text/javascript'>
-        $("#esempio-ready").button({text: "Button Ready", icon: "<i class='fas fa-play'></i>", onClick: function(event) { alert('click') }});
-		$("#esempio-disabled").button({text: "Button Disabled", initialState: "disabled"});
-		$("#esempio-error").button({text: "Button Error", initialState: "error"});
-        $("#esempio-pending").button({text: "Button Pending", initialState: "pending"});
+        $(".esempio-ready").button({text: "Button Ready", icon: "<i class='fas fa-play'></i>", onClick: function(event) { alert('click') }});
+		$("#esempio-disabled").button({text: "Button Disabled", initialState: "disabled", onClick: function(event) { alert('click') }});
+		$("#esempio-error").button({text: "Button Error", initialState: "error", onClick: function(event) { alert('click') }});
+        $("#esempio-pending").button({text: "Button Pending", initialState: "pending", onClick: function(event) { alert('click') }});
         $("#esempio-error2").button({text: "Button Error 2", icon: "<i class='fas fa-ban'></i>", initialState: "error"});
         $("#esempio-ready2").button({text: "Button Ready 2", initialState: "READY", width: 100, height: 75});
         $("#esempio-pending2").button({text: "Button Pending 2", initialState: "pending", width: 200});
+        $("#esempio-ready-pending").button({text: "Button Ready", initialState: "pending", icon: "<i class='fas fa-play'></i>", onClick: function(event) { alert('click') }});
     </script>
 </html>
