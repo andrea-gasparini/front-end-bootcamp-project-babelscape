@@ -1,6 +1,6 @@
 export enum Align
 {
-    LEFT, CENTER, RIGHT
+    LEFT = 'LEFT', CENTER = 'CENTER', RIGHT = 'RIGHT'
 }
 
 export namespace Align

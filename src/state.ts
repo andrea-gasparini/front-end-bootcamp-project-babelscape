@@ -1,6 +1,6 @@
 export enum State
 {
-    READY, DISABLED, ERROR, PENDING
+    READY = 'READY', DISABLED = 'DISABLED', ERROR = 'ERROR', PENDING = 'PENDING'
 }
 
 export namespace State

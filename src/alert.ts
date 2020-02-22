@@ -1,6 +1,6 @@
 export enum Alert
 {
-    SUCCESS, WARNING, DANGER, INFO
+    SUCCESS = 'SUCCESS', WARNING = 'WARNING', DANGER = 'DANGER', INFO = 'INFO'
 }
 
 export namespace Alert
