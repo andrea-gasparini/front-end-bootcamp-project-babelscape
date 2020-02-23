@@ -24,3 +24,9 @@ export function tableRowSort(table : JQuery<HTMLTableElement>, sortFunc : (a : H
 
     table.find('tbody').append(rows);
 }
+
+export function closeOnOutsideClick(event : JQuery.MouseUpEvent, element : JQuery<HTMLElement>)
+{
+    if ( ! element.is(event.target) && element.has(event.target).length == 0 )
+        element.hide();
+}

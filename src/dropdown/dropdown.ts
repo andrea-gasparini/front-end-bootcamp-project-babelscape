@@ -1,5 +1,6 @@
 import DropdownConfiguration from "./dropdown-configuration";
 import { DropdownType } from "../dropdown-type";
+import { closeOnOutsideClick } from "../utils";
 import KeyValue from "../key-value";
 import "./dropdown.scss";
 
@@ -54,6 +55,8 @@ export default class Dropdown
                 .prop('placeholder', 'Cerca..')
                 .on('input', () => this.filterSearch()));
 
+        $(document).on('mouseup', (event : JQuery.MouseUpEvent) => closeOnOutsideClick(event, this._dropdownBodyElement));
+
         for (let value of this._values)
         {
             let listElement : JQuery<HTMLElement> = $('<li />')
@@ -83,7 +86,7 @@ export default class Dropdown
         $(this._element).append(this._dropdownElement);
     }
 
-    private filterSearch()
+    private filterSearch() : void
     {
         let liElements : JQuery<HTMLUListElement> = this._dropdownBodyElement.find('li');
 
@@ -96,7 +99,7 @@ export default class Dropdown
                 $(liElements[i]).hide();
     }
 
-    private updateSelection(listElement : JQuery<HTMLElement>, e : JQuery.ClickEvent)
+    private updateSelection(listElement : JQuery<HTMLElement>, e : JQuery.ClickEvent) : void
     {  
         if (this._configuration.type == DropdownType.MULTI)
         {
