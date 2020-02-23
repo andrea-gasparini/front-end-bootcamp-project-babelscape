@@ -7,6 +7,7 @@ export default class Message
 {
     private _element : HTMLElement;
     private _configuration : MessageConfiguration;
+    private _messageElement : JQuery<HTMLElement> = $('<div />');
 
     constructor(element: HTMLElement, config: MessageConfiguration)
     {
@@ -18,16 +19,18 @@ export default class Message
 
     private render() : void
     {
-        $(this._element)
+        this._messageElement
             .text(this._configuration.message)
             .css('text-align', Align.toCssValue(this._configuration.alignText))
             .addClass('message')
             .addClass(Alert.toCssClass(this._configuration.type));
 
         if (this._configuration.width !== undefined)
-            $(this._element).css('width', this._configuration.width + 'px');
+            this._messageElement.css('width', this._configuration.width + 'px');
 
         if (this._configuration.height !== undefined)
-            $(this._element).css('height', this._configuration.height + 'px');
+            this._messageElement.css('height', this._configuration.height + 'px');
+
+        $(this._element).append(this._messageElement);
     }
 }
