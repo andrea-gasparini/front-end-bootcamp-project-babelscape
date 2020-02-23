@@ -9,10 +9,10 @@
     border-style: solid;
     border-width: 1px;
     font-weight: bold;
-    color: $button-ready-color;
-    border-color: $button-ready-color;
-    background-color: lighten($button-ready-color, 40);
-    box-shadow: 0 3px $button-ready-color;
+    color: $button-main-color;
+    border-color: $button-main-color;
+    background-color: lighten($button-main-color, 40);
+    box-shadow: 0 3px $button-main-color;
 
     padding:
     {
@@ -24,8 +24,8 @@
 
     &:hover
     {
-        color: lighten($button-ready-color, 40);
-        background-color: lighten($button-ready-color, 20);
+        color: lighten($button-main-color, 40);
+        background-color: lighten($button-main-color, 20);
     }
 
     &:focus { outline: none; }
@@ -35,13 +35,13 @@
     &:active
     {
         transform: translateY(1px);
-        box-shadow: 0 2px darken($button-ready-color, 10);
+        box-shadow: 0 2px darken($button-main-color, 10);
     }
 
     &.disabled 
     {
         font-weight: normal;
-        color: lighten($button-ready-color, 10);
+        color: lighten($button-main-color, 10);
         box-shadow: none;
     }
 
