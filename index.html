@@ -12,7 +12,10 @@
 		<script src="./bootcamp-ui-kit.min.js" type="text/javascript"></script>
 	</head>
 	<body>
-		<div id="dropdown1"></div>
+		<div style='display: flex; flex-direction: row; justify-content: center;'>
+			<div id="dropdown1"></div>
+			<div id="dropdown2"></div>
+		</div>
 
 		<div id="table1"></div>
 		<div id="table2"></div>
@@ -93,18 +96,36 @@
 		$("#table1").table({firstRowHeader: true, data: [['Header1', 'Header2', 'Header3', 'HeaderNumerico'], ['mele','buone',3,44], ['arance', 'cattive', 4, 12], ['test' ,'colonna2' , 'a', 5]]})
 		$("#table2").table({firstRowHeader: false, data: [['noHeader1', 'noHeader2', 'noHeader3', 'noHeaderNumerico'], ['mele','buone',3,44], ['arance', 'cattive', 4, 12], ['test' ,'colonna2' , 'a', 5]]})
 
-		var dropdownConfig = 
+		var dropdownConfig1 = 
 		{
-			placeholder: 'test',
+			placeholder: 'SingleDropdown',
+			selected: ['Java'],
 			data: [
 				{id: 1, nome:"Javascript", img: "http://myhost.com/javascript.png"},
 				{id: 2, nome:"Java", img: "http://myhost.com/java-icon.png"},
 				{id: 3, nome:"C++", img: "http://myhost.com/c-plus-plus.png"}],
+			width: 150,
 			dataMapper: function(t){ return { key: t.id, value: t.nome }; },
-			labebelMapper: function(t){ return t },
-			onChange: function(values){ console.log("Valori selezionati " + values.map(function(value){ return value.name; }).join(",")); }
+			labelMapper: function(values){ return values.map((el) => el.value).join(", ") },
+			onChange: function(values){ console.log("Valore selezionato: " + values.map((el) => el.value).join(", ")); }
+		}
+
+		var dropdownConfig2 = 
+		{
+			type: 'multi',
+			selected: ['Java'],
+			placeholder: 'MultiDropdown',
+			data: [
+				{id: 1, nome:"Javascript", img: "http://myhost.com/javascript.png"},
+				{id: 2, nome:"Java", img: "http://myhost.com/java-icon.png"},
+				{id: 3, nome:"C++", img: "http://myhost.com/c-plus-plus.png"}],
+			width: 250,
+			dataMapper: function(t){ return { key: t.id, value: t.nome }; },
+			labelMapper: function(values){ return "Selezionati: " + values.map((el) => el.value).join(", ") },
+			onChange: function(values){ console.log("Valori selezionati: " + values.map((el) => el.value).join(", ")); }
 		}
 		
-		$("#dropdown1").dropdown(dropdownConfig);
+		$("#dropdown1").dropdown(dropdownConfig1);
+		$("#dropdown2").dropdown(dropdownConfig2);
 	</script>
 </html>

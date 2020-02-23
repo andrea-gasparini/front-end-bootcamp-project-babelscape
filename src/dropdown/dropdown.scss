@@ -1,17 +1,134 @@
+@import '../variables';
+
+$color: grey;
+
 .dropdown
 {
-    &.single
+    margin: $default-margin;
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    .dropdown-label
     {
+        display: flex;
+        flex-direction: row;
 
-    }
-
-    &.multi
-    {
-
-    }
-
-    .label
-    {
+        cursor: pointer;
+        padding: 15px;
+        font-size: 14.6px;
+        width: 100%;
+    
+        border:
+        {
+            style: solid;
+            width: 1px;
+        }
         
+        color: $color;
+        background-color: lighten($color, 30);
+        transition: all .2s ease;
+
+        &:hover
+        {
+            background-color: lighten($color, 35);
+        }
+
+        &:focus { outline: none; }
+
+        &::-moz-focus-inner { border: none; }
+
+        span
+        {
+            margin-left: 10px;
+
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+
+    .dropdown-body
+    {
+        display: none;
+        top: 48px;
+        left: 0;
+        position: absolute;
+        overflow:auto;
+        
+        min-width: 150px;
+        max-width: 200px;
+        max-height: 250px;
+        background-color: whitesmoke;
+        margin: 0;
+        padding: 0;
+
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, .5);
+
+        border:
+        {
+            radius: 2.5px;
+            color: lighten($color, 30);
+            style: solid;
+            width: 1px;
+        }
+
+        input[type='text']
+        {
+            color: $color;
+            padding: 5px;
+            width: 80%;
+            margin: 7.5px;
+
+            border:
+            {
+                radius: 5px;
+                color: lighten($color, 30);
+                style: solid;
+                width: 1px;
+            }
+        }
+
+        input:focus
+        {
+            outline: none;
+            box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+            border: 1px solid rgba(81, 203, 238, 1);
+        }
+
+        li
+        {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            cursor: pointer;
+            list-style:none;
+
+            padding:
+            {
+                top: 5px;
+                left: 15px;
+                bottom: 5px;
+            }
+        }
+
+        li:hover
+        {
+            background-color: lighten($color, 30);
+        }
+    }
+
+    &.multi li
+    {
+        padding-left: 5px;
+
+        input[type='checkbox']
+        {
+            cursor: pointer;
+            margin-right: 7.5px;
+        }
     }
 }

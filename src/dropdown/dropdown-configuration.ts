@@ -7,7 +7,7 @@ export default class DropdownConfiguration
 {
     private _type: DropdownType = DropdownType.SINGLE;
     private _placeholder: string;
-    private _data: Array<any>;
+    private _data: Array<any> = new Array();
     private _selected: Array<string> = new Array();
     private _dimensions: Dimension = new Dimension();
     private _dataMapper: (elem: any) => KeyValue;
@@ -49,7 +49,7 @@ export default class DropdownConfiguration
 
     get dataMapper() : (elem: any) => KeyValue { return this._dataMapper; }
 
-    get labelmapper() : (selectedList: Array<KeyValue>) => string { return this._labelMapper; }
+    get labelMapper() : (selectedList: Array<KeyValue>) => string { return this._labelMapper; }
 
     get onChange() : (selectedList: Array<KeyValue>) => void { return this._onChange; }
 }
