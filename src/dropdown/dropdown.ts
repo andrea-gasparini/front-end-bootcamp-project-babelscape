@@ -59,7 +59,7 @@ export default class Dropdown
             let listElement : JQuery<HTMLElement> = $('<li />')
                 .prop('name', value.value)
                 .text(value.value)
-                .on('click', () => this.updateSelection(listElement));;
+                .on('click', (e : JQuery.ClickEvent) => this.updateSelection(listElement, e));
 
             if (this._configuration.type == DropdownType.MULTI)
                 listElement
@@ -92,8 +92,8 @@ export default class Dropdown
                 $(liElements[i]).hide();
     }
 
-    private updateSelection(listElement : JQuery<HTMLElement>)
-    {
+    private updateSelection(listElement : JQuery<HTMLElement>, e : JQuery.ClickEvent)
+    {  
         if (this._configuration.type == DropdownType.MULTI)
         {
             let checkBox = listElement.find('input');
@@ -102,14 +102,15 @@ export default class Dropdown
             {
                 this._selectedValues = this._selectedValues.filter(el => el.value.toLowerCase() != listElement.prop('name').toLowerCase());
                 this._dropdownLabelElement.find('span').text(this._selectedValues.length == 0 ? this._configuration.placeholder : this._configuration.labelMapper(this._selectedValues));
-                checkBox.prop('checked', false);
             }
             else
             {
                 this._selectedValues.push(this._values.find(el => el.value.toLowerCase() == listElement.prop('name').toLowerCase()));
                 this._dropdownLabelElement.find('span').text(this._configuration.labelMapper(this._selectedValues));
-                checkBox.prop('checked', true);
             }
+
+            if (e.target.tagName != 'input')
+                checkBox.prop('checked', ! checkBox.prop('checked'));
         }
         else
         {
