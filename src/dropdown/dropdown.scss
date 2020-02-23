@@ -1,7 +1,5 @@
 @import '../variables';
 
-$color: grey;
-
 .dropdown
 {
     margin: $default-margin;
@@ -27,13 +25,13 @@ $color: grey;
             width: 1px;
         }
         
-        color: $color;
-        background-color: lighten($color, 30);
+        color: $dropdown-main-color;
+        background-color: lighten($dropdown-main-color, 30);
         transition: all .2s ease;
 
         &:hover
         {
-            background-color: lighten($color, 35);
+            background-color: lighten($dropdown-main-color, 35);
         }
 
         &:focus { outline: none; }
@@ -61,23 +59,23 @@ $color: grey;
         min-width: 150px;
         max-width: 200px;
         max-height: 250px;
-        background-color: whitesmoke;
+        background-color: $dropdown-body-background-color;
         margin: 0;
         padding: 0;
 
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, .5);
+        box-shadow: $dropdown-body-box-shadow;
 
         border:
         {
             radius: 2.5px;
-            color: lighten($color, 30);
+            color: lighten($dropdown-main-color, 30);
             style: solid;
             width: 1px;
         }
 
         input[type='text']
         {
-            color: $color;
+            color: $dropdown-main-color;
             padding: 5px;
             width: 80%;
             margin: 7.5px;
@@ -85,7 +83,7 @@ $color: grey;
             border:
             {
                 radius: 5px;
-                color: lighten($color, 30);
+                color: lighten($dropdown-main-color, 30);
                 style: solid;
                 width: 1px;
             }
@@ -94,8 +92,8 @@ $color: grey;
         input:focus
         {
             outline: none;
-            box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-            border: 1px solid rgba(81, 203, 238, 1);
+            box-shadow: 0 0 5px $dropdown-body-input-focus-color;
+            border: 1px solid $dropdown-body-input-focus-color;
         }
 
         li
@@ -117,7 +115,7 @@ $color: grey;
 
         li:hover
         {
-            background-color: lighten($color, 30);
+            background-color: lighten($dropdown-main-color, 30);
         }
     }
 
