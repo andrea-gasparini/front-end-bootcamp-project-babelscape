@@ -61,11 +61,15 @@ export default class Dropdown
                 .text(value.value)
                 .on('click', (e : JQuery.ClickEvent) => this.updateSelection(listElement, e));
 
+            let isSelected = this._configuration.selected.find(el => el.toLowerCase() == value.value.toLowerCase());
+
+            if (isSelected) listElement.addClass('selected');
+
             if (this._configuration.type == DropdownType.MULTI)
                 listElement
                     .prepend($('<input />')
                         .prop('type', 'checkbox')
-                        .prop('checked', this._configuration.selected.find(el => el.toLowerCase() == value.value.toLowerCase())));
+                        .prop('checked', isSelected));
 
             this._dropdownBodyElement.append(listElement);
         }
@@ -114,10 +118,13 @@ export default class Dropdown
         }
         else
         {
+            this._dropdownBodyElement.find('li').removeClass('selected');
             this._selectedValues[0] = this._values.find(el => el.value.toLowerCase() == listElement.prop('name').toLowerCase());
             this._dropdownLabelElement.find('span').text(this._configuration.labelMapper(this._selectedValues));
             this._dropdownBodyElement.hide();
         }
+
+        listElement.toggleClass('selected');
 
         this._configuration.onChange(this._selectedValues);
     }

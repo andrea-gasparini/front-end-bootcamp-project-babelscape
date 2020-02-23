@@ -59,7 +59,7 @@
         min-width: 150px;
         max-width: 200px;
         max-height: 250px;
-        background-color: $dropdown-body-background-color;
+        background-color: $dropdown-body-bg-color;
         margin: 0;
         padding: 0;
 
@@ -110,6 +110,11 @@
                 top: 5px;
                 left: 15px;
                 bottom: 5px;
+            }
+
+            &.selected, &.selected:hover 
+            {
+                background-color: lighten($dropdown-main-color, 22.5);
             }
         }
 
