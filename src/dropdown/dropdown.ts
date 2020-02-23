@@ -131,4 +131,38 @@ export default class Dropdown
 
         this._configuration.onChange(this._selectedValues);
     }
+
+    // DA TESTARE
+    public setValues(values : Array<string>) : void
+    {
+        if (this._configuration.type == DropdownType.MULTI)
+        {
+            this._selectedValues = new Array();
+            let listElementsToSelect : HTMLUListElement[];
+
+            for (let newValue of values)
+            {
+                this._selectedValues.push(this._values.find(el => el.key.toLowerCase() == newValue.toLowerCase()));
+                listElementsToSelect = this._dropdownBodyElement.find('li').toArray().filter(listElement => $(listElement).prop('name').toLowerCase() == newValue.toLowerCase());
+            }
+
+            for (let listElement of listElementsToSelect)
+            {
+                let checkBox = $(listElement).find('input');
+                checkBox.prop('checked', true);
+                $(listElement).addClass('selected');
+            }
+
+            this._dropdownLabelElement.find('span').text(this._selectedValues.length == 0 ? this._configuration.placeholder : this._configuration.labelMapper(this._selectedValues));
+        }
+        else
+        {
+            this._selectedValues[0] = this._values.find(el => el.key.toLowerCase() == values[0].toLowerCase());
+            let listElementToSelect = this._dropdownBodyElement.find('li').toArray().filter(listElement => $(listElement).prop('name').toLowerCase() == values[0].toLowerCase());;
+            $(listElementToSelect).addClass('selected');
+            this._dropdownLabelElement.find('span').text(this._configuration.labelMapper(this._selectedValues));
+        }
+
+        this._configuration.onChange(this._selectedValues);
+    }
 }
