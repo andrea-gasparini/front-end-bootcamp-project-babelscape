@@ -44,6 +44,8 @@ export default class Dropdown
                 .text(this._selectedValues.length == 0 ? this._configuration.placeholder : this._configuration.labelMapper(this._selectedValues)))
             .click(() => 
                 {
+                    console.log(this._dropdownElement.hasClass('open'));
+                    this._dropdownElement.toggleClass('open');
                     this._dropdownBodyElement.toggle();
                     this._dropdownBodyElement.find('input[type=text]').focus()
                 });
@@ -55,7 +57,11 @@ export default class Dropdown
                 .prop('placeholder', 'Cerca..')
                 .on('input', () => this.filterSearch()));
 
-        $(document).on('mouseup', (event : JQuery.MouseUpEvent) => closeOnOutsideClick(event, this._dropdownBodyElement));
+        $(document).on('mouseup', (event : JQuery.MouseUpEvent) => 
+        {
+            if (closeOnOutsideClick(event, this._dropdownBodyElement))
+                this._dropdownElement.toggleClass('open');
+        });
 
         for (let value of this._values)
         {
@@ -116,7 +122,7 @@ export default class Dropdown
                 this._dropdownLabelElement.find('span').text(this._configuration.labelMapper(this._selectedValues));
             }
 
-            if (e.target.tagName != 'input')
+            if (e.target.tagName != 'INPUT')
                 checkBox.prop('checked', ! checkBox.prop('checked'));
         }
         else
@@ -138,6 +144,8 @@ export default class Dropdown
 
         if (this._configuration.type == DropdownType.MULTI)
         {
+            this._dropdownBodyElement.find('li input').prop('checked', false);
+
             this._selectedValues = new Array();
             let listElementsToSelect : HTMLUListElement[] = new Array();
 
