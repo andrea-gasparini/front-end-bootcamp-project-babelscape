@@ -60,7 +60,7 @@ export default class Dropdown
         for (let value of this._values)
         {
             let listElement : JQuery<HTMLElement> = $('<li />')
-                .prop('name', value.value)
+                .data('KeyValue', { key: value.key.toLowerCase(), value: value.value.toLowerCase() })
                 .text(value.value)
                 .on('click', (e : JQuery.ClickEvent) => this.updateSelection(listElement, e));
 
@@ -93,7 +93,7 @@ export default class Dropdown
         let input : string = this._dropdownBodyElement.find('input[type=text]').val() as string;
 
         for (let i = 0; i < liElements.length; i++)
-            if ($(liElements[i]).prop('name').toLowerCase().includes(input.toLowerCase()))
+            if ($(liElements[i]).data('KeyValue').value.includes(input.toLowerCase()))
                 $(liElements[i]).show();
             else
                 $(liElements[i]).hide();
@@ -107,12 +107,12 @@ export default class Dropdown
 
             if (checkBox.prop('checked'))
             {
-                this._selectedValues = this._selectedValues.filter(el => el.value.toLowerCase() != listElement.prop('name').toLowerCase());
+                this._selectedValues = this._selectedValues.filter(el => el.value.toLowerCase() != listElement.data('KeyValue').value);
                 this._dropdownLabelElement.find('span').text(this._selectedValues.length == 0 ? this._configuration.placeholder : this._configuration.labelMapper(this._selectedValues));
             }
             else
             {
-                this._selectedValues.push(this._values.find(el => el.value.toLowerCase() == listElement.prop('name').toLowerCase()));
+                this._selectedValues.push(this._values.find(el => el.value.toLowerCase() == listElement.data('KeyValue').value));
                 this._dropdownLabelElement.find('span').text(this._configuration.labelMapper(this._selectedValues));
             }
 
@@ -122,7 +122,7 @@ export default class Dropdown
         else
         {
             this._dropdownBodyElement.find('li').removeClass('selected');
-            this._selectedValues[0] = this._values.find(el => el.value.toLowerCase() == listElement.prop('name').toLowerCase());
+            this._selectedValues[0] = this._values.find(el => el.value.toLowerCase() == listElement.data('KeyValue').value);
             this._dropdownLabelElement.find('span').text(this._configuration.labelMapper(this._selectedValues));
             this._dropdownBodyElement.hide();
         }
@@ -132,18 +132,19 @@ export default class Dropdown
         this._configuration.onChange(this._selectedValues);
     }
 
-    // DA TESTARE
     public setValues(values : Array<string>) : void
-    {
+    {     
+        this._dropdownBodyElement.find('li').removeClass('selected');
+
         if (this._configuration.type == DropdownType.MULTI)
         {
             this._selectedValues = new Array();
-            let listElementsToSelect : HTMLUListElement[];
+            let listElementsToSelect : HTMLUListElement[] = new Array();
 
             for (let newValue of values)
             {
                 this._selectedValues.push(this._values.find(el => el.key.toLowerCase() == newValue.toLowerCase()));
-                listElementsToSelect = this._dropdownBodyElement.find('li').toArray().filter(listElement => $(listElement).prop('name').toLowerCase() == newValue.toLowerCase());
+                listElementsToSelect.push(this._dropdownBodyElement.find('li').toArray().filter(listElement => $(listElement).data('KeyValue').key == newValue.toLowerCase())[0]);
             }
 
             for (let listElement of listElementsToSelect)
@@ -158,10 +159,10 @@ export default class Dropdown
         else
         {
             this._selectedValues[0] = this._values.find(el => el.key.toLowerCase() == values[0].toLowerCase());
-            let listElementToSelect = this._dropdownBodyElement.find('li').toArray().filter(listElement => $(listElement).prop('name').toLowerCase() == values[0].toLowerCase());;
+            let listElementToSelect = this._dropdownBodyElement.find('li').toArray().filter(listElement => $(listElement).data('KeyValue').key == values[0].toLowerCase());;
             $(listElementToSelect).addClass('selected');
             this._dropdownLabelElement.find('span').text(this._configuration.labelMapper(this._selectedValues));
-        }
+        }        
 
         this._configuration.onChange(this._selectedValues);
     }

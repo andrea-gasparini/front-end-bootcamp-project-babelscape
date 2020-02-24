@@ -114,7 +114,10 @@ import '@fortawesome/fontawesome-free/js/brands'
 
             var methods : any = 
             {
-                //setValues:
+                setValues: function(values : Array<string>)
+                {
+                    $(this).data("dropdown").setValues(values);
+                },
 
                 //getValues:
 

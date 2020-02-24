@@ -105,7 +105,7 @@
 				{id: 2, nome:"Java", img: "http://myhost.com/java-icon.png"},
 				{id: 3, nome:"C++", img: "http://myhost.com/c-plus-plus.png"}],
 			width: 150,
-			dataMapper: function(t){ return { key: t.id, value: t.nome }; },
+			dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
 			labelMapper: function(values){ return values.map((el) => el.value).join(", ") },
 			onChange: function(values){ console.log("Valore selezionato: " + values.map((el) => el.value).join(", ")); }
 		}
@@ -120,12 +120,13 @@
 				{id: 2, nome:"Java", img: "http://myhost.com/java-icon.png"},
 				{id: 3, nome:"C++", img: "http://myhost.com/c-plus-plus.png"}],
 			width: 250,
-			dataMapper: function(t){ return { key: t.id, value: t.nome }; },
+			dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
 			labelMapper: function(values){ return "Selezionati: " + values.map((el) => el.value).join(", ") },
 			onChange: function(values){ console.log("Valori selezionati: " + values.map((el) => el.value).join(", ")); }
 		}
 		
 		$("#dropdown1").dropdown(dropdownConfig1);
 		$("#dropdown2").dropdown(dropdownConfig2);
+		$("#dropdown2").dropdown("setValues", ['1','3'])
 	</script>
 </html>
