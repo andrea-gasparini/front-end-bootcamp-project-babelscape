@@ -1,7 +1,7 @@
 import DropdownConfiguration from "./dropdown-configuration";
 import { DropdownType } from "../dropdown-type";
 import { closeOnOutsideClick } from "../utils";
-import KeyValue from "../key-value";
+import KeyValue, { keyValueToLowerCase } from "../key-value";
 import "./dropdown.scss";
 
 export default class Dropdown
@@ -60,7 +60,7 @@ export default class Dropdown
         for (let value of this._values)
         {
             let listElement : JQuery<HTMLElement> = $('<li />')
-                .data('KeyValue', { key: value.key.toLowerCase(), value: value.value.toLowerCase() })
+                .data('KeyValue', keyValueToLowerCase(value))
                 .text(value.value)
                 .on('click', (e : JQuery.ClickEvent) => this.updateSelection(listElement, e));
 
