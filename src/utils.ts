@@ -25,13 +25,8 @@ export function tableRowSort(table : JQuery<HTMLTableElement>, sortFunc : (a : H
     table.find('tbody').append(rows);
 }
 
-export function closeOnOutsideClick(event : JQuery.ClickEvent, containerElement : HTMLElement, element : JQuery<HTMLElement>) : boolean
+export function closeOnOutsideClick(event : JQuery.ClickEvent, containerElement : HTMLElement, element : JQuery<HTMLElement>) : void
 {
     if ( ! containerElement.contains(event.target) && element.is(':visible') )
-    {
         element.hide();
-        return true;
-    }
-
-    return false;
 }
