@@ -48,6 +48,7 @@
         border: none;
         width: 180px;
         height: 100%;
+        z-index: 1;
     }
     #menu-container
     {
