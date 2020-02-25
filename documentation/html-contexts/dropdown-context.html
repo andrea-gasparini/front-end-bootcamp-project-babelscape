@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <h1> Documentazione Dropdown </h1>
+        <span id='subtitle'> È un componente che permette la sezione di elementi da una lista predefinita.</span>
+        <p> 
+            La selezione degli elementi del Dropdown può essere di due diversi tipi: <code>SINGLE</code> e <code>MULTI</code>.
+            Nel primo caso l’utente può selezionare al più un valore dalla lista dei valori forniti; nel secondo caso anche più di uno.
+            Il componente è formato da due sezioni principali: label e body.
+        </p>
+        <p>
+            Il label è la parte sempre visibile di cui fanno parte:
+            <ul>
+                <li>Il placeholder, in caso non sia stato selezionato alcun elemento del dropdown</li>
+                <li>Un testo contenente i valori selezionati, che sostituisce il placeholder</li>
+            </ul>
+        </p>
+        <p>
+            Il body invece è il menù a tendina che viene mostrato e nascosto quando l'utente clicca sul label.
+            Fanno parte del body:
+            <ul>
+                <li>La lista dei valori disponibili sul quale l'utente effettuerà la selezione</li>
+                <li>Nel caso di dropdown <code>MULTI</code> una checkbox per ogni valore mostrato che ne indica lo stato di selezione</li>
+                <li>Una barra di ricerca per effettuare una ricerca veloce tra gli elementi</li>
+            </ul>
+        </p>
+
+        <h2> Esempi </h2>
+        <p> 
+            Oltre che nella tipologia, il componente può essere personalizzato nelle dimensioni, nel placeholder e nei valori selezionati di default.
+            Inoltre è possibile personalizzare la funzioni che gestisce il modo in cui vengono visualizzati i dati nel label e la funzione di callback che viene invocata ogni volta che la selezione cambia.
+        </p>
+        <p>
+            A seguire alcuni esempi con la relativa configurazione.
+        </p>
+        <div class='horizontal-centered-container'>
+            <div id='esempio-single'></div>
+            <div id='esempio-multi'></div>
+        </div>
+        <div id='esempio-single2'></div>
+        <div id='esempio-multi2'></div>
+        <pre>
+$("#esempio-ready").button({
+    text: "Button Ready",
+    icon: "&lt;i class='fas fa-play'&gt;&lt;/i&gt;",
+    onClick: function(event) { alert('click') }});
+
+$("#esempio-disabled").button({
+    text: "Button Disabled",
+    initialState: "DISABLED",
+    onClick: function(event) { alert('click') }});
+
+$("#esempio-error").button({
+    text: "Button Error",
+    initialState: "ERROR",
+    onClick: function(event) { alert('click') }});
+
+$("#esempio-pending").button({
+    text: "Button Pending",
+    initialState: "PENDING",
+    onClick: function(event) { alert('click') }});
+        </pre> 
+        <h2> Opzioni </h2>
+        <p>
+            Le opzioni del componente vanno specificate nella configurazione tramite un oggetto <code>JSON</code>, come mostrato negli esempi precedenti.
+            Se l'opzione non ha alcun valore in default è obbligatorio specificarne uno per la corretta configurazione del componente.
+        </p>
+        <table class='doc-table'>
+            <thead>
+                <tr>
+                    <th>Opzione</th>
+                    <th>Tipo</th>
+                    <th>Default</th>
+                    <th id='descrizione'>Descrizione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>text</td>
+                    <td><code>string</code></td>
+                    <td></td>
+                    <td>Il testo da mostrare nel componente.</td>
+                </tr>
+                <tr>
+                    <td>icon</td>
+                    <td><code>JQuery</code></td>
+                    <td></td>
+                    <td>L'icona da mostrare nel componente. Es: <code>&lt;i class='fas fa-envelope'&gt;&lt;/i&gt;</code>.</td>
+                </tr>
+                <tr>
+                    <td>width</td>
+                    <td><code>number</code></td>
+                    <td><code>auto</code></td>
+                    <td>Larghezza del componente, di default si adatta alle dimensioni del div in cui è contenuto.</td>
+                </tr>
+                <tr>
+                    <td>height</td>
+                    <td><code>number</code></td>
+                    <td><code>auto</code></td>
+                    <td>Altezza del componente, di default si adatta alle righe del testo.</td>
+                </tr>
+                <tr>
+                    <td>initialState</td>
+                    <td><code>State</code> o <code>string</code></td>
+                    <td><code>READY</code></td>
+                    <td>Lo stato iniziale del bottone, che ne modifica il comportamento e l'aspetto. È possibile scegliere tra <code>READY</code>, <code>DISABLED</code>, <code>ERROR</code> e <code>PENDING</code>.</td>
+                </tr>
+                <tr>
+                    <td>onClick</td>
+                    <td><code>function&lt;Event&gt;</code></td>
+                    <td></td>
+                    <td>Funzione (callback) che viene invocata ogni volta che il componente viene azionato correttamente dopo essere stato cliccato. Questo può variare in base allo stato in cui si trova.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2> Metodi </h2>
+        <p>Il componente dispone inoltre dei metodi descritti a seguire.</p>
+        
+        <h2><code>.button('setState', newState)</code></h2>
+        <p>Modifica lo stato del bottone, impostando <code>newState</code> (il secondo parametro) come nuovo stato.</p>
+        <pre>
+$("#esempio-ready").button(
+    'setState',
+    'PENDING');
+        </pre>
+        <div class='horizontal-centered-container'>
+            <div class='esempio-ready'></div>
+            &rarr;
+            <div id='esempio-ready-pending'></div>
+        </div>
+
+        <h2><code>.button('getState')</code></h2>
+        <p>Ritorna lo stato attuale del bottone.</p>
+        <pre>
+let statoButton = $("#esempio-ready").button('getState');
+        </pre>
+    </body>
+    <script type='text/javascript'>
+        $("#esempio-single").dropdown({
+            placeholder: 'SingleDropdown',
+			data: [
+				{id: 1, nome:"Javascript", img: "http://myhost.com/javascript.png"},
+				{id: 2, nome:"Java", img: "http://myhost.com/java-icon.png"},
+				{id: 3, nome:"C++", img: "http://myhost.com/c-plus-plus.png"}],
+			width: 200,
+			dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
+			labelMapper: function(values){ return values.map((el) => el.value).join(", ") },
+        });
+
+        $("#esempio-multi").dropdown({
+			type: 'multi',
+			selected: ['2'],
+			placeholder: 'MultiDropdown',
+			data: [
+				{id: 1, nome:"Javascript", img: "http://myhost.com/javascript.png"},
+				{id: 2, nome:"Java", img: "http://myhost.com/java-icon.png"},
+				{id: 3, nome:"C++", img: "http://myhost.com/c-plus-plus.png"}],
+			width: 250,
+			dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
+			onChange: function(values){ console.log("Lista valori dropdown2: " + values.map((el) => el.value).join(", ")); }
+        });
+
+        $("#esempio-multi2").dropdown({
+			type: 'multi',
+			selected: ['1', '2'],
+			placeholder: 'MultiDropdown',
+			data: [
+				{id: 1, nome:"Javascript", img: "http://myhost.com/javascript.png"},
+				{id: 2, nome:"Java", img: "http://myhost.com/java-icon.png"},
+				{id: 3, nome:"C++", img: "http://myhost.com/c-plus-plus.png"}],
+			dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
+			onChange: function(values){ console.log("Lista valori dropdown2: " + values.map((el) => el.value).join(", ")); }
+        });
+    </script>
+</html>
