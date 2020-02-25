@@ -44,10 +44,8 @@ export default class Dropdown
                 .text(this._selectedValues.length == 0 ? this._configuration.placeholder : this._configuration.labelMapper(this._selectedValues)))
             .click(() => 
                 {
-                    console.log(this._dropdownElement.hasClass('open'));
-                    this._dropdownElement.toggleClass('open');
                     this._dropdownBodyElement.toggle();
-                    this._dropdownBodyElement.find('input[type=text]').focus()
+                    if (this._dropdownBodyElement.is(':visible')) this._dropdownBodyElement.find('input[type=text]').focus()
                 });
 
         this._dropdownBodyElement
@@ -57,12 +55,8 @@ export default class Dropdown
                 .prop('placeholder', 'Cerca..')
                 .on('input', () => this.filterSearch()));
 
-        $(document).on('mouseup', (event : JQuery.MouseUpEvent) => 
-        {
-            if (closeOnOutsideClick(event, this._dropdownBodyElement))
-                this._dropdownElement.toggleClass('open');
-        });
-
+        $(document).on('click', (event : JQuery.ClickEvent) => closeOnOutsideClick(event, this._dropdownElement.get(0), this._dropdownBodyElement));
+                
         for (let value of this._values)
         {
             let listElement : JQuery<HTMLElement> = $('<li />')
