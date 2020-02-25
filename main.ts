@@ -119,13 +119,25 @@ import '@fortawesome/fontawesome-free/js/brands'
                     $(this).data("dropdown").setValues(values);
                 },
 
-                //getValues:
+                getValues: function()
+                {
+                    return $(this).data("dropdown").getValues();
+                },
 
-                //show:
+                show: function()
+                {
+                    $(this).data("dropdown").show();
+                },
 
-                //hide:
+                hide: function()
+                {
+                    $(this).data("dropdown").hide();
+                },
 
-                //toggle:
+                toggle: function()
+                {
+                    $(this).data("dropdown").toggle();
+                },
             };
 
             if (TypeUtils.isObject(opts))

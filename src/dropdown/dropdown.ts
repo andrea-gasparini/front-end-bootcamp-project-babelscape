@@ -168,4 +168,12 @@ export default class Dropdown
 
         this._configuration.onChange(this._selectedValues);
     }
+
+    public getValues() : Array<KeyValue> { return this._selectedValues; }
+
+    public show() : void { this._dropdownBodyElement.show(); }
+
+    public hide() : void { this._dropdownBodyElement.hide(); }
+
+    public toggle() : void { this._dropdownBodyElement.toggle(); }
 }
