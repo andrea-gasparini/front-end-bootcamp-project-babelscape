@@ -14,7 +14,7 @@ export default class DropdownConfiguration
     private _labelMapper: (selectedList: Array<KeyValue>) => string;
     private _onChange: (selectedList: Array<KeyValue>) => void;
     
-    constructor(config: {type? : DropdownType | string, placeholder: string, data : Array<any>, selected? : Array<string>, width? : number, height? : number, dataMapper : (elem : any) => KeyValue, labelMapper : (selectedList : Array<KeyValue>) => string, onChange : (selectedList : Array<KeyValue>) => void})
+    constructor(config: {type? : DropdownType | string, placeholder: string, data : Array<any>, selected? : Array<string>, width? : number, height? : number, dataMapper : (elem : any) => KeyValue, labelMapper? : (selectedList : Array<KeyValue>) => string, onChange? : (selectedList : Array<KeyValue>) => void})
     {
         if (config.type !== undefined) 
             this._type = TypeUtils.isString(config.type) ? DropdownType.fromValue(config.type) : config.type;
@@ -31,8 +31,11 @@ export default class DropdownConfiguration
         if (config.dataMapper !== undefined) this._dataMapper = config.dataMapper;
 
         if (config.labelMapper !== undefined) this._labelMapper = config.labelMapper;
+        else this._labelMapper = (values : Array<KeyValue>) => values.map((el) => el.value).join(", ");
 
         if (config.onChange !== undefined) this._onChange = config.onChange;
+        else if (this._type == DropdownType.SINGLE) this._onChange = (values : Array<KeyValue>) => console.log("Valore selezionato: " + values.map((el) => el.value).join(", "));
+        else if (this._type == DropdownType.MULTI) this._onChange = (values : Array<KeyValue>) => console.log("Valori selezionati: " + values.map((el) => el.value).join(", "));
     }
 
     get type() : DropdownType { return this._type; }
