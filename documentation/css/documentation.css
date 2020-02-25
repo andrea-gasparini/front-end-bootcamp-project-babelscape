@@ -28,7 +28,7 @@ body
     border: lightgrey;
     border-right-style: solid;
     border-width: 1px;
-    width: 80%;
+    max-width: 82.5%;
     padding: 40px;
     padding-top: 10px;
 }

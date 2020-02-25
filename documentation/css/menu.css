@@ -6,7 +6,7 @@
     border-right-style: solid;
     border-left-style: solid;
     border-width: 1px;
-    width: 20%;
+    min-width: 17.5%;
 }
 #menu-container
 {
