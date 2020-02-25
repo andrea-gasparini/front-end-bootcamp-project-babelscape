@@ -13,6 +13,11 @@
 	</head>
 	<body>
 		<div style='display: flex; flex-direction: row; justify-content: center;'>
+			<div id="toggle1"></div>
+			<div id="toggle2"></div>
+		</div>
+
+		<div style='display: flex; flex-direction: row; justify-content: center;'>
 			<div id="dropdown1"></div>
 			<div id="dropdown2"></div>
 		</div>
@@ -99,7 +104,7 @@
 		var dropdownConfig1 = 
 		{
 			placeholder: 'SingleDropdown',
-			selected: ['Java'],
+			selected: ['1'],
 			data: [
 				{id: 1, nome:"Javascript", img: "http://myhost.com/javascript.png"},
 				{id: 2, nome:"Java", img: "http://myhost.com/java-icon.png"},
@@ -107,13 +112,12 @@
 			width: 150,
 			dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
 			labelMapper: function(values){ return values.map((el) => el.value).join(", ") },
-			onChange: function(values){ console.log("Valore selezionato: " + values.map((el) => el.value).join(", ")); }
 		}
 
 		var dropdownConfig2 = 
 		{
 			type: 'multi',
-			selected: ['Java'],
+			selected: ['2'],
 			placeholder: 'MultiDropdown',
 			data: [
 				{id: 1, nome:"Javascript", img: "http://myhost.com/javascript.png"},
@@ -121,8 +125,7 @@
 				{id: 3, nome:"C++", img: "http://myhost.com/c-plus-plus.png"}],
 			width: 250,
 			dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
-			labelMapper: function(values){ return "Selezionati: " + values.map((el) => el.value).join(", ") },
-			onChange: function(values){ console.log("Valori selezionati: " + values.map((el) => el.value).join(", ")); }
+			onChange: function(values){ console.log("Lista valori dropdown2: " + values.map((el) => el.value).join(", ")); }
 		}
 		
 		$("#dropdown1").dropdown(dropdownConfig1);
