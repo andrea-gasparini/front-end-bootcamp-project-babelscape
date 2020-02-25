@@ -4,10 +4,10 @@ import { closeOnOutsideClick } from "../utils";
 import KeyValue, { keyValueToLowerCase } from "../key-value";
 import "./dropdown.scss";
 
-export default class Dropdown
+export default class Dropdown<T>
 {
     private _element : HTMLElement;
-    private _configuration : DropdownConfiguration;
+    private _configuration : DropdownConfiguration<T>;
     private _values : Array<KeyValue> = new Array();
     private _selectedValues : Array<KeyValue> = new Array();
     private _dropdownElement : JQuery<HTMLElement> = $('<div />');
@@ -15,16 +15,16 @@ export default class Dropdown
     private _dropdownBodyElement : JQuery<HTMLUListElement> = $('<ul />');
     private readonly _dropdownIcon : JQuery<HTMLElement> = $('<i class="fas fa-sort-down"></i>');
 
-    constructor(element: HTMLElement, config: DropdownConfiguration)
+    constructor(element: HTMLElement, config: DropdownConfiguration<T>)
     {
         this._element = element;
         this._configuration = config;
 
-        for (let element of config.data)
-            this._values.push(config.dataMapper(element));
+        for (let val of config.data)
+            this._values.push(config.dataMapper(val));
 
         for (let selectedValue of config.selected)
-            this._selectedValues.push(this._values.find((elem) => elem.value == selectedValue));
+            this._selectedValues.push(this._values.find((el) => el.key == selectedValue));
 
         this.render();
     }
@@ -57,14 +57,14 @@ export default class Dropdown
 
         $(document).on('click', (event : JQuery.ClickEvent) => closeOnOutsideClick(event, this._dropdownElement.get(0), this._dropdownBodyElement));
                 
-        for (let value of this._values)
+        for (let val of this._values)
         {
             let listElement : JQuery<HTMLElement> = $('<li />')
-                .data('KeyValue', keyValueToLowerCase(value))
-                .text(value.value)
-                .on('click', (e : JQuery.ClickEvent) => this.updateSelection(listElement, e));
+                .data('KeyValue', keyValueToLowerCase(val))
+                .text(val.value)
+                .on('click', (event : JQuery.ClickEvent) => this.updateSelection(listElement, event));
 
-            let isSelected = this._configuration.selected.find(el => el.toLowerCase() == value.value.toLowerCase());
+            let isSelected = this._configuration.selected.find(el => el.toLowerCase() == val.key.toLowerCase());
 
             if (isSelected) listElement.addClass('selected');
 
@@ -99,7 +99,7 @@ export default class Dropdown
                 $(liElements[i]).hide();
     }
 
-    private updateSelection(listElement : JQuery<HTMLElement>, e : JQuery.ClickEvent) : void
+    private updateSelection(listElement : JQuery<HTMLElement>, event : JQuery.ClickEvent) : void
     {  
         if (this._configuration.type == DropdownType.MULTI)
         {
@@ -116,7 +116,7 @@ export default class Dropdown
                 this._dropdownLabelElement.find('span').text(this._configuration.labelMapper(this._selectedValues));
             }
 
-            if (e.target.tagName != 'INPUT')
+            if (event.target.tagName != 'INPUT')
                 checkBox.prop('checked', ! checkBox.prop('checked'));
         }
         else

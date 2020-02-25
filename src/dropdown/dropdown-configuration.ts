@@ -3,18 +3,18 @@ import Dimension from "../dimension";
 import KeyValue from "../key-value";
 import { TypeUtils } from "../utils";
 
-export default class DropdownConfiguration
+export default class DropdownConfiguration<T>
 {
     private _type: DropdownType = DropdownType.SINGLE;
     private _placeholder: string;
-    private _data: Array<any> = new Array();
+    private _data: Array<T> = new Array();
     private _selected: Array<string> = new Array();
     private _dimensions: Dimension = new Dimension();
-    private _dataMapper: (elem: any) => KeyValue;
+    private _dataMapper: (elem: T) => KeyValue;
     private _labelMapper: (selectedList: Array<KeyValue>) => string;
     private _onChange: (selectedList: Array<KeyValue>) => void;
     
-    constructor(config: {type? : DropdownType | string, placeholder: string, data : Array<any>, selected? : Array<string>, width? : number, height? : number, dataMapper : (elem : any) => KeyValue, labelMapper? : (selectedList : Array<KeyValue>) => string, onChange? : (selectedList : Array<KeyValue>) => void})
+    constructor(config: {type? : DropdownType | string, placeholder: string, data : Array<T>, selected? : Array<string>, width? : number, height? : number, dataMapper : (elem : T) => KeyValue, labelMapper? : (selectedList : Array<KeyValue>) => string, onChange? : (selectedList : Array<KeyValue>) => void})
     {
         if (config.type !== undefined) 
             this._type = TypeUtils.isString(config.type) ? DropdownType.fromValue(config.type) : config.type;

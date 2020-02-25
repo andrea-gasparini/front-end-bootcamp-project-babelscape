@@ -144,8 +144,8 @@ import '@fortawesome/fontawesome-free/js/brands'
             {
                 var dropdownBuilder = function()
                 {
-                    var dropdownConfiguration = new DropdownConfiguration(opts);
-                    $(this).data("dropdown", new Dropdown($(this).get(0), dropdownConfiguration));
+                    var dropdownConfiguration = new DropdownConfiguration<typeof opts.data>(opts);
+                    $(this).data("dropdown", new Dropdown<typeof opts.data>($(this).get(0), dropdownConfiguration));
                 }
 
                 return this.each(dropdownBuilder);
