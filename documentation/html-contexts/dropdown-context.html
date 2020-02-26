@@ -6,7 +6,7 @@
         <p> 
             La selezione degli elementi del Dropdown può essere di due diversi tipi: <code>SINGLE</code> e <code>MULTI</code>.
             Nel primo caso l’utente può selezionare al più un valore dalla lista dei valori forniti; nel secondo caso anche più di uno.
-            Il componente è formato da due sezioni principali: label e body.
+            Il componente è formato da due elementi principali: il label e il body.
         </p>
         <p>
             Il label è la parte sempre visibile di cui fanno parte:
@@ -20,45 +20,76 @@
             Fanno parte del body:
             <ul>
                 <li>La lista dei valori disponibili sul quale l'utente effettuerà la selezione</li>
-                <li>Nel caso di dropdown <code>MULTI</code> una checkbox per ogni valore mostrato che ne indica lo stato di selezione</li>
-                <li>Una barra di ricerca per effettuare una ricerca veloce tra gli elementi</li>
+                <li>Nel caso di dropdown <code>MULTI</code> una checkbox per ogni valore mostrato che ne conferma lo stato di selezione (oltre allo sfondo di diverso colore)</li>
+                <li>Una barra di input testuale per effettuare una ricerca veloce tra gli elementi</li>
             </ul>
         </p>
 
         <h2> Esempi </h2>
         <p> 
             Oltre che nella tipologia, il componente può essere personalizzato nelle dimensioni, nel placeholder e nei valori selezionati di default.
-            Inoltre è possibile personalizzare la funzioni che gestisce il modo in cui vengono visualizzati i dati nel label e la funzione di callback che viene invocata ogni volta che la selezione cambia.
+            Inoltre è possibile personalizzare la funzione che gestisce il modo in cui vengono visualizzati i dati nel label e la funzione di callback che viene invocata ogni volta che la selezione cambia.
         </p>
         <p>
             A seguire alcuni esempi con la relativa configurazione.
         </p>
         <div class='horizontal-centered-container'>
             <div id='esempio-single'></div>
-            <div id='esempio-multi'></div>
+            <div class='esempio-multi'></div>
         </div>
-        <div id='esempio-single2'></div>
         <div id='esempio-multi2'></div>
         <pre>
-$("#esempio-ready").button({
-    text: "Button Ready",
-    icon: "&lt;i class='fas fa-play'&gt;&lt;/i&gt;",
-    onClick: function(event) { alert('click') }});
+$("#esempio-single").dropdown({
+    placeholder: 'SingleDropdown',
+    data: [
+        {id: 1, nome:"Javascript", img: "http://myhost.com/javascript.png"},
+        {id: 2, nome:"Java", img: "http://myhost.com/java-icon.png"},
+        {id: 3, nome:"C++", img: "http://myhost.com/c-plus-plus.png"},
+        {id: 4, nome:"Python", img: "http://myhost.com/python.png"},
+        {id: 5, nome:"C", img: "http://myhost.com/c.png"},
+        {id: 6, nome:"Bash", img: "http://myhost.com/bash.png"}],
+    width: 250,
+    dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; }
+});
 
-$("#esempio-disabled").button({
-    text: "Button Disabled",
-    initialState: "DISABLED",
-    onClick: function(event) { alert('click') }});
+$("#esempio-multi").dropdown({
+    type: 'MULTI',
+    selected: ['2'],
+    data: [
+        {id: 1, nome:"Opzione 1"},
+        {id: 2, nome:"Opzione 2"},
+        {id: 3, nome:"Opzione 3"}],
+    width: 150,
+    dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
+    onChange: function(values){ 
+        console.log(
+            "Lista valori esempio-multi: " + values.map((el) => el.value).join(", ")
+            ); 
+        }
+});
 
-$("#esempio-error").button({
-    text: "Button Error",
-    initialState: "ERROR",
-    onClick: function(event) { alert('click') }});
-
-$("#esempio-pending").button({
-    text: "Button Pending",
-    initialState: "PENDING",
-    onClick: function(event) { alert('click') }});
+$("#esempio-multi2").dropdown({
+    type: 'MULTI',
+    placeholder: 'Lingue Parlate',
+    data: [
+        {id: 1, nome:"Arabo"},
+        {id: 2, nome:"Cinese"},
+        {id: 3, nome:"Inglese"},
+        {id: 4, nome:"Italiano"},
+        {id: 5, nome:"Greco"},
+        {id: 6, nome:"Russo"},
+        {id: 7, nome:"Spagnolo"},
+        {id: 8, nome:"Tedesco"}],
+    dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
+    labelMapper:function(values){ 
+        values.map((el) => "Lingue selezionate: " + el.value).join(", "); 
+    },
+    onChange: function(values){ 
+        console.log(
+            "Lista lingue parlate: " + values.map((el) => el.value).join(", ")
+            );
+        }
+});
         </pre> 
         <h2> Opzioni </h2>
         <p>
@@ -76,16 +107,31 @@ $("#esempio-pending").button({
             </thead>
             <tbody>
                 <tr>
-                    <td>text</td>
-                    <td><code>string</code></td>
+                    <td>type</td>
+                    <td><code>DropdownType</code></td>
                     <td></td>
-                    <td>Il testo da mostrare nel componente.</td>
+                    <td>Il tipo di selezione del dropdown (è possibile scegliere tra <code>SINGLE</code> e <code>MULTI</code>).</td>
                 </tr>
                 <tr>
-                    <td>icon</td>
-                    <td><code>JQuery</code></td>
+                    <td>placeholder</td>
+                    <td><code>string</code></td>
+                    <td><code>''</code></td>
+                    <td>La stringa che viene mostrata nel label del dropdown quando non viene selezionato alcun valore tra quelli del body.</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td><code>Array&lt;T&gt;</code></td>
                     <td></td>
-                    <td>L'icona da mostrare nel componente. Es: <code>&lt;i class='fas fa-envelope'&gt;&lt;/i&gt;</code>.</td>
+                    <td>La lista dei valori da mostrare all'interno del body del dropdown. Il tipo generico T indica che è possibile passare qualsiasi tipo permesso da Javascript.</td>
+                </tr>
+                <tr>
+                    <td>selected</td>
+                    <td><code>Array&lt;string&gt;</code></td>
+                    <td><code>[]</code></td>
+                    <td>
+                        La lista degli identificatori (le <code>key</code> degli oggetti <code>KeyValue</code> a cui vengono mappati i valori in input tramite la funzione <code>dataMapper</code>, anch'essa definita in fase di configurazione del componente) dei valori selezionati di default.
+                        Nel caso di dropdown a selezione singola (<code>SINGLE</code>) verrà considerato solo il primo elemento della lista.
+                    </td>
                 </tr>
                 <tr>
                     <td>width</td>
@@ -94,22 +140,25 @@ $("#esempio-pending").button({
                     <td>Larghezza del componente, di default si adatta alle dimensioni del div in cui è contenuto.</td>
                 </tr>
                 <tr>
-                    <td>height</td>
-                    <td><code>number</code></td>
-                    <td><code>auto</code></td>
-                    <td>Altezza del componente, di default si adatta alle righe del testo.</td>
-                </tr>
-                <tr>
-                    <td>initialState</td>
-                    <td><code>State</code> o <code>string</code></td>
-                    <td><code>READY</code></td>
-                    <td>Lo stato iniziale del bottone, che ne modifica il comportamento e l'aspetto. È possibile scegliere tra <code>READY</code>, <code>DISABLED</code>, <code>ERROR</code> e <code>PENDING</code>.</td>
-                </tr>
-                <tr>
-                    <td>onClick</td>
-                    <td><code>function&lt;Event&gt;</code></td>
+                    <td>dataMapper</td>
+                    <td><code>function&lt;T, KeyValue&gt;</code></td>
                     <td></td>
-                    <td>Funzione (callback) che viene invocata ogni volta che il componente viene azionato correttamente dopo essere stato cliccato. Questo può variare in base allo stato in cui si trova.</td>
+                    <td>Una funzione che mappa ogni elemento della lista in input, in un oggetto <code>KeyValue</code>.</td>
+                </tr>
+                <tr>
+                    <td>labelMapper</td>
+                    <td><code>function&lt;Array&lt;KeyValue&gt;, string&gt;</code></td>
+                    <td><code>(values : Array&lt;KeyValue&gt;) => values.map((el) => el.value).join(", ")</code></td>
+                    <td>
+                        Una funzione che mappa una lista di oggetti <code>KeyValue</code> (che rappresentano i valori selezionati nel dropdown) in una stringa rappresentativa mostrata all'utente.
+                        Nel caso di dropdown a selezione singola (<code>SINGLE</code>) verrà considerato solo il primo elemento della lista.
+                    </td>
+                </tr>
+                <tr>
+                    <td>onChange</td>
+                    <td><code>function&lt;Array&lt;KeyValue&gt;&gt;</code></td>
+                    <td><code>(values : Array&lt;KeyValue&gt;) => console.log("Valore/i selezionato/i: " + values.map((el) => el.value).join(", "))</code></td>
+                    <td>Funzione (callback) che viene invocata ogni volta che la selezione del dropdown cambia.</td>
                 </tr>
             </tbody>
         </table>
@@ -117,23 +166,41 @@ $("#esempio-pending").button({
         <h2> Metodi </h2>
         <p>Il componente dispone inoltre dei metodi descritti a seguire.</p>
         
-        <h2><code>.button('setState', newState)</code></h2>
-        <p>Modifica lo stato del bottone, impostando <code>newState</code> (il secondo parametro) come nuovo stato.</p>
+        <h2><code>.dropdown('setValues', newValues : Array&lt;string&gt;)</code></h2>
+        <p>Modifica i valori selezionati del dropdown, deselezionando quelli presenti e impostando quelli rappresentati dalle stringhe nella lista <code>newValues</code> (le stringhe rappresentano le <code>key</code> degli oggetti <code>KeyValue</code> a cui vengono mappati i valori in input).</p>
         <pre>
-$("#esempio-ready").button(
+$("#esempio-multi").dropdown(
     'setState',
-    'PENDING');
+    ['1','3']);
         </pre>
         <div class='horizontal-centered-container'>
-            <div class='esempio-ready'></div>
+            <div class='esempio-multi'></div>
             &rarr;
-            <div id='esempio-ready-pending'></div>
+            <div id='esempio-multi-changed'></div>
         </div>
 
-        <h2><code>.button('getState')</code></h2>
-        <p>Ritorna lo stato attuale del bottone.</p>
+        <h2><code>.dropdown('getValues')</code></h2>
+        <p>Ritorna i valori selezionati del dropdown.</p>
         <pre>
-let statoButton = $("#esempio-ready").button('getState');
+let selectedValues = $("#esempio-multi2").dropdown('getValues');
+        </pre>
+
+        <h2><code>.dropdown('show')</code></h2>
+        <p>Mostra il body del dropdown.</p>
+        <pre>
+$("#esempio-multi2").dropdown('show');
+        </pre>
+
+        <h2><code>.dropdown('hide')</code></h2>
+        <p>Nasconde il body del dropdown.</p>
+        <pre>
+let selectedValues = $("#esempio-multi2").dropdown('hide');
+        </pre>
+
+        <h2><code>.dropdown('toggle')</code></h2>
+        <p>Nasconde il body se già visibile e lo mostra se nascosto.</p>
+        <pre>
+let selectedValues = $("#esempio-multi2").dropdown('toggle');
         </pre>
     </body>
     <script type='text/javascript'>
@@ -142,35 +209,47 @@ let statoButton = $("#esempio-ready").button('getState');
 			data: [
 				{id: 1, nome:"Javascript", img: "http://myhost.com/javascript.png"},
 				{id: 2, nome:"Java", img: "http://myhost.com/java-icon.png"},
-				{id: 3, nome:"C++", img: "http://myhost.com/c-plus-plus.png"}],
-			width: 200,
-			dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
-			labelMapper: function(values){ return values.map((el) => el.value).join(", ") },
+                {id: 3, nome:"C++", img: "http://myhost.com/c-plus-plus.png"},
+                {id: 4, nome:"Python", img: "http://myhost.com/python.png"},
+				{id: 5, nome:"C", img: "http://myhost.com/c.png"},
+				{id: 6, nome:"Bash", img: "http://myhost.com/bash.png"}],
+			width: 250,
+			dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; }
         });
 
-        $("#esempio-multi").dropdown({
-			type: 'multi',
+        let configEsempioMulti = {
+			type: 'MULTI',
 			selected: ['2'],
-			placeholder: 'MultiDropdown',
 			data: [
-				{id: 1, nome:"Javascript", img: "http://myhost.com/javascript.png"},
-				{id: 2, nome:"Java", img: "http://myhost.com/java-icon.png"},
-				{id: 3, nome:"C++", img: "http://myhost.com/c-plus-plus.png"}],
-			width: 250,
+				{id: 1, nome:"Opzione 1"},
+				{id: 2, nome:"Opzione 2"},
+				{id: 3, nome:"Opzione 3"}],
+			width: 150,
 			dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
-			onChange: function(values){ console.log("Lista valori dropdown2: " + values.map((el) => el.value).join(", ")); }
-        });
+			onChange: function(values){ console.log("Lista valori esempio-multi: " + values.map((el) => el.value).join(", ")); }
+        }
+
+        $(".esempio-multi").dropdown(configEsempioMulti);
 
         $("#esempio-multi2").dropdown({
-			type: 'multi',
-			selected: ['1', '2'],
-			placeholder: 'MultiDropdown',
+			type: 'MULTI',
+			placeholder: 'Lingue Parlate',
 			data: [
-				{id: 1, nome:"Javascript", img: "http://myhost.com/javascript.png"},
-				{id: 2, nome:"Java", img: "http://myhost.com/java-icon.png"},
-				{id: 3, nome:"C++", img: "http://myhost.com/c-plus-plus.png"}],
-			dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
-			onChange: function(values){ console.log("Lista valori dropdown2: " + values.map((el) => el.value).join(", ")); }
+				{id: 1, nome:"Arabo"},
+				{id: 2, nome:"Cinese"},
+                {id: 3, nome:"Inglese"},
+                {id: 4, nome:"Italiano"},
+				{id: 5, nome:"Greco"},
+                {id: 6, nome:"Russo"},
+                {id: 7, nome:"Spagnolo"},
+				{id: 8, nome:"Tedesco"}],
+            dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
+            labelMapper:function(values){ values.map((el) => "Lingue selezionate: " + el.value).join(", "); },
+			onChange: function(values){ console.log("Lista lingue parlate: " + values.map((el) => el.value).join(", ")); }
         });
+
+        $("#esempio-multi-changed").dropdown(configEsempioMulti);
+        $("#esempio-multi-changed").dropdown("setValues", ['1','3']);
+        
     </script>
 </html>
