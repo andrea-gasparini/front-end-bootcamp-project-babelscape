@@ -6,7 +6,7 @@ import { TypeUtils } from "../utils";
 export default class DropdownConfiguration<T>
 {
     private _type: DropdownType = DropdownType.SINGLE;
-    private _placeholder: string;
+    private _placeholder: string = '';
     private _data: Array<T> = new Array();
     private _selected: Array<string> = new Array();
     private _width: number;
