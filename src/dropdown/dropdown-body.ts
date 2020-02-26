@@ -54,9 +54,10 @@ export default class DropdownBody<T>
             .text(val.value)
             .on('click', (event : JQuery.ClickEvent) => this.updateSelection(liElement, event));
 
-        let isSelected = (this._dropdownType == DropdownType.MULTI) ?
-            this._selectedValues.find(el => el.key.toLowerCase() == val.key.toLowerCase()) :
-            this.selectedValues[0].key.toLowerCase() == val.key.toLowerCase();
+        let isSelected = this._selectedValues.length == 0 ? false :
+            (this._dropdownType == DropdownType.MULTI) ?
+                this._selectedValues.find(el => el.key.toLowerCase() == val.key.toLowerCase()) :
+                this._selectedValues[0].key.toLowerCase() == val.key.toLowerCase();
 
         if (isSelected) liElement.addClass('selected');
 
