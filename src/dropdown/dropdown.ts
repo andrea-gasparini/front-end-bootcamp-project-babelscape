@@ -19,7 +19,7 @@ export default class Dropdown<T>
         this._element = element;
         this._configuration = config;
         this._dropdownLabel = new DropdownLabel(this._configuration.placeholder, this._configuration.labelMapper); 
-        this._dropdownBody = new DropdownBody(this._dropdownLabel, this._configuration.type, this._configuration.data, this._configuration.selected, this._configuration.dataMapper, this._configuration.onChange);
+        this._dropdownBody = new DropdownBody<T>(this._dropdownLabel, this._configuration.type, this._configuration.data, this._configuration.selected, this._configuration.dataMapper, this._configuration.onChange);
 
         this.render();
     }
