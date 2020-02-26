@@ -9,7 +9,7 @@ export default class DropdownConfiguration<T>
     private _placeholder: string;
     private _data: Array<T> = new Array();
     private _selected: Array<string> = new Array();
-    private _dimensions: Dimension = new Dimension();
+    private _width: number;
     private _dataMapper: (elem: T) => KeyValue;
     private _labelMapper: (selectedList: Array<KeyValue>) => string;
     private _onChange: (selectedList: Array<KeyValue>) => void;
@@ -25,8 +25,7 @@ export default class DropdownConfiguration<T>
 
         if (config.selected !== undefined) this._selected = config.selected;
 
-        if (config.width !== undefined) this._dimensions.width = config.width;
-        if (config.height !== undefined) this._dimensions.height = config.height;
+        if (config.width !== undefined) this._width = config.width;
 
         if (config.dataMapper !== undefined) this._dataMapper = config.dataMapper;
 
@@ -46,9 +45,7 @@ export default class DropdownConfiguration<T>
 
     get selected() : Array<string> { return this._selected; }
 
-    get width() : number { return this._dimensions.width; }
-
-    get height() : number { return this._dimensions.height; }
+    get width() : number { return this._width; }
 
     get dataMapper() : (elem: any) => KeyValue { return this._dataMapper; }
 

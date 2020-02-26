@@ -61,9 +61,6 @@ export default class Dropdown<T>
         if (this._configuration.width !== undefined)
             this._dropdownElement.css('width', this._configuration.width + 'px');
 
-        if (this._configuration.height !== undefined)
-            this._dropdownElement.css('height', this._configuration.height + 'px');
-
         this._dropdownElement
             .addClass('dropdown')
             .addClass(DropdownType.toCssClass(this._configuration.type))
