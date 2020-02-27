@@ -8,6 +8,8 @@ import ButtonConfiguration from './src/button/button-configuration';
 import Button from './src/button/button';
 import DropdownConfiguration from './src/dropdown/dropdown-configuration';
 import Dropdown from './src/dropdown/dropdown';
+import ToggleConfiguration from './src/toggle/toggle-configuration';
+import Toggle from './src/toggle/toggle';
 import TableConfiguration from './src/table/table-configuration';
 import Table from './src/table/table';
 
@@ -152,6 +154,43 @@ import '@fortawesome/fontawesome-free/js/brands'
             }
             else
                 return methods[opts].apply(this, Array.prototype.slice.call( arguments, 1 ));   
+        },
+
+        toggle : function(opts : any) 
+        {
+            var opts = opts;
+            if (opts == undefined) opts = {};
+
+            var methods : any = 
+            {
+                setFirstValue: function()
+                {
+                    $(this).data("toggle").setFirstValue();
+                },
+
+                setSecondValue: function()
+                {
+                    $(this).data("toggle").setSecondValue();
+                },
+
+                getValue: function()
+                {
+                    return $(this).data("toggle").getValue();
+                }
+            };
+
+            if (TypeUtils.isObject(opts))
+            {
+                var toggleBuilder = function()
+                {
+                    var toggleConfiguration = new ToggleConfiguration<typeof opts.data>(opts);
+                    $(this).data("toggle", new Toggle<typeof opts.data>($(this).get(0), toggleConfiguration));
+                }
+
+                return this.each(toggleBuilder);
+            } 
+            else
+                return methods[opts].apply(this, Array.prototype.slice.call( arguments, 1 ));
         },
 
         table : function(opts : any)
