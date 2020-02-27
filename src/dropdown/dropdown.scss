@@ -92,8 +92,8 @@
         input:focus
         {
             outline: none;
-            box-shadow: 0 0 5px $dropdown-body-input-focus-color;
-            border: 1px solid $dropdown-body-input-focus-color;
+            box-shadow: 0 0 5px $input-focus-color;
+            border: 1px solid $input-focus-color;
         }
 
         li
