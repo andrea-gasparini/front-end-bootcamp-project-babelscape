@@ -2,7 +2,7 @@
 <html lang="en">
     <body>
         <h1> Documentazione Dropdown </h1>
-        <span id='subtitle'> È un componente che permette la sezione di elementi da una lista predefinita.</span>
+        <span id='subtitle'> Il Dropdown è un componente che permette la sezione di elementi da una lista predefinita.</span>
         <p> 
             La selezione degli elementi del Dropdown può essere di due diversi tipi: <code>SINGLE</code> e <code>MULTI</code>.
             Nel primo caso l’utente può selezionare al più un valore dalla lista dei valori forniti; nel secondo caso anche più di uno.
@@ -11,7 +11,7 @@
         <p>
             Il label è la parte sempre visibile di cui fanno parte:
             <ul>
-                <li>Il placeholder, in caso non sia stato selezionato alcun elemento del dropdown</li>
+                <li>Il placeholder, visualizzato in caso non sia stato selezionato alcun valore del dropdown</li>
                 <li>Un testo contenente i valori selezionati, che sostituisce il placeholder</li>
             </ul>
         </p>
@@ -20,7 +20,7 @@
             Fanno parte del body:
             <ul>
                 <li>La lista dei valori disponibili sul quale l'utente effettuerà la selezione</li>
-                <li>Nel caso di dropdown <code>MULTI</code> una checkbox per ogni valore mostrato che ne conferma lo stato di selezione (oltre allo sfondo di diverso colore)</li>
+                <li>Nel caso di dropdown <code>MULTI</code>, una checkbox per ogni valore mostrato che ne conferma lo stato di selezione (oltre allo sfondo di diverso colore)</li>
                 <li>Una barra di input testuale per effettuare una ricerca veloce tra gli elementi</li>
             </ul>
         </p>
@@ -59,13 +59,11 @@ $("#esempio-multi").dropdown({
         {id: 1, nome:"Opzione 1"},
         {id: 2, nome:"Opzione 2"},
         {id: 3, nome:"Opzione 3"}],
-    width: 150,
+    width: 200,
     dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
     onChange: function(values){ 
         console.log(
-            "Lista valori esempio-multi: " + values.map((el) => el.value).join(", ")
-            ); 
-        }
+            "Lista valori esempio-multi: " + values.map((el) => el.value).join(", ")); }
 });
 
 $("#esempio-multi2").dropdown({
@@ -81,14 +79,8 @@ $("#esempio-multi2").dropdown({
         {id: 7, nome:"Spagnolo"},
         {id: 8, nome:"Tedesco"}],
     dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
-    labelMapper:function(values){ 
-        values.map((el) => "Lingue selezionate: " + el.value).join(", "); 
-    },
-    onChange: function(values){ 
-        console.log(
-            "Lista lingue parlate: " + values.map((el) => el.value).join(", ")
-            );
-        }
+    labelMapper: function(values){ 
+        return "Lingue selezionate: " + values.map((el) => el.value).join(", "); }
 });
         </pre> 
         <h2> Opzioni </h2>
@@ -109,7 +101,7 @@ $("#esempio-multi2").dropdown({
                 <tr>
                     <td>type</td>
                     <td><code>DropdownType</code></td>
-                    <td></td>
+                    <td><code>SINGLE</code></td>
                     <td>Il tipo di selezione del dropdown (è possibile scegliere tra <code>SINGLE</code> e <code>MULTI</code>).</td>
                 </tr>
                 <tr>
@@ -148,7 +140,7 @@ $("#esempio-multi2").dropdown({
                 <tr>
                     <td>labelMapper</td>
                     <td><code>function&lt;Array&lt;KeyValue&gt;, string&gt;</code></td>
-                    <td><code>(values : Array&lt;KeyValue&gt;) => values.map((el) => el.value).join(", ")</code></td>
+                    <td><code>(values) => values.map((el) => el.value).join(", ")</code></td>
                     <td>
                         Una funzione che mappa una lista di oggetti <code>KeyValue</code> (che rappresentano i valori selezionati nel dropdown) in una stringa rappresentativa mostrata all'utente.
                         Nel caso di dropdown a selezione singola (<code>SINGLE</code>) verrà considerato solo il primo elemento della lista.
@@ -157,7 +149,7 @@ $("#esempio-multi2").dropdown({
                 <tr>
                     <td>onChange</td>
                     <td><code>function&lt;Array&lt;KeyValue&gt;&gt;</code></td>
-                    <td><code>(values : Array&lt;KeyValue&gt;) => console.log("Valore/i selezionato/i: " + values.map((el) => el.value).join(", "))</code></td>
+                    <td><code>(values) => console.log("Valore/i selezionato/i: " + values.map((el) => el.value).join(", "))</code></td>
                     <td>Funzione (callback) che viene invocata ogni volta che la selezione del dropdown cambia.</td>
                 </tr>
             </tbody>
@@ -194,13 +186,13 @@ $("#esempio-multi2").dropdown('show');
         <h2><code>.dropdown('hide')</code></h2>
         <p>Nasconde il body del dropdown.</p>
         <pre>
-let selectedValues = $("#esempio-multi2").dropdown('hide');
+$("#esempio-multi2").dropdown('hide');
         </pre>
 
         <h2><code>.dropdown('toggle')</code></h2>
         <p>Nasconde il body se già visibile e lo mostra se nascosto.</p>
         <pre>
-let selectedValues = $("#esempio-multi2").dropdown('toggle');
+$("#esempio-multi2").dropdown('toggle');
         </pre>
     </body>
     <script type='text/javascript'>
@@ -217,19 +209,17 @@ let selectedValues = $("#esempio-multi2").dropdown('toggle');
 			dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; }
         });
 
-        let configEsempioMulti = {
+        $(".esempio-multi").dropdown({
 			type: 'MULTI',
 			selected: ['2'],
 			data: [
 				{id: 1, nome:"Opzione 1"},
 				{id: 2, nome:"Opzione 2"},
 				{id: 3, nome:"Opzione 3"}],
-			width: 150,
+			width: 200,
 			dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
 			onChange: function(values){ console.log("Lista valori esempio-multi: " + values.map((el) => el.value).join(", ")); }
-        }
-
-        $(".esempio-multi").dropdown(configEsempioMulti);
+        });
 
         $("#esempio-multi2").dropdown({
 			type: 'MULTI',
@@ -244,11 +234,20 @@ let selectedValues = $("#esempio-multi2").dropdown('toggle');
                 {id: 7, nome:"Spagnolo"},
 				{id: 8, nome:"Tedesco"}],
             dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
-            labelMapper:function(values){ values.map((el) => "Lingue selezionate: " + el.value).join(", "); },
-			onChange: function(values){ console.log("Lista lingue parlate: " + values.map((el) => el.value).join(", ")); }
+            labelMapper: function(values){ return "Lingue selezionate: " + values.map((el) => el.value).join(", "); }
         });
 
-        $("#esempio-multi-changed").dropdown(configEsempioMulti);
+        $("#esempio-multi-changed").dropdown({
+			type: 'MULTI',
+			selected: ['2'],
+			data: [
+				{id: 1, nome:"Opzione 1"},
+				{id: 2, nome:"Opzione 2"},
+				{id: 3, nome:"Opzione 3"}],
+			width: 200,
+			dataMapper: function(t){ return { key: t.id.toString(), value: t.nome }; },
+			onChange: function(values){ console.log("Lista valori esempio-multi: " + values.map((el) => el.value).join(", ")); }
+        });
         $("#esempio-multi-changed").dropdown("setValues", ['1','3']);
         
     </script>
