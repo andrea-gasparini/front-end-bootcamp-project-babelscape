@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <h1> Documentazione Toggle </h1>
+        <span id='subtitle'> Il Toggle è un componente che permette di fare lo switch tra due valori.</span>
+        <p> 
+            Contiene il bottone principale, che se cliccato cambia la selezione, e due label relative ai valori selezionabili.
+            Tipico esempio è il bottoncino ON/OFF. 
+        </p>
+
+        <h2> Esempi </h2>
+        <p> 
+            Oltre che nei valori delle label, il componente può essere personalizzato nelle dimensioni e nella funzione di callback che viene invocata ogni volta che la selezione cambia.
+        </p>
+        <p>
+            A seguire alcuni esempi con la relativa configurazione.
+        </p>
+        <div class='horizontal-centered-container'>
+            <div id='esempio1'></div>
+            <div class='esempio2'></div>
+        </div>
+        <div class='horizontal-centered-container'>
+            <div id='esempio3'></div>
+        </div>
+        <pre>
+$("#esempio1").toggle({
+    value1: { id: 'on', label: 'ON'},
+    value2: { id: 'off', label: 'OFF' },
+    dataMapper: (v) => { key: v.id, value: v.label },
+    onChange: (v) => console.log("Toggle value: " + v.value)});
+
+$("#esempio2").toggle({
+    value1: 'SI,
+    value2: 'NO',
+    color1: 'blue',
+    color2: 'red',
+    dataMapper: (v) => { key: v, value: v }});
+
+$("#esempio3").toggle({
+    value1: { id: 'accept', label: 'ACCEPT'},
+    value2: { id: 'decline', label: 'DECLINE' },
+    color1: 'lightblue',
+    height: 40,
+    dataMapper: (v) => { key: v.id, value: v.label }});
+        </pre> 
+        <h2> Opzioni </h2>
+        <p>
+            Le opzioni del componente vanno specificate nella configurazione tramite un oggetto <code>JSON</code>, come mostrato negli esempi precedenti.
+            Se l'opzione non ha alcun valore in default è obbligatorio specificarne uno per la corretta configurazione del componente.
+        </p>
+        <table class='doc-table'>
+            <thead>
+                <tr>
+                    <th>Opzione</th>
+                    <th>Tipo</th>
+                    <th>Default</th>
+                    <th id='descrizione'>Descrizione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>value1</td>
+                    <td><code>T</code></td>
+                    <td></td>
+                    <td>Il primo valore del toggle, che verrà mostrato nella label di sinistra.</td>
+                </tr>
+                <tr>
+                    <td>value2</td>
+                    <td><code>T</code></td>
+                    <td></td>
+                    <td>Il secondo valore del toggle, che verrà mostrato nella label di destra.</td>
+                </tr>
+                <tr>
+                    <td>height</td>
+                    <td><code>number</code></td>
+                    <td><code>25</code></td>
+                    <td>L'altezza del componente. Al variare di questa vengono modificate di conseguenza anche le dimensioni dei label laterali.</td>
+                </tr>
+                <tr>
+                    <td>color1</td>
+                    <td><code>string</code></td>
+                    <td><code>lightgreen</code></td>
+                    <td>Colore del componente se è selezionato il primo valore. Può essere rappresentato come stringa testuale, in formato RGB o esadecimale. Es: <code>#90EE90</code>, <code>rgb(144, 238, 144)</code>.</td>
+                </tr>
+                <tr>
+                    <td>color2</td>
+                    <td><code>string</code></td>
+                    <td><code>grey</code></td>
+                    <td>Colore del componente se è selezionato il secondo valore. Può essere rappresentato come stringa testuale, in formato RGB o esadecimale. Es: <code>#808080</code>, <code>rgb(128, 128, 128)</code>.</td>
+                </tr>
+                <tr>
+                    <td>dataMapper</td>
+                    <td><code>function&lt;T, KeyValue&gt;</code></td>
+                    <td></td>
+                    <td>Una funzione per mappare <code>value1</code> e <code>value2</code> in un oggetto <code>KeyValue</code>.</td>
+                </tr>
+                <tr>
+                    <td>onChange</td>
+                    <td><code>function&lt;KeyValue&gt;</code></td>
+                    <td><code>(v) => console.log( "Valore selezionato: " + v.value )</code></td>
+                    <td>Funzione (callback) che viene invocata ogni volta che la selezione del toggle cambia.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2> Metodi </h2>
+        <p>Il componente dispone inoltre dei metodi descritti a seguire.</p>
+        
+        <h2><code>.toggle('setSecondValue')</code></h2>
+        <p>Imposta il toggle sul secondo valore (<code>value2</code>).</p>
+        <pre>
+$("#esempio2").toggle('setSecondValue');
+        </pre>
+        <div class='horizontal-centered-container'>
+            <div class='esempio2'></div>
+            &rarr;
+            <div id='esempio2-changed1'></div>
+        </div>
+
+        <h2><code>.toggle('setFirstValue')</code></h2>
+        <p>Imposta il toggle sul primo valore (<code>value1</code>).</p>
+        <pre>
+$("#esempio2").toggle('setFirstValue');
+        </pre>
+        <div class='horizontal-centered-container'>
+            <div id='esempio2-to-change'></div>
+            &rarr;
+            <div id='esempio2-changed2'></div>
+        </div>
+
+        <h2><code>.toggle('getValue')</code></h2>
+        <p>Ritorna il valore selezionato del toggle.</p>
+        <pre>
+let selectedValue = $("#esempio2").toggle('getValue');
+        </pre>
+    </body>
+    <script type='text/javascript'>
+        $("#esempio1").toggle({value1: { id: 'on', label: 'ON'}, value2: { id: 'off', label: 'OFF' }, dataMapper: function(v){ return { key: v.id, value: v.label }; }, onChange: (v) => console.log("Toggle value: " + v.value)});
+        $(".esempio2").toggle({value1: { id: 'si', label: 'SI'}, value2: { id: 'no', label: 'NO' }, color1: 'blue', color2: 'red', dataMapper: function(v){ return { key: v.id, value: v.label }; }});
+        $("#esempio3").toggle({value1: { id: 'accept', label: 'ACCEPT'}, value2: { id: 'decline', label: 'DECLINE' }, color1: 'lightblue', height: 40, dataMapper: function(v){ return { key: v.id, value: v.label }; }});
+        $("#esempio2-changed1").toggle({value1: { id: 'si', label: 'SI'}, value2: { id: 'no', label: 'NO' }, color1: 'blue', color2: 'red', dataMapper: function(v){ return { key: v.id, value: v.label }; }});
+        $("#esempio2-changed1").toggle('setSecondValue');
+        $("#esempio2-changed2").toggle({value1: { id: 'si', label: 'SI'}, value2: { id: 'no', label: 'NO' }, color1: 'blue', color2: 'red', dataMapper: function(v){ return { key: v.id, value: v.label }; }});
+        $("#esempio2-to-change").toggle({value1: { id: 'si', label: 'SI'}, value2: { id: 'no', label: 'NO' }, color1: 'blue', color2: 'red', dataMapper: function(v){ return { key: v.id, value: v.label }; }});
+        $("#esempio2-to-change").toggle('setSecondValue');
+        $("#esempio2-changed2").toggle('setFirstValue');
+    </script>
+</html>
