@@ -39,6 +39,7 @@ export default class Toggle<T>
         this._toggleButtonElement
             .addClass('toggle-button')
             .addClass('left')
+            .css('background-color', this._configuration.color1)
             .append(this._toggleIconElement)
             .click(() => this.toggle());
 
@@ -92,9 +93,19 @@ export default class Toggle<T>
         this._toggleButtonElement.toggleClass('right');
 
         if ( this._selected == this._value2 )
-            this._toggleIconElement.css('left', this._mainDimension + 2 + 'px');
+        {
+            this._toggleIconElement
+                .css('left', this._mainDimension + 2 + 'px');
+            this._toggleButtonElement
+                .css('background-color', this._configuration.color2);
+        }
         else
-            this._toggleIconElement.css('left', 2 + 'px');  
+        {
+            this._toggleIconElement
+                .css('left', 2 + 'px');
+            this._toggleButtonElement
+                .css('background-color', this._configuration.color1);  
+        }
 
         this._configuration.onChange(this._selected);
     }

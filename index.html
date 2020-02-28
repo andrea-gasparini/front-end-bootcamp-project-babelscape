@@ -134,7 +134,7 @@
 		$("#dropdown1").dropdown("toggle");
 
 		$("#toggle1").toggle({height: 50, value1: { id: 'on', label: 'ON'}, value2: { id: 'off', label: 'OFF' }, dataMapper: function(v){ return { key: v.id, value: v.label }; }});
-		$("#toggle2").toggle({value1: { id: 'on', label: 'ON'}, value2: { id: 'off', label: 'OFF' }, dataMapper: function(v){ return { key: v.id, value: v.label }; }});
+		$("#toggle2").toggle({color2: 'red', value1: { id: 'on', label: 'ON'}, value2: { id: 'off', label: 'OFF' }, dataMapper: function(v){ return { key: v.id, value: v.label }; }});
 		console.log($("#toggle1").toggle('getValue'))
 	</script>
 </html>
