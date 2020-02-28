@@ -23,7 +23,7 @@ export default class ToggleConfiguration<T>
         if (config.dataMapper !== undefined) this._dataMapper = config.dataMapper;
 
         if (config.onChange != undefined) this._onChange = config.onChange;
-        else this._onChange = (v : KeyValue) => console.log("Valore selezionato " + v.value);
+        else this._onChange = (v : KeyValue) => console.log("Valore selezionato: " + v.value);
     }
 
     get value1() : T { return this._value1; }
