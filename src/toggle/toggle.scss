@@ -1,8 +1,45 @@
 @import '../variables';
 
-input:focus
+$test: 40px;
+
+.toggle
 {
-    outline: none;
-    box-shadow: 0 0 5px $input-focus-color;
-    border: 1px solid $input-focus-color;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    width: $test * 2;
+    height: $test;
+    background-color: grey;
+    border-radius: 20px;
+    transition: all 0.3s;
+
+    .toggle-icon
+    {
+        position: absolute;
+        width: $test - 4;
+        height: $test - 4;
+        border-radius: 50%;
+        background-color: white;
+        top: 2px;
+        left: 2px;
+        transition: all 0.3s;
+    }
+}
+
+.toggle-checkbox
+{
+    display: none;
+
+    &:checked
+    {
+        + .toggle .toggle-icon
+        {
+            left: $test + 2;
+        }
+
+        + .toggle
+        {
+            background-color: lightgreen;
+        }
+    }
 }
