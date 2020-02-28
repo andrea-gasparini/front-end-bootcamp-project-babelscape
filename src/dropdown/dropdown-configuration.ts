@@ -1,5 +1,4 @@
 import { DropdownType } from "../dropdown-type";
-import Dimension from "../dimension";
 import KeyValue from "../key-value";
 import { TypeUtils } from "../utils";
 
