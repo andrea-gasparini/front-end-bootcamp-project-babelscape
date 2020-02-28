@@ -36,12 +36,7 @@ export default class DropdownLabel<T>
                 this._labelMapper(dropdownBody.selectedValues) :
                 this._labelMapper(new Array(dropdownBody.selectedValues[0]));
 
-        this._element.click(() =>
-            {
-                dropdownBody.toggle();
-                if (dropdownBody.isVisible())
-                    dropdownBody.filterElement.focus();
-            });
+        this._element.click(() => dropdownBody.toggle());
     }
 
     set labelText(labelText : string)

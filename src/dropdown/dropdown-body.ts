@@ -8,7 +8,7 @@ export default class DropdownBody<T>
     private _values : Array<KeyValue> = new Array();
     private _selectedValues : Array<KeyValue> = new Array();
     private _dropdownType : DropdownType;
-    private _bodyFilterElement : JQuery<HTMLInputElement> = $('<input />');
+    private _searchElement : JQuery<HTMLInputElement> = $('<input />');
     private _liElements : Array<HTMLLIElement> = new Array();
     private _dataMapper : (elem: T) => KeyValue;
     private _onChange : (selectedList: Array<KeyValue>) => void;
@@ -34,14 +34,14 @@ export default class DropdownBody<T>
 
     private render() : void
     {
-        this._bodyFilterElement
+        this._searchElement
             .prop('type', 'text')
             .prop('placeholder', 'Cerca..')
             .on('input', () => this.filterSearch());
 
         this._element
             .addClass('dropdown-body')
-            .append(this._bodyFilterElement);
+            .append(this._searchElement);
 
         for (let val of this._values)
             this.addLiElement(this.createliElement(val));
@@ -78,7 +78,7 @@ export default class DropdownBody<T>
 
     private filterSearch() : void
     {
-        let input : string = this._bodyFilterElement.val() as string;
+        let input : string = this._searchElement.val() as string;
 
         for (let i = 0; i < this._liElements.length; i++)
             if ($(this._liElements[i]).data('KeyValue').value.includes(input.toLowerCase()))
@@ -159,11 +159,15 @@ export default class DropdownBody<T>
 
     isVisible() : boolean { return this._element.is(':visible'); }
 
-    show() : void { this._element.show(); }
+    show() : void 
+    {
+        this._element.show();
+        this._searchElement.focus();
+    }
 
     hide() : void { this._element.hide(); }
 
-    toggle() : void { this._element.toggle(); }
+    toggle() : void { this.isVisible() ? this.hide() : this.show(); }
 
     get values() : Array<KeyValue> { return this._values; }
 
@@ -177,7 +181,7 @@ export default class DropdownBody<T>
 
     get liElements() : Array<HTMLLIElement> { return this._liElements; }
 
-    get filterElement() : JQuery<HTMLInputElement> { return this._bodyFilterElement; }
+    get searchElement() : JQuery<HTMLInputElement> { return this._searchElement; }
 
     get element() : JQuery<HTMLUListElement> { return this._element; }
 }
