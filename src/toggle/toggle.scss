@@ -1,45 +1,55 @@
 @import '../variables';
 
-$test: 40px;
-
 .toggle
 {
-    cursor: pointer;
-    position: relative;
-    display: inline-block;
-    width: $test * 2;
-    height: $test;
-    background-color: grey;
-    border-radius: 20px;
-    transition: all 0.3s;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin: $default-margin;
+    
+    .toggle-label
+    {
+        margin: $default-margin;
+        font-size: $toggle-main-dimension / 2.5;
+
+        &.selected
+        {
+            font-weight: bold;
+        }
+    }
+    
+    .toggle-button
+    {   
+        position: relative;
+    
+        cursor: pointer;
+        border: none;
+        border-radius: $toggle-main-dimension / 2;
+        width: $toggle-main-dimension * 2;
+        height: $toggle-main-dimension;
+
+        background-color: $toggle-left-color;
+        transition: all 0.3s;
+    
+        &:focus { outline: none; }
+    
+        &::-moz-focus-inner { border: none; }
+    
+        &.right { background-color: $toggle-right-color; }
+    }
 
     .toggle-icon
     {
         position: absolute;
-        width: $test - 4;
-        height: $test - 4;
-        border-radius: 50%;
-        background-color: white;
+         
+        width: $toggle-main-dimension - 4;
+        height: $toggle-main-dimension - 4;
         top: 2px;
         left: 2px;
+        border-radius: 50%;
+
+        background-color: white;
         transition: all 0.3s;
-    }
-}
-
-.toggle-checkbox
-{
-    display: none;
-
-    &:checked
-    {
-        + .toggle .toggle-icon
-        {
-            left: $test + 2;
-        }
-
-        + .toggle
-        {
-            background-color: lightgreen;
-        }
     }
 }
