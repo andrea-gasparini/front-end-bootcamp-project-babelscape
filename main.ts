@@ -14,6 +14,8 @@ import TableConfiguration from './src/table/table-configuration';
 import Table from './src/table/table';
 import AutocompleteConfiguration from './src/autocomplete/autocomplete-configuration';
 import Autocomplete from './src/autocomplete/autocomplete';
+import ModalConfiguration from './src/modal/modal-configuration';
+import Modal from './src/modal/modal';
 
 import '@fortawesome/fontawesome-free/js/fontawesome'
 import '@fortawesome/fontawesome-free/js/solid'
@@ -221,6 +223,33 @@ import '@fortawesome/fontawesome-free/js/brands'
             }
             
             return this.each(autocompleteBuilder)
+        },
+
+        modal : function(opts : any) 
+        {
+            var opts = opts;
+            if (opts == undefined) opts = {};
+
+            var methods : any = 
+            {
+                dispose: function()
+                {
+                    $(this).data("modal").dispose();
+                }
+            };
+
+            if (TypeUtils.isObject(opts))
+            {
+                var modalBuilder = function()
+                {
+                    var modalConfiguration = new ModalConfiguration(opts);
+                    $(this).data("modal", new Modal($(this).get(0), modalConfiguration));
+                }
+
+                return this.each(modalBuilder);
+            } 
+            else
+                return methods[opts].apply(this, Array.prototype.slice.call( arguments, 1 ));
         }
     });
 })(window, jQuery);
