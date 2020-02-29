@@ -13,6 +13,11 @@
 	</head>
 	<body>
 		<div style='display: flex; flex-direction: row; justify-content: center;'>
+			<div id="autocomplete1"></div>
+			<div id="autocomplete2"></div>
+		</div>
+
+		<div style='display: flex; flex-direction: row; justify-content: center;'>
 			<div id="toggle1"></div>
 			<div id="toggle2"></div>
 		</div>
@@ -136,5 +141,8 @@
 		$("#toggle1").toggle({height: 50, value1: { id: 'on', label: 'ON'}, value2: { id: 'off', label: 'OFF' }, dataMapper: function(v){ return { key: v.id, value: v.label }; }});
 		$("#toggle2").toggle({color2: 'red', value1: { id: 'on', label: 'ON'}, value2: { id: 'off', label: 'OFF' }, dataMapper: function(v){ return { key: v.id, value: v.label }; }});
 		console.log($("#toggle1").toggle('getValue'))
+
+		$("#autocomplete1").autocomplete({});
+		$("#autocomplete2").autocomplete({});
 	</script>
 </html>

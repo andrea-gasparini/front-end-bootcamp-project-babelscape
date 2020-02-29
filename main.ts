@@ -12,6 +12,8 @@ import ToggleConfiguration from './src/toggle/toggle-configuration';
 import Toggle from './src/toggle/toggle';
 import TableConfiguration from './src/table/table-configuration';
 import Table from './src/table/table';
+import AutocompleteConfiguration from './src/autocomplete/autocomplete-configuration';
+import Autocomplete from './src/autocomplete/autocomplete';
 
 import '@fortawesome/fontawesome-free/js/fontawesome'
 import '@fortawesome/fontawesome-free/js/solid'
@@ -205,6 +207,20 @@ import '@fortawesome/fontawesome-free/js/brands'
             }
             
             return this.each(tableBuilder)
+        },
+
+        autocomplete : function(opts : any)
+        {
+            var opts = opts;
+            if (opts == undefined) return undefined;
+            
+            var autocompleteBuilder = function()
+            {
+                var autocompleteConfiguration = new AutocompleteConfiguration(opts);
+                $(this).data('autocomplete', new Autocomplete($(this).get(0), autocompleteConfiguration));
+            }
+            
+            return this.each(autocompleteBuilder)
         }
     });
 })(window, jQuery);

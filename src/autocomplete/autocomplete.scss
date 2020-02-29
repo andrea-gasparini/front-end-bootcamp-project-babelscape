@@ -1,0 +1,28 @@
+@import '../variables';
+
+.autocomplete
+{
+    margin: $default-margin;
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    .autocomplete-input-box
+    {
+        padding: 15px;
+        font-size: 14.6px;
+
+        border:
+        {
+            color: lighten($standard-color, 30);
+            style: solid;
+            width: 1px;
+            radius: 2.5px;
+        }
+
+        color: $standard-color;
+        background-color: lighten($standard-color, 45);
+    }
+}
