@@ -1,21 +1,21 @@
 import DropdownLabel from "./dropdown-label";
 import { DropdownType } from "../dropdown-type";
 import KeyValue, { keyValueToLowerCase } from "../key-value";
+import HiddenBody from "../hidden-body";
 
-export default class DropdownBody<T>
+export default class DropdownBody<T> extends HiddenBody
 {
-    private _element : JQuery<HTMLUListElement> = $('<ul />');
-    private _values : Array<KeyValue> = new Array();
     private _selectedValues : Array<KeyValue> = new Array();
     private _dropdownType : DropdownType;
     private _searchElement : JQuery<HTMLInputElement> = $('<input />');
-    private _liElements : Array<HTMLLIElement> = new Array();
     private _dataMapper : (elem: T) => KeyValue;
     private _onChange : (selectedList: Array<KeyValue>) => void;
     private readonly _dropdownLabel : DropdownLabel<T>;
 
     constructor(dropdownLabel : DropdownLabel<T>, dropdownType : DropdownType, inputData : Array<T>, inputSelected : Array<string>, dataMapper : (elem: T) => KeyValue, onChange : (selectedList: Array<KeyValue>) => void)
     {
+        super();
+
         for (let val of inputData)
             this._values.push(dataMapper(val));
 
@@ -35,18 +35,15 @@ export default class DropdownBody<T>
             .on('input', () => this.filterSearch());
 
         this._element
-            .addClass('hidden-body')
             .append(this._searchElement);
 
         for (let val of this._values)
             this.addLiElement(this.createliElement(val));
     }
 
-    private createliElement(val : KeyValue) : HTMLLIElement
+    protected createliElement(val : KeyValue) : HTMLLIElement
     {
-        let liElement = $('<li />')
-            .data('KeyValue', keyValueToLowerCase(val))
-            .text(val.value)
+        let liElement = $(super.createliElement(val))
             .on('click', (event : JQuery.ClickEvent) => this.updateSelection(liElement, event));
 
         let isSelected = this._selectedValues.length == 0 ? false :
@@ -65,15 +62,9 @@ export default class DropdownBody<T>
         return liElement.get(0) as HTMLLIElement;
     }
 
-    private addLiElement(liElement : HTMLLIElement) : void
-    {
-        this._liElements.push(liElement);
-        this._element.append(liElement);
-    }
-
     private filterSearch() : void
     {
-        let input : string = this._searchElement.val() as string;
+        let input : string = this._searchElement.val().toString();
 
         for (let i = 0; i < this._liElements.length; i++)
             if ($(this._liElements[i]).data('KeyValue').value.includes(input.toLowerCase()))
@@ -115,7 +106,7 @@ export default class DropdownBody<T>
         this._onChange(this._selectedValues);
     }
 
-    setValues(values : Array<string>) : void
+    public setValues(values : Array<string>) : void
     {
         $(this._liElements).removeClass('selected');
 
@@ -152,19 +143,11 @@ export default class DropdownBody<T>
         this._onChange(this._selectedValues);
     }
 
-    isVisible() : boolean { return this._element.is(':visible'); }
-
-    show() : void 
+    public show() : void 
     {
-        this._element.show();
+        super.show();
         this._searchElement.focus();
     }
-
-    hide() : void { this._element.hide(); }
-
-    toggle() : void { this.isVisible() ? this.hide() : this.show(); }
-
-    get values() : Array<KeyValue> { return this._values; }
 
     get selectedValues() : Array<KeyValue> { return this._selectedValues; }
 
@@ -174,9 +157,5 @@ export default class DropdownBody<T>
 
     get onChange() : (selectedList: Array<KeyValue>) => void { return this._onChange; }
 
-    get liElements() : Array<HTMLLIElement> { return this._liElements; }
-
     get searchElement() : JQuery<HTMLInputElement> { return this._searchElement; }
-
-    get element() : JQuery<HTMLUListElement> { return this._element; }
 }
