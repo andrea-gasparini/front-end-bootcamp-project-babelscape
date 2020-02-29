@@ -17,15 +17,10 @@ export default class DropdownLabel<T>
         this._placeholder = placeholder;
         this._labelMapper = labelMapper;
 
-        this.render();
-    }
-
-    private render() : void
-    {
         this._element
-        .addClass('dropdown-label')
-        .append(this._dropdownIcon)
-        .append(this._labelTextElement);
+            .addClass('dropdown-label')
+            .append(this._dropdownIcon)
+            .append(this._labelTextElement);
     }
 
     setDropdownBody(dropdownBody : DropdownBody<T>)

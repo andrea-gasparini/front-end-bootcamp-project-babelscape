@@ -29,11 +29,6 @@ export default class DropdownBody<T>
         this._dropdownLabel = dropdownLabel;
         dropdownLabel.setDropdownBody(this);
 
-        this.render();
-    }
-
-    private render() : void
-    {
         this._searchElement
             .prop('type', 'text')
             .prop('placeholder', 'Cerca..')
