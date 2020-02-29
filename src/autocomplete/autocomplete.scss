@@ -25,4 +25,10 @@
         color: $standard-color;
         background-color: lighten($standard-color, 45);
     }
+
+    .hidden-body
+    {
+        min-width: 200px;
+        max-width: 300px;
+    }
 }

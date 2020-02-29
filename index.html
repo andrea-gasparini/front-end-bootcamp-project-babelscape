@@ -17,7 +17,7 @@
 			<div id="autocomplete2"></div>
 		</div>
 
-		<div style='display: flex; flex-direction: row; justify-content: center;'>
+		<div style='display: flex; flex-direction: row; justify-content: center; align-items: center;'>
 			<div id="toggle1"></div>
 			<div id="toggle2"></div>
 		</div>
@@ -136,13 +136,13 @@
 		$("#dropdown1").dropdown(dropdownConfig1);
 		$("#dropdown2").dropdown(dropdownConfig2);
 		$("#dropdown2").dropdown("setValues", ['1','3']);
-		$("#dropdown1").dropdown("toggle");
+		$("#dropdown1").dropdown("show");
 
 		$("#toggle1").toggle({height: 50, value1: { id: 'on', label: 'ON'}, value2: { id: 'off', label: 'OFF' }, dataMapper: function(v){ return { key: v.id, value: v.label }; }});
 		$("#toggle2").toggle({color2: 'red', value1: { id: 'on', label: 'ON'}, value2: { id: 'off', label: 'OFF' }, dataMapper: function(v){ return { key: v.id, value: v.label }; }});
 		console.log($("#toggle1").toggle('getValue'))
 
-		$("#autocomplete1").autocomplete({});
-		$("#autocomplete2").autocomplete({});
+		$("#autocomplete1").autocomplete({width: 200, restURL: new URL('http://localhost:30000/autocomplete?word=')});
+		$("#autocomplete2").autocomplete({placeholder: 'Autocompletamento..', minTextLength: 5, restURL: new URL('http://localhost:30000/autocomplete?word=')});
 	</script>
 </html>

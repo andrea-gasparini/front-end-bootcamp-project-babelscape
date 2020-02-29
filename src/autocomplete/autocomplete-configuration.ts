@@ -3,7 +3,7 @@ export default class AutocompleteConfiguration
     private _placeholder : string = 'Inserisci del testo..';
     private _width : number;
     private _restURL : URL;
-    private _minTextLength : number;
+    private _minTextLength : number = 1;
 
     constructor(config: {placeholder : string, width? : number, restURL : URL, minTextLength? : number}) 
     {
