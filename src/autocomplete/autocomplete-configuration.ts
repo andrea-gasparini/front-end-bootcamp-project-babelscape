@@ -1,6 +1,6 @@
 export default class AutocompleteConfiguration
 {
-    private _placeholder : string = '';
+    private _placeholder : string = 'Inserisci del testo..';
     private _width : number;
     private _restURL : URL;
     private _minTextLength : number;
