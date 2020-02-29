@@ -4,6 +4,7 @@ import DropdownBody from "./dropdown-body";
 import { DropdownType } from "../dropdown-type";
 import { closeOnOutsideClick } from "../utils";
 import KeyValue, { keyValueToLowerCase } from "../key-value";
+import "../hidden-body.scss";
 import "./dropdown.scss";
 
 export default class Dropdown<T>

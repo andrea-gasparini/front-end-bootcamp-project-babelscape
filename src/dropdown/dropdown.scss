@@ -25,13 +25,13 @@
             width: 1px;
         }
         
-        color: $dropdown-main-color;
-        background-color: lighten($dropdown-main-color, 30);
+        color: $standard-color;
+        background-color: lighten($standard-color, 30);
         transition: all .2s ease;
 
         &:hover
         {
-            background-color: lighten($dropdown-main-color, 35);
+            background-color: lighten($standard-color, 35);
         }
 
         &:focus { outline: none; }
@@ -48,34 +48,11 @@
         }
     }
 
-    .dropdown-body
+    .hidden-body
     {
-        display: none;
-        top: 48px;
-        left: 0;
-        position: absolute;
-        overflow:auto;
-        z-index: 1;
-        
-        min-width: 150px;
-        max-width: 225px;
-        max-height: 250px;
-        background-color: $dropdown-body-bg-color;
-        margin: 0;
-        padding: 0;
-
-        box-shadow: $dropdown-body-box-shadow;
-
-        border:
-        {
-            radius: 2.5px;
-            color: lighten($dropdown-main-color, 30);
-            
-        }
-
         input[type='text']
         {
-            color: $dropdown-main-color;
+            color: $standard-color;
             padding: 5px;
             width: 80%;
             margin: 7.5px;
@@ -83,7 +60,7 @@
             border:
             {
                 radius: 5px;
-                color: lighten($dropdown-main-color, 30);
+                color: lighten($standard-color, 30);
                 style: solid;
                 width: 1px;
             }
@@ -94,33 +71,6 @@
             outline: none;
             box-shadow: 0 0 5px $input-focus-color;
             border: 1px solid $input-focus-color;
-        }
-
-        li
-        {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-
-            cursor: pointer;
-            list-style:none;
-
-            padding:
-            {
-                top: 5px;
-                left: 15px;
-                bottom: 5px;
-            }
-
-            &.selected, &.selected:hover 
-            {
-                background-color: lighten($dropdown-main-color, 22.5);
-            }
-        }
-
-        li:hover
-        {
-            background-color: lighten($dropdown-main-color, 30);
         }
     }
 

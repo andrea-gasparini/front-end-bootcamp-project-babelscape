@@ -40,7 +40,7 @@ export default class DropdownBody<T>
             .on('input', () => this.filterSearch());
 
         this._element
-            .addClass('dropdown-body')
+            .addClass('hidden-body')
             .append(this._searchElement);
 
         for (let val of this._values)

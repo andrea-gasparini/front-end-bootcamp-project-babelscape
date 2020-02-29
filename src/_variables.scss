@@ -1,6 +1,11 @@
 /* variabili globali */
 $default-margin: 5px;
 $input-focus-color: rgba(81, 203, 238, 1);
+$standard-color: grey;
+
+/* variabili hidden-body */
+$hidden-body-bg-color: whitesmoke;
+$hidden-body-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, .5);
 
 /* variabili componenete Messsage */
 $message-info-color: rgb(109, 109, 109);
@@ -11,13 +16,6 @@ $message-danger-color: rgb(190, 0, 0);
 /* variabili componente Button */
 $button-main-color: rgb(128, 128, 128);
 $button-error-color: red;
-
-/* variabili componente Dropdown */
-$dropdown-main-color: grey;
-$dropdown-body-bg-color: whitesmoke;
-$dropdown-body-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, .5);
-$dropdown-body-selected-bg-color: rgb(29, 44, 65);
-$dropdown-body-selected-color: white;
 
 /* variabili componente Toggle */
 $toggle-main-dimension: 25px;
