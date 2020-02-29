@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <h1> Documentazione Autocomplete </h1>
+        <span id='subtitle'> L’Autocomplete è un componente che permette di mostrare dei suggerimenti per il completamento automatico di una stringa.</span>
+        <p> 
+            È formato da due elementi principali:
+            <ul>
+                <li>L'input box, in cui l'utente può inserire una stringa di testo per cui saranno mostrati i suggerimenti</li>
+                <li>Il body, ovvero il menù a tendina che mostra i suggerimenti disponibili per la stringa inserita</li>
+            </ul>             
+        </p>
+        <p>
+            Quando l'utente clicca su uno dei suggerimenti disponibili presenti nel body, questo verrà inserito all'interno dell'input box.
+            In caso la stringa in input non abbia alcun suggerimento, il body non sarà mostrato.
+        </p>
+
+        <h2> Esempi </h2>
+        <p> 
+            Il componente può essere personalizzato in larghezza, nel placeholder, nel numero minimo di caratteri per mostrare i suggerimenti e nell'URL del servizio web che fornisce i suggerimenti.
+        </p>
+        <p>
+            A seguire alcuni esempi con la relativa configurazione.
+        </p>
+        <div class='horizontal-centered-container'>
+            <div id='esempio1'></div>
+        </div>
+        <div id='esempio2'></div>
+        <pre>
+$("#esempio1").autocomplete({
+    width: 200,
+    restURL: new URL('http://localhost:30000/autocomplete?word=')
+});
+
+$("#esempio2").autocomplete({
+    placeholder: 'Autocompletamento..',
+    minTextLength: 5,
+    restURL: new URL('http://localhost:30000/autocomplete?word=')
+});        
+        </pre> 
+        <h2> Opzioni </h2>
+        <p>
+            Le opzioni del componente vanno specificate nella configurazione tramite un oggetto <code>JSON</code>, come mostrato negli esempi precedenti.
+            Se l'opzione non ha alcun valore in default è obbligatorio specificarne uno per la corretta configurazione del componente.
+        </p>
+        <table class='doc-table'>
+            <thead>
+                <tr>
+                    <th>Opzione</th>
+                    <th>Tipo</th>
+                    <th>Default</th>
+                    <th id='descrizione'>Descrizione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>placeholder</td>
+                    <td><code>string</code></td>
+                    <td><code>'Inserisci del testo..'</code></td>
+                    <td>La stringa che viene mostrata nell'input box del componente quando non viene scritto nulla.</td>
+                </tr> 
+                <tr>
+                    <td>width</td>
+                    <td><code>number</code></td>
+                    <td><code>auto</code></td>
+                    <td>Larghezza del componente, di default si adatta alle dimensioni del div in cui è contenuto.</td>
+                </tr>
+                <tr>
+                    <td>restURL</td>
+                    <td><code>URL</code></td>
+                    <td></td>
+                    <td>L'indirizzo del servizio web che, data una stringa come parametro in input, restituisce la lista delle parole più simili.</td>
+                </tr>
+                <tr>
+                    <td>minTextLength</td>
+                    <td><code>number</code></td>
+                    <td><code>1</code></td>
+                    <td>Il minimo numero di caratteri per permettere al componente di effettuare una richiesta al servizio web.</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+    <script type='text/javascript'>
+        $("#esempio1").autocomplete({
+            width: 200,
+            restURL: new URL('http://localhost:30000/autocomplete?word=')
+        });
+
+        $("#esempio2").autocomplete({
+            placeholder: 'Autocompletamento..',
+            minTextLength: 5,
+            restURL: new URL('http://localhost:30000/autocomplete?word=')
+        });        
+    </script>
+</html>
