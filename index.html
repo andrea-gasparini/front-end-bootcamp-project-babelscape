@@ -145,6 +145,6 @@
 		$("#autocomplete1").autocomplete({width: 200, restURL: new URL('http://localhost:30000/autocomplete?word=')});
 		$("#autocomplete2").autocomplete({placeholder: 'Autocompletamento..', minTextLength: 5, restURL: new URL('http://localhost:30000/autocomplete?word=')});
 		
-		$("#modal").modal({type: 'dialog'});
+		$("#modal").modal({body: "Vedi che bello questo Modal", type: 'confirm'});
 	</script>
 </html>

@@ -1,6 +1,6 @@
 import ModalConfiguration from "./modal-configuration";
+import ModalFooter from "./modal-footer";
 import "./modal.scss"
-import { ModalType } from "../modal-type";
 
 export default class Modal
 {
@@ -9,12 +9,13 @@ export default class Modal
     private _modalElement : JQuery<HTMLDivElement> = $('<div />');
     private _modalHeaderElement : JQuery<HTMLDivElement> = $('<div />');
     private _modalBodyElement : JQuery<HTMLDivElement> = $('<div />');
-    private _modalFooterElement : JQuery<HTMLDivElement> = $('<div />');
+    private _modalFooter : ModalFooter;
 
     constructor(element: HTMLElement, config: ModalConfiguration)
     {
         this._element = element;
         this._configuration = config;
+        this._modalFooter = new ModalFooter(this._element, this._configuration.type, this._configuration.onConfirm)
 
         this.render();
     }
@@ -32,42 +33,9 @@ export default class Modal
             .append(this._configuration.body)
             .appendTo(this._modalElement);
 
-        this._modalFooterElement
-            .addClass('modal-footer');
-            
-        let closeButton = $('<button />');
-
-        this._modalFooterElement
-            .append(closeButton)
-            .on('click', () =>
-            {
-                this.dispose();
-            });
-        
-        if ( this._configuration.type == ModalType.CONFIRM )
-        {
-            let confirmButton = $('<button />')
-                .addClass('confirm-button')
-                .text('Conferma')
-                .on('click', () =>
-                    {
-                        this._configuration.onConfirm();
-                        this.dispose();
-                    });
-
-            closeButton
-                .text('Annulla');
-
-            this._modalFooterElement
-                .prepend(confirmButton);
-        }
-        else
-            closeButton
-                .text('Chiudi'); 
-
         this._modalElement
             .addClass('modal-content')
-            .append(this._modalFooterElement);
+            .append(this._modalFooter.element);
 
         $(this._element)
             .addClass('modal')
