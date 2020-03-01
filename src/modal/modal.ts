@@ -24,12 +24,13 @@ export default class Modal
         if ( this._configuration.header !== undefined )
             this._modalHeaderElement
                 .addClass('modal-header')
-                .append(this._configuration.header);
+                .append(this._configuration.header)
+                .appendTo(this._modalElement);
 
-        if ( this._configuration.body !== undefined )
-            this._modalBodyElement
-                .addClass('modal-body')
-                .append(this._configuration.body);
+        this._modalBodyElement
+            .addClass('modal-body')
+            .append(this._configuration.body)
+            .appendTo(this._modalElement);
 
         this._modalFooterElement
             .addClass('modal-footer');
@@ -66,8 +67,6 @@ export default class Modal
 
         this._modalElement
             .addClass('modal-content')
-            .append(this._modalHeaderElement)
-            .append(this._modalBodyElement)
             .append(this._modalFooterElement);
 
         $(this._element)
