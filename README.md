@@ -7,3 +7,6 @@ Lo script si occupa di generare i file - _up to date_ - necessari per istanziare
 ```bash
 cd documentation && ./loadDocumentation.sh
 ```
+Per il corretto funzionamento del componente _Autocomplete_ è necessario eseguire `java -jar server.jar`, che avvia localmente un server per il suggerimento di stringhe.
+
+Per la corretta installazione di tutte le dipendenze è necessario eseguire `npm install` nella root del progetto (dove si trova`packages.json`).
