@@ -41,6 +41,8 @@
         .modal-header
         {
             padding: 5px;
+            padding-bottom: 10px;
+
             border: 
             {
                 bottom-style: solid;
@@ -54,6 +56,13 @@
             padding: 5px;
             padding-top: 15px;
             padding-bottom: 15px;
+
+            border: 
+            {
+                bottom-style: solid;
+                bottom-width: 1px;
+                bottom-color: $sections-separator-color;
+            }
         }
 
         .modal-footer
@@ -62,21 +71,44 @@
             flex-direction: row-reverse;
 
             padding-top: 10px;
-            border: 
-            {
-                top-style: solid;
-                top-width: 1px;
-                top-color: $sections-separator-color;
-            }
 
             button
             {
                 cursor: pointer;
                 margin: $default-margin;
 
-                &:focus { outline: none; }
+                &:focus { outline: 0; }
 
-                &::-moz-focus-inner { border: none; }
+                &::-moz-focus-inner { border: 0; }
+
+                border-radius: 5px;
+                border-style: solid;
+                border-width: 1px;
+                font-weight: bold;
+
+                color: white;
+                background-color: $button-main-color;
+            
+                padding:
+                {
+                    top: 10px;
+                    bottom: 10px;
+                    left: 15px;
+                    right: 15px;
+                }
+
+                &:hover { background-color: darken($button-main-color, 10); }
+
+                &.confirm-button
+                {
+                    color: white;
+                    background-color: #007bff;
+
+                    &:hover
+                    {
+                        background-color: darken(#007bff, 10);
+                    }
+                }
             }
         }
     }

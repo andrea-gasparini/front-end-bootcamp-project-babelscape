@@ -21,30 +21,59 @@ export default class Modal
 
     private render() : void
     {
-        this._modalHeaderElement
-            .addClass('modal-header')
-           .append(this._configuration.header);
+        if ( this._configuration.header !== undefined )
+            this._modalHeaderElement
+                .addClass('modal-header')
+                .append(this._configuration.header);
 
-        this._modalBodyElement
-            .addClass('modal-body')
-            .append(this._configuration.body);
+        if ( this._configuration.body !== undefined )
+            this._modalBodyElement
+                .addClass('modal-body')
+                .append(this._configuration.body);
 
         this._modalFooterElement
-            .addClass('modal-footer')
-            .append($('<button />')
-                .text('Chiudi'));
+            .addClass('modal-footer');
+            
+        let closeButton = $('<button />');
+
+        this._modalFooterElement
+            .append(closeButton)
+            .on('click', () =>
+            {
+                this.dispose();
+            });
+        
+        if ( this._configuration.type == ModalType.CONFIRM )
+        {
+            let confirmButton = $('<button />')
+                .addClass('confirm-button')
+                .text('Conferma')
+                .on('click', () =>
+                    {
+                        this._configuration.onConfirm();
+                        this.dispose();
+                    });
+
+            closeButton
+                .text('Annulla');
+
+            this._modalFooterElement
+                .prepend(confirmButton);
+        }
+        else
+            closeButton
+                .text('Chiudi'); 
 
         this._modalElement
             .addClass('modal-content')
             .append(this._modalHeaderElement)
             .append(this._modalBodyElement)
             .append(this._modalFooterElement);
-            
-        if ( this._configuration.type == ModalType.CONFIRM )
-
 
         $(this._element)
             .addClass('modal')
             .append(this._modalElement);
     }
+
+    public dispose() : void { $(this._element).remove(); }
 }
