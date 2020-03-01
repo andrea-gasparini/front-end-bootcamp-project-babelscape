@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <h1> Documentazione Modal </h1>
+        <span id='subtitle'> La Modal è un componente che permette di mostrare una finestra in rilievo.</span>
+        <p> 
+            Si può utilizzare per evidenziare particolari condizioni in cui si trova la UI in quel momento.
+            Il componente viene mostrato sopra l'intera interfaccia, disabilitando la possibilità di cliccare sugli elementi della pagina finché non viene chiuso.
+            È disponibile in due diverse tipologie: 
+            <ul>
+                <li><code>DIALOG</code>, in cui viene mostrato un messaggio</li>
+                <li><code>CONFIRMATION</code>, in cui viene chiesto all'utente di confermare oppure annullare un operazione</li>
+            </ul>
+        </p>
+        <p>
+            Il componente è formato da tre elementi principali:
+            <ul>
+                <li>L'header, che rappresenta il titolo della Modal</li>
+                <li>Il body, che rappresenta il corpo centrale della Modal</li>
+                <li>Il footer, in cui sono presenti i bottoni per interagire con la Modal</li>
+            </ul>
+        </p>
+
+        <h2> Esempi </h2>
+        <p> 
+            Oltre che nella tipologia, il componente può ovviamente essere personalizzato nel contenuto dell'header e del body.
+            Inoltre può essere definita la funzione che viene invocata nel caso in cui la Modal sia di tipo <code>CONFIRM</code> e l'utente abbia confermato l'operazione.
+        </p>
+        <p>
+            A seguire alcuni bottoni che mostrano delle Modal di esempio, con la relativa configurazione sul click del bottone.
+        </p>
+        <div class='horizontal-centered-container'>
+            <div id='button-modal1'></div>
+            <div id='button-modal2'></div>
+        </div>
+        <pre>
+$('&lt;div /&gt;').appendTo('body').modal({
+    header: "Header title della prima Modal",
+    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit [...]"
+});
+
+$('&lt;div /&gt;').appendTo('body').modal({
+    type: "CONFIRM",
+    body: $('&lt;div /&gt;')
+        .append(
+            'Questa Modal non ha un Header ed è della tipologia',
+            ' &lt;code&gt;CONFIRM&lt;/code&gt;. ',
+            'Cliccando sul bottone di conferma verrà avviata la funzione onConfirm.'
+            ),
+    onConfirm: () => console.log('Hai cliccato su conferma.')
+});
+        </pre> 
+        <h2> Opzioni </h2>
+        <p>
+            Le opzioni del componente vanno specificate nella configurazione tramite un oggetto <code>JSON</code>, come mostrato negli esempi precedenti.
+            Se l'opzione non ha alcun valore in default è obbligatorio specificarne uno per la corretta configurazione del componente.
+        </p>
+        <table class='doc-table'>
+            <thead>
+                <tr>
+                    <th>Opzione</th>
+                    <th>Tipo</th>
+                    <th>Default</th>
+                    <th id='descrizione'>Descrizione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>type</td>
+                    <td><code>ModalType</code></td>
+                    <td><code>DIALOG</code></td>
+                    <td>La tipologia della modal (è possibile scegliere tra <code>DIALOG</code> e <code>CONFIRM</code>).</td>
+                </tr>
+                <tr>
+                    <td>header</td>
+                    <td><code>string</code> o <code>JQuery</code></td>
+                    <td><code>''</code></td>
+                    <td>L'header della modal, può essere specificato tramite stringa di testo o codice JQuery.</td>
+                </tr>
+                <tr>
+                    <td>body</td>
+                    <td><code>string</code> o <code>JQuery</code></td>
+                    <td><code>''</code></td>
+                    <td>Il body della modal, può essere specificato tramite stringa di testo o codice JQuery.</td>
+                </tr>
+                <tr>
+                    <td>onConfirm</td>
+                    <td><code>function</code></td>
+                    <td><code>() => console.log('conferma!')</code></td>
+                    <td>Funzione (callback) che viene invocata solamente nel caso in cui la modal sia di tipo <code>CONFIRM</code> e l'utente confermi l'operazione.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2> Metodi </h2>
+        <p>Il componente dispone inoltre dei metodi descritti a seguire.</p>
+        
+        <h2><code>.modal('dispose')</code></h2>
+        <p>Rimuove la modal dal <code>DOM</code>.</p>
+        <pre>
+$("#modal-id").modal('dispose');
+        </pre>
+    </body>
+    <script type='text/javascript'>
+        $("#button-modal1").button({
+            text: "Avvio Modal 1",
+            onClick: (event) => 
+                $('<div />').appendTo('body').modal({
+                    header: "Header title della prima Modal",
+                    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet congue nisi, volutpat dapibus magna. Maecenas et dictum mi, in viverra sapien. Vivamus dignissim molestie ultrices. Praesent in interdum arcu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at nunc ac ipsum tempus eleifend. Donec accumsan purus elementum, dignissim magna id, pretium eros. "
+                })
+        });
+
+		$("#button-modal2").button({
+            text: "Avvio Modal 2",
+            onClick: (event) => 
+                $('<div />').appendTo('body').modal({
+                    type: "CONFIRM",
+                    body: $('<div />').append('Questa Modal non ha un Header ed è della tipologia', ' <code>CONFIRM</code>. ', 'Cliccando sul bottone di conferma verrà avviata la funzione onConfirm.'), 
+                    onConfirm: () => console.log('Hai cliccato su conferma.'
+                )}
+        )});
+    </script>
+</html>
