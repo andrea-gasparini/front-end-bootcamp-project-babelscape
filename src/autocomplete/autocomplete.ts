@@ -66,7 +66,7 @@ export default class Autocomplete
                 type: 'GET',
                 dataType: 'json',
                 success: (data) => this._autocompleteBody.createliElements(data),
-                error: (error) => console.log(`Errore chiamata RestURL: ${error}`)                
+                error: (error) => console.log('Errore chiamata RestURL: ', error)                
             })
             this._autocompleteBody.show();
         }

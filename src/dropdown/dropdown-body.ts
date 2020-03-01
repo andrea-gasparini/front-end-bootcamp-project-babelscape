@@ -1,6 +1,6 @@
 import DropdownLabel from "./dropdown-label";
 import { DropdownType } from "../dropdown-type";
-import KeyValue, { keyValueToLowerCase } from "../key-value";
+import KeyValue from "../key-value";
 import HiddenBody from "../hidden-body";
 
 export default class DropdownBody<T> extends HiddenBody
@@ -81,12 +81,12 @@ export default class DropdownBody<T> extends HiddenBody
 
             if (checkBox.prop('checked'))
             {
-                this._selectedValues = this._selectedValues.filter(el => el.value.toLowerCase() != liElement.data('KeyValue').value);
+                this._selectedValues = this._selectedValues.filter(el => el.key.toLowerCase() != liElement.data('KeyValue').key);
                 this._dropdownLabel.labelText = this._selectedValues.length == 0 ? this._dropdownLabel.placeholder : this._dropdownLabel.labelMapper(this._selectedValues);
             }
             else
             {
-                this._selectedValues.push(this._values.find(el => el.value.toLowerCase() == liElement.data('KeyValue').value));
+                this._selectedValues.push(this._values.find(el => el.key.toLowerCase() == liElement.data('KeyValue').key));
                 this._dropdownLabel.labelText = this._dropdownLabel.labelMapper(this._selectedValues);
             }
 
@@ -96,7 +96,7 @@ export default class DropdownBody<T> extends HiddenBody
         else
         {
             $(this._liElements).removeClass('selected');
-            this._selectedValues = new Array(this._values.find(el => el.value.toLowerCase() == liElement.data('KeyValue').value));
+            this._selectedValues = new Array(this._values.find(el => el.key.toLowerCase() == liElement.data('KeyValue').key));
             this._dropdownLabel.labelText = this._dropdownLabel.labelMapper(this._selectedValues);
             this.hide();
         }
