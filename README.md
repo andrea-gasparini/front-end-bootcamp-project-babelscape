@@ -14,6 +14,6 @@ cd documentation && ./loadDocumentation.sh
 
 - Per avviare correttamente il server relativo alla documentazione è necessario che `python3` sia installato.
 
-- Per il corretto funzionamento del componente _Autocomplete_ è necessario eseguire `java -jar server.jar`, che avvia localmente un server per il suggerimento di stringhe, e abilitare il **CORS** ([Estensione per Firefox](https://addons.mozilla.org/it/firefox/addon/cors-everywhere/)).
+- Per il corretto funzionamento del componente _Autocomplete_ è necessario eseguire `java -jar server.jar`, che avvia localmente un server per il suggerimento di stringhe, e abilitare il **CORS** ([qui un'estensione per Firefox](https://addons.mozilla.org/it/firefox/addon/cors-everywhere/)).
 
 - Per la corretta installazione di tutte le dipendenze è necessario eseguire `npm install` nella root del progetto (dove si trova`packages.json`).
